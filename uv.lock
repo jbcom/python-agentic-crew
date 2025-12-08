@@ -3986,6 +3986,7 @@ version = "0.1.0"
 source = { editable = "packages/pytest-agentic-crew" }
 dependencies = [
     { name = "pytest" },
+    { name = "pytest-mock" },
     { name = "vcrpy" },
 ]
 
@@ -4016,6 +4017,7 @@ requires-dist = [
     { name = "pytest-agentic-crew", extras = ["crewai"], marker = "extra == 'all'", editable = "packages/pytest-agentic-crew" },
     { name = "pytest-agentic-crew", extras = ["langgraph"], marker = "extra == 'all'", editable = "packages/pytest-agentic-crew" },
     { name = "pytest-agentic-crew", extras = ["strands"], marker = "extra == 'all'", editable = "packages/pytest-agentic-crew" },
+    { name = "pytest-mock", specifier = ">=3.12.0" },
     { name = "strands-agents", marker = "extra == 'strands'", specifier = ">=0.1" },
     { name = "vcrpy", specifier = ">=6.0" },
 ]

@@ -3,17 +3,28 @@
 This module is registered as a pytest plugin via entry points.
 All fixtures and hooks are automatically available when the package is installed.
 
-Includes VCR.py integration for recording/replaying LLM API calls.
+Includes:
+- VCR.py integration for recording/replaying LLM API calls
+- Framework mocking fixtures (via pytest-mock integration)
+- Crew configuration fixtures for testing
 """
 
 from __future__ import annotations
 
 import os
-import sys
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Generator
+from typing import Any
 
 import pytest
+
+# Import mocking fixtures - these will be automatically available
+from pytest_agentic_crew.mocking import (  # noqa: F401
+    crew_mocker,
+    mock_crewai,
+    mock_frameworks,
+    mock_langgraph,
+    mock_strands,
+)
 
 # Import VCR fixtures (they register themselves)
 from pytest_agentic_crew.vcr import (
@@ -25,9 +36,6 @@ from pytest_agentic_crew.vcr import (
     vcr_config,  # noqa: F401
 )
 from pytest_agentic_crew.vcr import pytest_addoption as vcr_addoption
-
-if TYPE_CHECKING:
-    from pytest_mock import MockerFixture
 
 
 def pytest_addoption(parser: Any) -> None:
@@ -109,159 +117,6 @@ def check_aws_credentials() -> None:
     has_profile = os.environ.get("AWS_PROFILE")
     if not (has_key or has_profile):
         pytest.skip("AWS credentials not configured (need AWS_ACCESS_KEY_ID or AWS_PROFILE)")
-
-
-# =============================================================================
-# Framework Mocking Fixtures
-# =============================================================================
-
-# List of framework modules to mock for unit testing
-FRAMEWORK_MODULES = [
-    "crewai",
-    "crewai.knowledge",
-    "crewai.knowledge.source",
-    "crewai.knowledge.source.text_file_knowledge_source",
-    "langgraph",
-    "langgraph.prebuilt",
-    "langchain_anthropic",
-    "strands",
-]
-
-
-@pytest.fixture
-def mock_frameworks(mocker: MockerFixture) -> Generator[dict[str, Any], None, None]:
-    """Fixture to mock AI framework modules for unit testing.
-
-    This fixture mocks all framework modules (crewai, langgraph, strands) so that
-    tests can run without the actual frameworks installed. Use this for unit tests
-    that need to test runner behavior without making real framework calls.
-
-    Yields:
-        dict: Dictionary mapping module names to their mock objects.
-
-    Example:
-        def test_crewai_runner(mock_frameworks):
-            from agentic_crew.runners.crewai_runner import CrewAIRunner
-            runner = CrewAIRunner()
-            # Test runner behavior with mocked framework
-    """
-    original_modules: dict[str, Any] = {}
-    mock_modules: dict[str, Any] = {}
-
-    # Create mocks and backup originals
-    for module_name in FRAMEWORK_MODULES:
-        mock_modules[module_name] = mocker.MagicMock()
-        if module_name in sys.modules:
-            original_modules[module_name] = sys.modules[module_name]
-        sys.modules[module_name] = mock_modules[module_name]
-
-    yield mock_modules
-
-    # Restore original modules
-    for module_name in FRAMEWORK_MODULES:
-        if module_name in original_modules:
-            sys.modules[module_name] = original_modules[module_name]
-        else:
-            sys.modules.pop(module_name, None)
-
-
-@pytest.fixture
-def mock_crewai(mocker: MockerFixture) -> Generator[dict[str, Any], None, None]:
-    """Fixture to mock only CrewAI framework modules.
-
-    Use this when testing CrewAI-specific functionality without needing
-    all framework mocks.
-
-    Yields:
-        dict: Dictionary with CrewAI mock objects.
-    """
-    crewai_modules = [
-        "crewai",
-        "crewai.knowledge",
-        "crewai.knowledge.source",
-        "crewai.knowledge.source.text_file_knowledge_source",
-    ]
-
-    original_modules: dict[str, Any] = {}
-    mock_modules: dict[str, Any] = {}
-
-    for module_name in crewai_modules:
-        mock_modules[module_name] = mocker.MagicMock()
-        if module_name in sys.modules:
-            original_modules[module_name] = sys.modules[module_name]
-        sys.modules[module_name] = mock_modules[module_name]
-
-    yield mock_modules
-
-    for module_name in crewai_modules:
-        if module_name in original_modules:
-            sys.modules[module_name] = original_modules[module_name]
-        else:
-            sys.modules.pop(module_name, None)
-
-
-@pytest.fixture
-def mock_langgraph(mocker: MockerFixture) -> Generator[dict[str, Any], None, None]:
-    """Fixture to mock only LangGraph framework modules.
-
-    Use this when testing LangGraph-specific functionality without needing
-    all framework mocks.
-
-    Yields:
-        dict: Dictionary with LangGraph mock objects.
-    """
-    langgraph_modules = [
-        "langgraph",
-        "langgraph.prebuilt",
-        "langchain_anthropic",
-    ]
-
-    original_modules: dict[str, Any] = {}
-    mock_modules: dict[str, Any] = {}
-
-    for module_name in langgraph_modules:
-        mock_modules[module_name] = mocker.MagicMock()
-        if module_name in sys.modules:
-            original_modules[module_name] = sys.modules[module_name]
-        sys.modules[module_name] = mock_modules[module_name]
-
-    yield mock_modules
-
-    for module_name in langgraph_modules:
-        if module_name in original_modules:
-            sys.modules[module_name] = original_modules[module_name]
-        else:
-            sys.modules.pop(module_name, None)
-
-
-@pytest.fixture
-def mock_strands(mocker: MockerFixture) -> Generator[dict[str, Any], None, None]:
-    """Fixture to mock only Strands framework modules.
-
-    Use this when testing Strands-specific functionality without needing
-    all framework mocks.
-
-    Yields:
-        dict: Dictionary with Strands mock objects.
-    """
-    strands_modules = ["strands"]
-
-    original_modules: dict[str, Any] = {}
-    mock_modules: dict[str, Any] = {}
-
-    for module_name in strands_modules:
-        mock_modules[module_name] = mocker.MagicMock()
-        if module_name in sys.modules:
-            original_modules[module_name] = sys.modules[module_name]
-        sys.modules[module_name] = mock_modules[module_name]
-
-    yield mock_modules
-
-    for module_name in strands_modules:
-        if module_name in original_modules:
-            sys.modules[module_name] = original_modules[module_name]
-        else:
-            sys.modules.pop(module_name, None)
 
 
 # =============================================================================
