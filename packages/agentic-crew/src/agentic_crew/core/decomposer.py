@@ -15,7 +15,7 @@ Usage:
 
     # Or let it auto-select
     runner = get_runner()  # Uses best available
-    
+
     # Get single-agent CLI runner
     from agentic_crew.core.decomposer import get_cli_runner
     runner = get_cli_runner("aider")
@@ -24,7 +24,7 @@ Usage:
 from __future__ import annotations
 
 import importlib
-from typing import TYPE_CHECKING, Any, Union
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from agentic_crew.runners.base import BaseRunner
@@ -142,28 +142,28 @@ def get_cli_runner(
     model: str | None = None,
 ) -> SingleAgentRunner:
     """Get a single-agent CLI runner for the specified profile.
-    
+
     Args:
         profile: Profile name (e.g., "aider", "claude-code", "ollama") or
                 custom config dict.
         model: Optional model override.
-        
+
     Returns:
         LocalCLIRunner instance for the profile.
-        
+
     Raises:
         ValueError: If profile not found.
         FileNotFoundError: If profiles file missing.
-        
+
     Examples:
         # Use built-in profile
         runner = get_cli_runner("aider")
         result = runner.run("Add error handling to auth.py")
-        
+
         # Use with model override
         runner = get_cli_runner("ollama", model="deepseek-coder")
         result = runner.run("Fix the bug")
-        
+
         # Use custom config
         runner = get_cli_runner({
             "command": "my-tool",
@@ -172,27 +172,27 @@ def get_cli_runner(
         })
     """
     from agentic_crew.runners.local_cli_runner import LocalCLIRunner
-    
+
     return LocalCLIRunner(profile, model=model)
 
 
 def get_available_cli_runners() -> list[str]:
     """Get list of available CLI runner profiles.
-    
+
     Returns:
         List of profile names (e.g., ["aider", "claude-code", "ollama"]).
     """
     from agentic_crew.runners.local_cli_runner import LocalCLIRunner
-    
+
     return LocalCLIRunner.get_available_profiles()
 
 
 def is_cli_runner_available(profile: str) -> bool:
     """Check if a CLI runner profile is available (tool installed).
-    
+
     Args:
         profile: Profile name to check.
-        
+
     Returns:
         True if the tool is installed and accessible.
     """

@@ -87,11 +87,11 @@ def cmd_run(args):
     """Run a specific crew or single-agent task."""
     use_json = getattr(args, "json", False)
     start_time = time.time()
-    
+
     # Check if using single-agent runner
     if hasattr(args, "runner") and args.runner:
         return _cmd_run_single_agent(args, use_json, start_time)
-    
+
     # Multi-agent crew execution (existing logic)
     from agentic_crew.core.decomposer import detect_framework, run_crew_auto
 
@@ -191,13 +191,13 @@ def cmd_run(args):
 
 def _cmd_run_single_agent(args, use_json: bool, start_time: float):
     """Run a task with a single-agent CLI runner."""
-    from agentic_crew.core.decomposer import get_cli_runner, get_available_cli_runners
-    
+    from agentic_crew.core.decomposer import get_available_cli_runners, get_cli_runner
+
     if not use_json:
         print("=" * 60)
         print(f"🤖 Running single-agent: {args.runner}")
         print("=" * 60)
-    
+
     # Get input
     if args.file:
         input_text = Path(args.file).read_text()
@@ -217,7 +217,7 @@ def _cmd_run_single_agent(args, use_json: bool, start_time: float):
         else:
             print("❌ Error: No input provided. Use --input or --file")
         sys.exit(2)
-    
+
     # Get working directory if package specified
     working_dir = None
     if hasattr(args, "package") and args.package:
@@ -225,14 +225,14 @@ def _cmd_run_single_agent(args, use_json: bool, start_time: float):
         if args.package in packages:
             # Use package directory as working dir
             working_dir = str(packages[args.package].parent)
-    
+
     try:
         # Get runner
         runner = get_cli_runner(
             args.runner,
             model=getattr(args, "model", None),
         )
-        
+
         # Check if available
         if not runner.is_available():
             available = get_available_cli_runners()
@@ -250,23 +250,23 @@ def _cmd_run_single_agent(args, use_json: bool, start_time: float):
             else:
                 print(f"❌ Runner '{args.runner}' not available (tool not installed)")
                 print(f"\nAvailable runners: {', '.join(available)}")
-                print(f"\nTo install, check: agentic-crew list-runners --json")
+                print("\nTo install, check: agentic-crew list-runners --json")
             sys.exit(2)
-        
+
         if not use_json:
             print(f"📋 Runner: {runner.config.name or args.runner}")
             if working_dir:
                 print(f"📁 Working dir: {working_dir}")
-        
+
         # Run the task
         result = runner.run(
             task=input_text,
             working_dir=working_dir,
             auto_approve=getattr(args, "auto_approve", True),
         )
-        
+
         duration_ms = int((time.time() - start_time) * 1000)
-        
+
         if use_json:
             print(
                 json.dumps(
@@ -283,7 +283,7 @@ def _cmd_run_single_agent(args, use_json: bool, start_time: float):
             print("📄 RESULT")
             print("=" * 60)
             print(result)
-    
+
     except (ValueError, RuntimeError, FileNotFoundError) as e:
         duration_ms = int((time.time() - start_time) * 1000)
         if use_json:
@@ -402,14 +402,13 @@ def cmd_list_runners(args):
     from agentic_crew.core.decomposer import (
         get_available_cli_runners,
         get_cli_runner,
-        is_cli_runner_available,
     )
-    
+
     use_json = getattr(args, "json", False)
-    
+
     try:
         profiles = get_available_cli_runners()
-        
+
         if use_json:
             runners_info = []
             for profile in profiles:
@@ -427,31 +426,31 @@ def cmd_list_runners(args):
                 except Exception:
                     # Skip profiles that fail to load
                     continue
-            
+
             print(json.dumps({"runners": runners_info}, indent=2))
         else:
             print("=" * 60)
             print("AVAILABLE SINGLE-AGENT CLI RUNNERS")
             print("=" * 60)
             print()
-            
+
             for profile in profiles:
                 try:
                     runner = get_cli_runner(profile)
                     available = "✅" if runner.is_available() else "❌"
                     print(f"{available} {profile}: {runner.config.description}")
-                    
+
                     if not runner.is_available():
                         print(f"    Install: {runner.config.install_cmd}")
-                    
+
                     if runner.get_required_env_vars():
                         print(f"    Requires: {', '.join(runner.get_required_env_vars())}")
-                    
+
                     print()
                 except Exception:
                     # Skip profiles that fail to load
                     continue
-    
+
     except FileNotFoundError as e:
         if use_json:
             print(json.dumps({"error": str(e)}))
@@ -473,7 +472,7 @@ Examples:
 
     # List crews in a package
     agentic-crew list otterfall
-    
+
     # List available single-agent runners
     agentic-crew list-runners
     agentic-crew list-runners --json
@@ -481,7 +480,7 @@ Examples:
     # Run a multi-agent crew
     agentic-crew run otterfall game_builder --input "Create a QuestComponent"
     agentic-crew run otterfall game_builder --input "..." --json  # JSON output
-    
+
     # Run with single-agent CLI runner
     agentic-crew run --runner aider --input "Add error handling to auth.py"
     agentic-crew run --runner claude-code --input "Refactor the database module"
@@ -510,7 +509,7 @@ Exit codes:
     list_parser.add_argument(
         "--json", action="store_true", help="Output as JSON (for external tools)"
     )
-    
+
     # List runners command
     list_runners_parser = subparsers.add_parser(
         "list-runners",
@@ -596,8 +595,6 @@ Exit codes:
         print(f"Workspace root: {get_workspace_root()}")
         tool = DirectoryListTool()
         print(tool._run("packages"))
-    else:
-        parser.print_help()
     else:
         parser.print_help()
 

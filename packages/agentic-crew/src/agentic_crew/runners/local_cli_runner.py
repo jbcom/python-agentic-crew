@@ -6,7 +6,7 @@ CLI flags in local_cli_profiles.yaml and it works.
 
 Supported tools (via profiles):
 - Aider: AI pair programming
-- Claude Code: Anthropic's coding agent  
+- Claude Code: Anthropic's coding agent
 - OpenAI Codex: OpenAI's local agent
 - Ollama: Free local LLMs (codellama, deepseek-coder, etc.)
 - Custom: Define your own tool's CLI flags
@@ -35,7 +35,7 @@ from agentic_crew.runners.single_agent_runner import SingleAgentRunner
 @dataclass
 class LocalCLIConfig:
     """Configuration for a CLI-based coding agent.
-    
+
     This defines how to invoke any CLI tool that can execute coding tasks.
     All fields map to the tool's command-line interface.
     """
@@ -43,30 +43,30 @@ class LocalCLIConfig:
     # Basic command configuration
     command: str  # Base command (e.g., "aider", "claude", "ollama")
     task_flag: str  # How to pass task (e.g., "--message", "--print", "" for positional)
-    
+
     # Optional subcommand (e.g., "run" for "ollama run")
     subcommand: str | None = None
-    
+
     # Authentication
     auth_env: list[str] = field(default_factory=list)  # Required env vars
-    
+
     # Mode controls
     auto_approve: str | None = None  # Auto-approve flag (e.g., "--yes-always")
     structured_output: str | None = None  # JSON output flag (e.g., "--json")
-    
+
     # Model configuration
     model_flag: str | None = None  # How to specify model (e.g., "--model")
     default_model: str | None = None  # Default model if not specified
-    
+
     # Working directory
     working_dir_flag: str | None = None  # Working dir flag (e.g., "--cwd")
-    
+
     # Additional flags to always include
     additional_flags: list[str] = field(default_factory=list)
-    
+
     # Execution settings
     timeout: int = 300  # Timeout in seconds
-    
+
     # Metadata
     name: str = ""
     description: str = ""
@@ -77,15 +77,15 @@ class LocalCLIConfig:
 
 class LocalCLIRunner(SingleAgentRunner):
     """Universal runner for CLI-based coding agents.
-    
+
     This runner can invoke any CLI tool that accepts a task/prompt and
     executes it. Configuration is done via profiles (built-in or custom).
-    
+
     Examples:
         # Use built-in profile
         runner = LocalCLIRunner("aider")
         result = runner.run("Add error handling to auth.py")
-        
+
         # Use custom config
         config = LocalCLIConfig(
             command="my-tool",
@@ -105,7 +105,7 @@ class LocalCLIRunner(SingleAgentRunner):
         model: str | None = None,
     ):
         """Initialize the runner with a profile or custom config.
-        
+
         Args:
             profile: Profile name (e.g., "aider"), LocalCLIConfig object,
                     or dict of config parameters.
@@ -127,20 +127,20 @@ class LocalCLIRunner(SingleAgentRunner):
         else:
             # Use provided LocalCLIConfig directly
             self.config = profile
-        
+
         self.model = model
         self.runner_name = f"local_cli_{self.config.command}"
 
     @classmethod
     def _load_profiles(cls) -> dict[str, LocalCLIConfig]:
         """Load CLI profiles from local_cli_profiles.yaml.
-        
+
         Returns:
             Dict mapping profile names to LocalCLIConfig objects.
         """
         if cls._profiles_cache is not None:
             return cls._profiles_cache
-        
+
         # Find the profiles file
         profiles_file = Path(__file__).parent / "local_cli_profiles.yaml"
         if not profiles_file.exists():
@@ -148,22 +148,22 @@ class LocalCLIRunner(SingleAgentRunner):
                 f"Profiles file not found: {profiles_file}\n"
                 f"Expected local_cli_profiles.yaml in runners directory."
             )
-        
+
         # Load and parse YAML
         with open(profiles_file) as f:
             data = yaml.safe_load(f)
-        
+
         profiles = {}
         for name, config_dict in data.get("profiles", {}).items():
             profiles[name] = LocalCLIConfig(**config_dict)
-        
+
         cls._profiles_cache = profiles
         return profiles
 
     @classmethod
     def get_available_profiles(cls) -> list[str]:
         """Get list of available profile names.
-        
+
         Returns:
             List of profile names that can be used.
         """
@@ -171,19 +171,19 @@ class LocalCLIRunner(SingleAgentRunner):
 
     def is_available(self) -> bool:
         """Check if the CLI tool is available (installed and accessible).
-        
+
         Returns:
             True if the command exists in PATH.
         """
         from shutil import which
-        
+
         # Check if command is in PATH
         command = self.config.command.split()[0]
         return which(command) is not None
 
     def get_required_env_vars(self) -> list[str]:
         """Get list of required environment variables.
-        
+
         Returns:
             List of environment variable names from config.auth_env.
         """
@@ -199,7 +199,7 @@ class LocalCLIRunner(SingleAgentRunner):
         **kwargs: Any,
     ) -> str:
         """Execute a task using the configured CLI tool.
-        
+
         Args:
             task: The task to execute (e.g., "Add error handling").
             working_dir: Optional working directory for execution.
@@ -207,10 +207,10 @@ class LocalCLIRunner(SingleAgentRunner):
             structured_output: Whether to request JSON output (if supported).
             model: Optional model override.
             **kwargs: Additional tool-specific arguments.
-            
+
         Returns:
             Tool output as a string.
-            
+
         Raises:
             RuntimeError: If tool execution fails or required env vars missing.
             subprocess.TimeoutExpired: If execution exceeds timeout.
@@ -220,14 +220,14 @@ class LocalCLIRunner(SingleAgentRunner):
         for var in self.config.auth_env:
             if var not in os.environ:
                 missing_vars.append(var)
-        
+
         if missing_vars:
             raise RuntimeError(
                 f"Missing required environment variables for {self.config.command}: "
                 f"{', '.join(missing_vars)}\n"
                 f"Set these before running: {', '.join(missing_vars)}"
             )
-        
+
         # Build command
         cmd = self._build_command(
             task=task,
@@ -236,7 +236,7 @@ class LocalCLIRunner(SingleAgentRunner):
             structured_output=structured_output,
             model=model or self.model,
         )
-        
+
         # Execute
         try:
             result = subprocess.run(
@@ -247,7 +247,7 @@ class LocalCLIRunner(SingleAgentRunner):
                 timeout=self.config.timeout,
                 env=os.environ.copy(),  # Pass through environment
             )
-            
+
             # Check for errors
             if result.returncode != 0:
                 raise RuntimeError(
@@ -256,9 +256,9 @@ class LocalCLIRunner(SingleAgentRunner):
                     f"stdout: {result.stdout}\n"
                     f"stderr: {result.stderr}"
                 )
-            
+
             return result.stdout
-            
+
         except subprocess.TimeoutExpired as e:
             raise RuntimeError(
                 f"Command timed out after {self.config.timeout}s\n"
@@ -274,24 +274,24 @@ class LocalCLIRunner(SingleAgentRunner):
         model: str | None,
     ) -> list[str]:
         """Build the command array for subprocess.run.
-        
+
         Args:
             task: The task to execute.
             working_dir: Optional working directory.
             auto_approve: Whether to include auto-approve flag.
             structured_output: Whether to include structured output flag.
             model: Optional model to use.
-            
+
         Returns:
             Command as list of strings.
         """
         # Start with base command
         cmd = shlex.split(self.config.command)
-        
+
         # Add subcommand if present (e.g., "ollama run")
         if self.config.subcommand:
             cmd.append(self.config.subcommand)
-        
+
         # Add model if specified and tool supports it
         # For positional model (like ollama), add before task
         if model:
@@ -303,27 +303,27 @@ class LocalCLIRunner(SingleAgentRunner):
         elif self.config.default_model and not self.config.model_flag:
             # Use default model for positional case
             cmd.append(self.config.default_model)
-        
+
         # Add task
         if self.config.task_flag:
             cmd.extend([self.config.task_flag, task])
         else:
             # Positional argument
             cmd.append(task)
-        
+
         # Add auto-approve flag if requested and supported
         if auto_approve and self.config.auto_approve:
             cmd.append(self.config.auto_approve)
-        
+
         # Add structured output flag if requested and supported
         if structured_output and self.config.structured_output:
             cmd.append(self.config.structured_output)
-        
+
         # Add working directory if supported
         if working_dir and self.config.working_dir_flag:
             cmd.extend([self.config.working_dir_flag, working_dir])
-        
+
         # Add any additional flags
         cmd.extend(self.config.additional_flags)
-        
+
         return cmd
