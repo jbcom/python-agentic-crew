@@ -371,8 +371,10 @@ profiles:
     @patch("subprocess.run")
     def test_build_command_positional_task(self, mock_run: MagicMock):
         """Should handle positional task argument (no flag)."""
+        # Note: command can contain spaces and will be split with shlex
+        # But using subcommand/default_model is more explicit (see next test)
         config = LocalCLIConfig(
-            command="ollama run codellama",
+            command="test-tool",
             task_flag="",  # Positional
             auth_env=["TEST_API_KEY"],
         )
@@ -384,8 +386,8 @@ profiles:
 
         call_args = mock_run.call_args
         cmd = call_args[0][0]
-        # Should be: ["ollama", "run", "codellama", "Fix the bug"]
-        assert cmd[-1] == "Fix the bug"
+        # Should be: ["test-tool", "Fix the bug"]
+        assert cmd == ["test-tool", "Fix the bug"]
         assert "--task" not in cmd
 
     @patch.dict("os.environ", {"TEST_API_KEY": "test-key"})
