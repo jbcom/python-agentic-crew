@@ -83,7 +83,7 @@ def cmd_list(args):
 
 def cmd_run(args):
     """Run a specific crew."""
-    from agentic_crew.core.decomposer import run_crew_auto, detect_framework
+    from agentic_crew.core.decomposer import detect_framework, run_crew_auto
 
     use_json = getattr(args, "json", False)
     start_time = time.time()
@@ -194,20 +194,48 @@ def cmd_build(args):
 
 def cmd_info(args):
     """Show detailed info about a crew."""
+    use_json = getattr(args, "json", False)
     packages = discover_packages()
 
     if args.package not in packages:
-        print(f"❌ Package '{args.package}' not found.")
-        print(f"Available: {list(packages.keys())}")
-        sys.exit(1)
+        if use_json:
+            print(json.dumps({
+                "error": f"Package '{args.package}' not found",
+                "available_packages": list(packages.keys()),
+            }))
+        else:
+            print(f"❌ Package '{args.package}' not found.")
+            print(f"Available: {list(packages.keys())}")
+        sys.exit(2)
 
-    crewai_dir = packages[args.package]
+    config_dir = packages[args.package]
 
     try:
-        config = get_crew_config(crewai_dir, args.crew)
+        config = get_crew_config(config_dir, args.crew)
     except ValueError as e:
-        print(f"❌ {e}")
-        sys.exit(1)
+        if use_json:
+            print(json.dumps({"error": str(e)}))
+        else:
+            print(f"❌ {e}")
+        sys.exit(2)
+
+    if use_json:
+        print(json.dumps({
+            "package": args.package,
+            "name": args.crew,
+            "description": config.get("description", ""),
+            "required_framework": config.get("required_framework"),
+            "agents": [
+                {"name": name, "role": cfg.get("role", name)}
+                for name, cfg in config.get("agents", {}).items()
+            ],
+            "tasks": [
+                {"name": name, "description": cfg.get("description", "")}
+                for name, cfg in config.get("tasks", {}).items()
+            ],
+            "knowledge_paths": config.get("knowledge_paths", []),
+        }, indent=2))
+        return
 
     print("=" * 60)
     print(f"CREW: {args.package}/{args.crew}")
@@ -232,24 +260,28 @@ def cmd_info(args):
 def main():
     """CLI entry point."""
     parser = argparse.ArgumentParser(
-        description="CrewAI - Package-Agnostic Crew Runner",
+        description="agentic-crew - Framework-Agnostic Crew Runner",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
     # List all packages with crews
-    crewai list
+    agentic-crew list
+    agentic-crew list --json  # JSON output for external tools
 
     # List crews in a package
-    crewai list otterfall
+    agentic-crew list otterfall
 
     # Run a crew
-    crewai run otterfall game_builder --input "Create a QuestComponent"
+    agentic-crew run otterfall game_builder --input "Create a QuestComponent"
+    agentic-crew run otterfall game_builder --input "..." --json  # JSON output
 
     # Show crew details
-    crewai info otterfall game_builder
+    agentic-crew info otterfall game_builder --json
 
-    # Legacy: Direct build (uses otterfall game_builder)
-    crewai build "Create a QuestComponent"
+Exit codes:
+    0 - Success
+    1 - Crew execution failed
+    2 - Configuration error (package/crew not found)
         """,
     )
 
@@ -262,6 +294,9 @@ Examples:
         "--framework",
         choices=["crewai", "langgraph", "strands"],
         help="Filter crews by framework",
+    )
+    list_parser.add_argument(
+        "--json", action="store_true", help="Output as JSON (for external tools)"
     )
 
     # Run command
@@ -277,11 +312,17 @@ Examples:
         help="Framework to use (auto=detect, or specify). "
         "Note: If crew is in a framework-specific directory, that takes precedence.",
     )
+    run_parser.add_argument(
+        "--json", action="store_true", help="Output as JSON (for external tools)"
+    )
 
     # Info command
     info_parser = subparsers.add_parser("info", help="Show crew details")
     info_parser.add_argument("package", help="Package name")
     info_parser.add_argument("crew", help="Crew name")
+    info_parser.add_argument(
+        "--json", action="store_true", help="Output as JSON (for external tools)"
+    )
 
     # Legacy build command (for backwards compatibility)
     build_parser = subparsers.add_parser("build", help="Build a game component (legacy)")
