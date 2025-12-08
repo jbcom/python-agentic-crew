@@ -92,9 +92,23 @@ src/agentic_crew/
     └── connector_builder/   # HTTP connector generation crew
 ```
 
+### Configuration Directories
+
+agentic-crew supports multiple configuration directory types:
+
+| Directory | Framework | Description |
+|-----------|-----------|-------------|
+| `.crew/` | Auto-detect | Framework-agnostic, runs on any available framework |
+| `.crewai/` | CrewAI | CrewAI-specific features required |
+| `.langgraph/` | LangGraph | LangGraph-specific features required |
+| `.strands/` | Strands | Strands-specific features required |
+
+Use `.crew/` when your crews don't need framework-specific features.
+Use framework-specific directories when you need features unique to that framework.
+
 ### Manifest Format
 
-Crews are defined in `.crewai/manifest.yaml`:
+Crews are defined in `manifest.yaml` (e.g., `.crew/manifest.yaml`):
 
 ```yaml
 name: my-package
