@@ -1,29 +1,33 @@
-"""Main entry point for CrewAI - Package-Agnostic Crew Runner.
+"""Main entry point for agentic-crew - Framework-Agnostic Crew Runner.
 
-This is a generic CrewAI runner that discovers and executes crews
-defined in packages' .crewai/ directories.
+This is a generic crew runner that discovers and executes crews
+defined in packages' .crew/, .crewai/, .langgraph/, or .strands/ directories.
 
 Usage:
     # List all available packages with crews
-    crewai list
+    agentic-crew list
+    agentic-crew list --json  # JSON output for external tools
 
     # List crews in a specific package
-    crewai list otterfall
+    agentic-crew list otterfall
 
     # Run a crew
-    crewai run otterfall game_builder --input "Create a BiomeComponent"
+    agentic-crew run otterfall game_builder --input "Create a BiomeComponent"
+    agentic-crew run otterfall game_builder --input "..." --json  # JSON output
 
     # Run with input from file
-    crewai run otterfall game_builder --file tasks.md
+    agentic-crew run otterfall game_builder --file tasks.md
 
-    # Legacy: Direct build (uses otterfall game_builder)
-    crewai build "Create a BiomeComponent"
+    # Show crew details
+    agentic-crew info otterfall game_builder --json
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import sys
+import time
 from pathlib import Path
 
 from agentic_crew.core.discovery import discover_packages, get_crew_config, list_crews
@@ -33,14 +37,31 @@ from agentic_crew.core.runner import run_crew
 def cmd_list(args):
     """List available packages and crews."""
     framework = getattr(args, "framework", None)
+    use_json = getattr(args, "json", False)
+
     crews_by_package = list_crews(
         args.package if hasattr(args, "package") else None,
         framework=framework,
     )
 
+    if use_json:
+        # Flatten to list for JSON output
+        all_crews = []
+        for pkg_name, crews in crews_by_package.items():
+            for crew in crews:
+                all_crews.append({
+                    "package": pkg_name,
+                    "name": crew["name"],
+                    "description": crew.get("description", ""),
+                    "required_framework": crew.get("required_framework"),
+                })
+        print(json.dumps({"crews": all_crews}, indent=2))
+        return
+
     if not crews_by_package:
         print("No packages with crew configuration directories found.")
         print("\nTo add crews to a package, create one of:")
+        print("  packages/<name>/.crew/manifest.yaml     # Framework-agnostic")
         print("  packages/<name>/.crewai/manifest.yaml   # CrewAI-specific")
         print("  packages/<name>/.langgraph/manifest.yaml  # LangGraph-specific")
         print("  packages/<name>/.strands/manifest.yaml  # Strands-specific")
@@ -62,11 +83,15 @@ def cmd_list(args):
 
 def cmd_run(args):
     """Run a specific crew."""
-    from agentic_crew.core.decomposer import run_crew_auto
+    from agentic_crew.core.decomposer import run_crew_auto, detect_framework
 
-    print("=" * 60)
-    print(f"🚀 Running {args.package}/{args.crew}")
-    print("=" * 60)
+    use_json = getattr(args, "json", False)
+    start_time = time.time()
+
+    if not use_json:
+        print("=" * 60)
+        print(f"🚀 Running {args.package}/{args.crew}")
+        print("=" * 60)
 
     # Get input
     if args.file:
@@ -81,36 +106,68 @@ def cmd_run(args):
     # Discover package and load config
     packages = discover_packages()
     if args.package not in packages:
-        print(f"❌ Package '{args.package}' not found.")
-        print(f"Available: {list(packages.keys())}")
-        sys.exit(1)
+        if use_json:
+            print(json.dumps({
+                "success": False,
+                "error": f"Package '{args.package}' not found",
+                "available_packages": list(packages.keys()),
+                "duration_ms": int((time.time() - start_time) * 1000),
+            }))
+        else:
+            print(f"❌ Package '{args.package}' not found.")
+            print(f"Available: {list(packages.keys())}")
+        sys.exit(2)  # Exit code 2 = configuration error
 
     config_dir = packages[args.package]
 
     try:
         crew_config = get_crew_config(config_dir, args.crew)
 
-        # Show framework info
+        # Determine framework
         required = crew_config.get("required_framework")
-        if required:
-            print(f"📋 Framework: {required} (required by .{required}/ directory)")
-        elif args.framework != "auto":
-            print(f"📋 Framework: {args.framework} (requested)")
-        else:
-            print("📋 Framework: auto-detect")
+        requested = args.framework if args.framework != "auto" else None
+        framework_used = required or requested or detect_framework()
+
+        if not use_json:
+            if required:
+                print(f"📋 Framework: {required} (required by .{required}/ directory)")
+            elif requested:
+                print(f"📋 Framework: {requested} (requested)")
+            else:
+                print(f"📋 Framework: {framework_used} (auto-detected)")
 
         result = run_crew_auto(
             crew_config,
             inputs=inputs,
-            framework=args.framework if args.framework != "auto" else None,
+            framework=requested,
         )
-        print("\n" + "=" * 60)
-        print("📄 RESULT")
-        print("=" * 60)
-        print(result)
+
+        duration_ms = int((time.time() - start_time) * 1000)
+
+        if use_json:
+            print(json.dumps({
+                "success": True,
+                "output": result,
+                "framework_used": framework_used,
+                "duration_ms": duration_ms,
+            }))
+        else:
+            print("\n" + "=" * 60)
+            print("📄 RESULT")
+            print("=" * 60)
+            print(result)
+
     except (ValueError, RuntimeError) as e:
-        print(f"❌ Error: {e}")
-        sys.exit(1)
+        duration_ms = int((time.time() - start_time) * 1000)
+        if use_json:
+            print(json.dumps({
+                "success": False,
+                "error": str(e),
+                "duration_ms": duration_ms,
+            }))
+        else:
+            print(f"❌ Error: {e}")
+        sys.exit(1)  # Exit code 1 = crew execution failed
 
 
 def cmd_build(args):
