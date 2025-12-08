@@ -138,9 +138,14 @@ timeout: 600
 Then use it:
 
 ```python
+import yaml
 from agentic_crew.core.decomposer import get_cli_runner
 
-runner = get_cli_runner("my-custom-runner.yaml")
+# Load your custom config from YAML
+with open("my-custom-runner.yaml") as f:
+    custom_config = yaml.safe_load(f)
+
+runner = get_cli_runner(custom_config)
 result = runner.run("Fix the bug")
 ```
 

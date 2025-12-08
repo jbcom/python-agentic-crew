@@ -339,10 +339,11 @@ profiles:
         )
         runner = LocalCLIRunner(config)
 
-        # Mock failed execution
-        mock_run.return_value = MagicMock(
+        # Mock failed execution with CalledProcessError (raised when check=True)
+        mock_run.side_effect = subprocess.CalledProcessError(
             returncode=1,
-            stdout="",
+            cmd=["test-tool", "--task", "Test task"],
+            output="",
             stderr="Error occurred",
         )
 

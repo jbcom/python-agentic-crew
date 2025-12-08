@@ -215,6 +215,9 @@ class LocalCLIRunner(SingleAgentRunner):
             RuntimeError: If tool execution fails or required env vars missing.
             subprocess.TimeoutExpired: If execution exceeds timeout.
         """
+        # Accept but don't use kwargs (reserved for future extensibility)
+        _ = kwargs
+
         # Check required environment variables
         missing_vars = []
         for var in self.config.auth_env:
@@ -246,19 +249,18 @@ class LocalCLIRunner(SingleAgentRunner):
                 text=True,
                 timeout=self.config.timeout,
                 env=os.environ.copy(),  # Pass through environment
+                check=True,
             )
-
-            # Check for errors
-            if result.returncode != 0:
-                raise RuntimeError(
-                    f"Command failed with exit code {result.returncode}\n"
-                    f"Command: {' '.join(cmd)}\n"
-                    f"stdout: {result.stdout}\n"
-                    f"stderr: {result.stderr}"
-                )
 
             return result.stdout
 
+        except subprocess.CalledProcessError as e:
+            raise RuntimeError(
+                f"Command failed with exit code {e.returncode}\n"
+                f"Command: {' '.join(e.cmd)}\n"
+                f"stdout: {e.stdout}\n"
+                f"stderr: {e.stderr}"
+            ) from e
         except subprocess.TimeoutExpired as e:
             raise RuntimeError(
                 f"Command timed out after {self.config.timeout}s\nCommand: {' '.join(cmd)}"
