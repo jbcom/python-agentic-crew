@@ -2,12 +2,12 @@
 
 This module provides the core capability of agentic-crew: declaring crews
 once and running them on CrewAI, LangGraph, or Strands depending on what's
-installed.
+installed. It also supports single-agent CLI runners for simpler tasks.
 
 Usage:
     from agentic_crew.core.decomposer import get_runner, detect_framework
 
-    # Auto-detect best framework
+    # Auto-detect best framework for multi-agent
     framework = detect_framework()
 
     # Get runner for that framework
@@ -15,15 +15,20 @@ Usage:
 
     # Or let it auto-select
     runner = get_runner()  # Uses best available
+    
+    # Get single-agent CLI runner
+    from agentic_crew.core.decomposer import get_cli_runner
+    runner = get_cli_runner("aider")
 """
 
 from __future__ import annotations
 
 import importlib
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Union
 
 if TYPE_CHECKING:
     from agentic_crew.runners.base import BaseRunner
+    from agentic_crew.runners.single_agent_runner import SingleAgentRunner
 
 # Framework detection cache
 _framework_cache: dict[str, bool] = {}
@@ -130,6 +135,72 @@ def get_runner(framework: str | None = None) -> BaseRunner:
         return StrandsRunner()
 
     raise ValueError(f"Unknown framework: {framework}. Options: {FRAMEWORK_PRIORITY}")
+
+
+def get_cli_runner(
+    profile: str | dict[str, Any],
+    model: str | None = None,
+) -> SingleAgentRunner:
+    """Get a single-agent CLI runner for the specified profile.
+    
+    Args:
+        profile: Profile name (e.g., "aider", "claude-code", "ollama") or
+                custom config dict.
+        model: Optional model override.
+        
+    Returns:
+        LocalCLIRunner instance for the profile.
+        
+    Raises:
+        ValueError: If profile not found.
+        FileNotFoundError: If profiles file missing.
+        
+    Examples:
+        # Use built-in profile
+        runner = get_cli_runner("aider")
+        result = runner.run("Add error handling to auth.py")
+        
+        # Use with model override
+        runner = get_cli_runner("ollama", model="deepseek-coder")
+        result = runner.run("Fix the bug")
+        
+        # Use custom config
+        runner = get_cli_runner({
+            "command": "my-tool",
+            "task_flag": "--task",
+            "auto_approve": "--yes",
+        })
+    """
+    from agentic_crew.runners.local_cli_runner import LocalCLIRunner
+    
+    return LocalCLIRunner(profile, model=model)
+
+
+def get_available_cli_runners() -> list[str]:
+    """Get list of available CLI runner profiles.
+    
+    Returns:
+        List of profile names (e.g., ["aider", "claude-code", "ollama"]).
+    """
+    from agentic_crew.runners.local_cli_runner import LocalCLIRunner
+    
+    return LocalCLIRunner.get_available_profiles()
+
+
+def is_cli_runner_available(profile: str) -> bool:
+    """Check if a CLI runner profile is available (tool installed).
+    
+    Args:
+        profile: Profile name to check.
+        
+    Returns:
+        True if the tool is installed and accessible.
+    """
+    try:
+        runner = get_cli_runner(profile)
+        return runner.is_available()
+    except (ValueError, FileNotFoundError):
+        return False
 
 
 def decompose_crew(
