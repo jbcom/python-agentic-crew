@@ -341,7 +341,7 @@ class TestLangGraphRunner:
             runner.get_llm()
 
             MockLLM.assert_called_once()
-            assert MockLLM.call_args[1]["model"] == "claude-sonnet-4-20250514"
+            assert MockLLM.call_args[1]["model"] == "claude-haiku-4-5-20251001"
 
     def test_build_task_returns_dict(self, mock_frameworks) -> None:
         """Test that build_task returns task configuration dict."""

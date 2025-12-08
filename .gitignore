@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -21,11 +23,17 @@ wheels/
 *.egg
 MANIFEST
 
+# PyInstaller
+*.manifest
+*.spec
+
 # Virtual environments
 .venv/
 venv/
 ENV/
 env/
+env.bak/
+venv.bak/
 
 # Testing
 .pytest_cache/
@@ -34,6 +42,10 @@ env/
 htmlcov/
 *.cover
 coverage.xml
+.tox/
+.cache
+nosetests.xml
+.hypothesis/
 
 # IDEs
 .vscode/
@@ -45,3 +57,7 @@ coverage.xml
 # OS
 .DS_Store
 Thumbs.db
+
+# Project specific
+*.log
+docs/_build/

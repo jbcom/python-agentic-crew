@@ -34,40 +34,42 @@ class LLMConfig:
 
 
 # Model identifiers
-_CLAUDE_SONNET_37 = "claude-3-7-sonnet-20250219"
-_CLAUDE_SONNET_35 = "claude-3-5-sonnet-20241022"
-_CLAUDE_OPUS_3 = "claude-3-opus-20240229"
+_CLAUDE_HAIKU_45 = "claude-haiku-4-5-20251001"
+_CLAUDE_SONNET_45 = "claude-sonnet-4-5-20250929"
+_CLAUDE_SONNET_4 = "claude-sonnet-4-20250514"
+_CLAUDE_OPUS_4 = "claude-opus-4-20250514"
 
-# Default model - Claude 3.7 Sonnet for best code generation
-DEFAULT_MODEL = _CLAUDE_SONNET_37
+# Default model - Claude Haiku 4.5 for fast, cost-effective operations
+DEFAULT_MODEL = _CLAUDE_HAIKU_45
 
 # Alternative models
 MODELS = {
-    "sonnet": _CLAUDE_SONNET_37,
-    "sonnet-3.5": _CLAUDE_SONNET_35,
-    "opus": _CLAUDE_OPUS_3,
+    "haiku": _CLAUDE_HAIKU_45,
+    "sonnet": _CLAUDE_SONNET_45,
+    "sonnet-4": _CLAUDE_SONNET_4,
+    "opus": _CLAUDE_OPUS_4,
     # OpenRouter fallbacks
     "openrouter-auto": "openrouter/auto",
-    "openrouter-sonnet": "openrouter/anthropic/claude-3.7-sonnet",
+    "openrouter-haiku": "openrouter/anthropic/claude-haiku-4.5",
 }
 
 # Predefined configurations for common use cases
 LLM_CONFIGS = {
     "reasoning": LLMConfig(
-        model=_CLAUDE_OPUS_3, temperature=0.3, description="Optimized for complex reasoning tasks"
+        model=_CLAUDE_OPUS_4, temperature=0.3, description="Optimized for complex reasoning tasks"
     ),
     "creative": LLMConfig(
-        model=_CLAUDE_SONNET_37,
+        model=_CLAUDE_SONNET_45,
         temperature=0.8,
         description="Optimized for creative content generation",
     ),
     "code": LLMConfig(
-        model=_CLAUDE_SONNET_37,
+        model=_CLAUDE_SONNET_45,
         temperature=0.2,
         description="Optimized for code generation and analysis",
     ),
     "default": LLMConfig(
-        model=_CLAUDE_SONNET_37,
+        model=_CLAUDE_HAIKU_45,
         temperature=0.7,
         description="Balanced configuration for general use",
     ),
@@ -80,16 +82,17 @@ def get_llm(
     """Get configured LLM instance for CrewAI agents.
 
     Args:
-        model: Model identifier. Defaults to claude-3-7-sonnet-20250219 (DEFAULT_MODEL)
+        model: Model identifier. Defaults to claude-haiku-4-5-20251001 (DEFAULT_MODEL)
         temperature: Sampling temperature (0.0-1.0). Lower = more focused,
                     higher = more creative.
         provider: Force specific provider (ANTHROPIC or OPENROUTER).
                  If None, auto-detects based on available API keys.
 
     Available models:
-        - claude-3-7-sonnet-20250219 (default - best for code)
-        - claude-3-5-sonnet-20241022 (previous version)
-        - claude-3-opus-20240229 (most capable)
+        - claude-haiku-4-5-20251001 (default - fast, cost-effective)
+        - claude-sonnet-4-5-20250929 (best for code and creative)
+        - claude-sonnet-4-20250514 (capable general purpose)
+        - claude-opus-4-20250514 (most capable)
         - openrouter/auto (fallback via OpenRouter)
 
     Returns:
@@ -100,8 +103,8 @@ def get_llm(
         Returns None if neither is set, allowing CrewAI to use its default.
 
     Example:
-        >>> llm = get_llm()  # Uses Claude 3.7 Sonnet
-        >>> llm = get_llm("claude-3-opus-20240229", temperature=0.3)
+        >>> llm = get_llm()  # Uses Claude Haiku 4.5
+        >>> llm = get_llm("claude-opus-4-20250514", temperature=0.3)
         >>> llm = get_llm(provider=LLMProvider.OPENROUTER)
     """
     if LLM is None:

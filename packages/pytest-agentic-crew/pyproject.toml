@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pytest-agentic-crew"
+version = "0.1.0"
+description = "Pytest plugin with fixtures for agentic-crew E2E testing"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+readme = "README.md"
+authors = [{ name = "Jon Bogaty", email = "jon@jonbogaty.com" }]
+keywords = ["pytest", "testing", "fixtures", "agentic-crew", "e2e", "crewai", "langgraph", "strands"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Pytest",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "pytest>=8.0",
+    "vcrpy>=6.0",
+]
+
+[project.optional-dependencies]
+crewai = ["crewai[tools,anthropic]>=1.5.0"]
+langgraph = ["langgraph>=0.2", "langchain-anthropic>=0.3"]
+strands = ["strands-agents>=0.1"]
+all = [
+    "pytest-agentic-crew[crewai]",
+    "pytest-agentic-crew[langgraph]",
+    "pytest-agentic-crew[strands]",
+]
+
+[project.urls]
+Homepage = "https://github.com/jbcom/agentic-crew"
+Repository = "https://github.com/jbcom/agentic-crew"
+Documentation = "https://github.com/jbcom/agentic-crew/tree/main/packages/pytest-agentic-crew"
+
+[project.entry-points.pytest11]
+agentic_crew = "pytest_agentic_crew.plugin"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pytest_agentic_crew"]
+
+# Semantic Release - per-package versioning
+[tool.semantic_release]
+tag_format = "pytest-agentic-crew-v{version}"
+version_toml = ["pyproject.toml:project.version"]
+version_variables = ["src/pytest_agentic_crew/__init__.py:__version__"]
+build_command = "uv build"
