@@ -99,7 +99,7 @@ profiles:
     auto_approve: "--yes"
     timeout: 120
     install_cmd: "pip install test-tool"
-    
+
   aider:
     name: "Aider"
     description: "AI pair programming"
