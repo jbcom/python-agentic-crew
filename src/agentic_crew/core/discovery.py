@@ -15,17 +15,27 @@ from pathlib import Path
 import yaml
 
 # Framework directory names in priority order
-FRAMEWORK_DIRS = [".crewai", ".langgraph", ".strands"]
+# .crew is framework-agnostic (can run on any available framework)
+# Framework-specific dirs enforce that framework
+FRAMEWORK_DIRS = [".crew", ".crewai", ".langgraph", ".strands"]
 
 # Mapping from directory name to framework name
-DIR_TO_FRAMEWORK = {
+# .crew maps to None (framework-agnostic, auto-detect at runtime)
+DIR_TO_FRAMEWORK: dict[str, str | None] = {
+    ".crew": None,  # Framework-agnostic
     ".crewai": "crewai",
     ".langgraph": "langgraph",
     ".strands": "strands",
 }
 
 # Mapping from framework name to directory name
-FRAMEWORK_TO_DIR = {v: k for k, v in DIR_TO_FRAMEWORK.items()}
+# None (agnostic) maps to .crew
+FRAMEWORK_TO_DIR: dict[str | None, str] = {
+    None: ".crew",
+    "crewai": ".crewai",
+    "langgraph": ".langgraph",
+    "strands": ".strands",
+}
 
 
 def get_workspace_root() -> Path:
