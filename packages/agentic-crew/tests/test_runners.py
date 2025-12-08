@@ -717,9 +717,7 @@ class TestBaseRunner:
             def run(self, crew: Any, inputs: dict[str, Any]) -> str:
                 return "result"
 
-            def build_agent(
-                self, agent_config: dict[str, Any], tools: list | None = None
-            ) -> Any:
+            def build_agent(self, agent_config: dict[str, Any], tools: list | None = None) -> Any:
                 return crew_mocker.MagicMock()
 
             def build_task(self, task_config: dict[str, Any], agent: Any) -> Any:

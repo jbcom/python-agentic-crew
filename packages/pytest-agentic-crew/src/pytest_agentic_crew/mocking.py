@@ -153,7 +153,13 @@ class CrewMocker:
         Returns:
             Dictionary of mocked CrewAI modules.
         """
-        return self.mock_modules(CREWAI_MODULES)
+        mocks = self.mock_modules(CREWAI_MODULES)
+        # Set up nested module attributes
+        if "crewai.knowledge.source.text_file_knowledge_source" in mocks:
+            mocks[
+                "crewai.knowledge.source.text_file_knowledge_source"
+            ].TextFileKnowledgeSource = self.mocker.MagicMock()
+        return mocks
 
     def mock_crewai_agent(self, **kwargs: Any) -> Any:
         """Create a mock for crewai.Agent.
@@ -234,11 +240,19 @@ class CrewMocker:
         return self.mocker.patch("crewai.Process")
 
     def patch_knowledge_source(self) -> Any:
-        """Patch TextFileKnowledgeSource and return the mock.
+        """Get the TextFileKnowledgeSource mock from the mocked crewai module.
+
+        Note: Must call mock_crewai() first.
 
         Returns:
             The mock for TextFileKnowledgeSource.
         """
+        # If the module is already mocked, return its TextFileKnowledgeSource
+        if "crewai.knowledge.source.text_file_knowledge_source" in self.mocked_modules:
+            return self.mocked_modules[
+                "crewai.knowledge.source.text_file_knowledge_source"
+            ].TextFileKnowledgeSource
+        # Otherwise, fall back to patching
         return self.mocker.patch(
             "crewai.knowledge.source.text_file_knowledge_source.TextFileKnowledgeSource"
         )
@@ -253,22 +267,38 @@ class CrewMocker:
         Returns:
             Dictionary of mocked LangGraph modules.
         """
-        return self.mock_modules(LANGGRAPH_MODULES)
+        mocks = self.mock_modules(LANGGRAPH_MODULES)
+        # Set up the prebuilt module with create_react_agent
+        if "langgraph.prebuilt" in mocks:
+            mocks["langgraph.prebuilt"].create_react_agent = self.mocker.MagicMock()
+        return mocks
 
     def patch_create_react_agent(self) -> Any:
-        """Patch langgraph.prebuilt.create_react_agent.
+        """Get the create_react_agent mock from the mocked langgraph module.
+
+        Note: Must call mock_langgraph() first.
 
         Returns:
             The mock for create_react_agent.
         """
+        # If langgraph.prebuilt is already mocked, return its create_react_agent
+        if "langgraph.prebuilt" in self.mocked_modules:
+            return self.mocked_modules["langgraph.prebuilt"].create_react_agent
+        # Otherwise, fall back to patching
         return self.mocker.patch("langgraph.prebuilt.create_react_agent")
 
     def patch_chat_anthropic(self) -> Any:
-        """Patch langchain_anthropic.ChatAnthropic.
+        """Get the ChatAnthropic mock from the mocked langchain_anthropic module.
+
+        Note: Must call mock_langgraph() first.
 
         Returns:
             The mock for ChatAnthropic.
         """
+        # If langchain_anthropic is already mocked, return its ChatAnthropic
+        if "langchain_anthropic" in self.mocked_modules:
+            return self.mocked_modules["langchain_anthropic"].ChatAnthropic
+        # Otherwise, fall back to patching
         return self.mocker.patch("langchain_anthropic.ChatAnthropic")
 
     def mock_langgraph_graph(self, result: str = "Test response") -> Any:
