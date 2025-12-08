@@ -205,8 +205,10 @@ A crew that scrapes API docs and generates HTTP connectors:
 
 ```bash
 agentic-crew run vendor-connectors connector_builder \
-  --input '{"api_docs": "https://docs.meshy.ai/en"}'
+  --input '{"api_docs_url": "https://docs.meshy.ai/en", "vendor_name": "meshy"}'
 ```
+
+See [vendor-connectors Integration Guide](docs/VENDOR_CONNECTORS_INTEGRATION.md) for details.
 
 ### 2. Code Generation (any project)
 
@@ -227,10 +229,16 @@ uvx ruff check src/ tests/ --fix
 
 ## Related Projects
 
-- [vendor-connectors](https://github.com/jbcom/vendor-connectors) - HTTP connector library
+- [vendor-connectors](https://github.com/jbcom/vendor-connectors) - HTTP connector library (uses agentic-crew for development)
 - [CrewAI](https://github.com/crewAIInc/crewAI) - Original crew framework
 - [LangGraph](https://github.com/langchain-ai/langgraph) - Graph-based agents
 - [Strands](https://github.com/strands-agents/strands-agents-python) - AWS agent framework
+
+## Documentation
+
+- [Quick Start](docs/QUICKSTART.md) - Get started quickly
+- [Architecture](docs/ARCHITECTURE.md) - Technical architecture
+- [vendor-connectors Integration](docs/VENDOR_CONNECTORS_INTEGRATION.md) - Integration guide for vendor-connectors
 
 ## License
 
