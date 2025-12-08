@@ -154,7 +154,7 @@ def decompose_crew(
     """
     # Check if crew config requires a specific framework
     required_framework = crew_config.get("required_framework")
-    
+
     if required_framework:
         # Framework is enforced by config directory (.crewai, .strands, etc.)
         if framework and framework != required_framework and framework != "auto":
@@ -162,14 +162,14 @@ def decompose_crew(
                 f"Crew requires {required_framework} (defined in .{required_framework}/ directory) "
                 f"but {framework} was requested"
             )
-        
+
         if not is_framework_available(required_framework):
             raise RuntimeError(
                 f"Crew requires {required_framework} but it's not installed. "
                 f"Install with: pip install {_get_install_command(required_framework)}"
             )
         framework = required_framework
-    
+
     runner = get_runner(framework)
     return runner.build_crew(crew_config)
 
@@ -208,21 +208,21 @@ def run_crew_auto(
     """
     # Check if crew config requires a specific framework
     required_framework = crew_config.get("required_framework")
-    
+
     if required_framework:
         if framework and framework != required_framework and framework != "auto":
             raise ValueError(
                 f"Crew requires {required_framework} (defined in .{required_framework}/ directory) "
                 f"but {framework} was requested"
             )
-        
+
         if not is_framework_available(required_framework):
             raise RuntimeError(
                 f"Crew requires {required_framework} but it's not installed. "
                 f"Install with: pip install {_get_install_command(required_framework)}"
             )
         framework = required_framework
-    
+
     runner = get_runner(framework)
     crew = runner.build_crew(crew_config)
     return runner.run(crew, inputs or {})

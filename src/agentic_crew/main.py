@@ -86,10 +86,10 @@ def cmd_run(args):
         sys.exit(1)
 
     config_dir = packages[args.package]
-    
+
     try:
         crew_config = get_crew_config(config_dir, args.crew)
-        
+
         # Show framework info
         required = crew_config.get("required_framework")
         if required:

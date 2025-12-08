@@ -73,7 +73,7 @@ def discover_packages(
         for pkg_dir in packages_dir.iterdir():
             if not pkg_dir.is_dir():
                 continue
-            
+
             # Try each framework directory in priority order
             for dir_name in dirs_to_check:
                 config_dir = pkg_dir / dir_name
@@ -119,14 +119,14 @@ def discover_all_framework_configs(
         for pkg_dir in packages_dir.iterdir():
             if not pkg_dir.is_dir():
                 continue
-            
+
             pkg_configs: dict[str, Path] = {}
             for dir_name in FRAMEWORK_DIRS:
                 config_dir = pkg_dir / dir_name
                 if config_dir.exists() and (config_dir / "manifest.yaml").exists():
                     framework = DIR_TO_FRAMEWORK[dir_name]
                     pkg_configs[framework] = config_dir
-            
+
             if pkg_configs:
                 packages[pkg_dir.name] = pkg_configs
 
@@ -137,7 +137,7 @@ def discover_all_framework_configs(
         if config_dir.exists() and (config_dir / "manifest.yaml").exists():
             framework = DIR_TO_FRAMEWORK[dir_name]
             root_configs[framework] = config_dir
-    
+
     if root_configs:
         pkg_name = workspace_root.name or "default"
         if pkg_name not in packages:
@@ -269,7 +269,7 @@ def list_crews(
 
         manifest = load_manifest(config_dir)
         required_framework = get_framework_from_config_dir(config_dir)
-        
+
         crews = []
         for crew_name, crew_config in manifest.get("crews", {}).items():
             crews.append(
