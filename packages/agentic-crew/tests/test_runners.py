@@ -656,15 +656,16 @@ class TestBaseRunner:
     """Tests for base runner interface."""
 
     def test_build_and_run_convenience_method(self, crew_mocker: CrewMocker) -> None:
-        """Test that build_and_run calls build_crew and run."""
+        """Test that build_and_run calls build_crew and run with correct args."""
         from agentic_crew.runners.base import BaseRunner
 
         class TestRunner(BaseRunner):
+            # Define abstract methods so the class can be instantiated
             def build_crew(self, crew_config: dict[str, Any]) -> Any:
-                return crew_mocker.MagicMock()
+                pass
 
             def run(self, crew: Any, inputs: dict[str, Any]) -> str:
-                return "test result"
+                pass
 
             def build_agent(self, agent_config: dict[str, Any], tools: list | None = None) -> Any:
                 return crew_mocker.MagicMock()
@@ -673,12 +674,20 @@ class TestBaseRunner:
                 return crew_mocker.MagicMock()
 
         runner = TestRunner()
+
+        # Mock the methods to verify they're called correctly
+        mock_crew_obj = crew_mocker.MagicMock()
+        runner.build_crew = crew_mocker.MagicMock(return_value=mock_crew_obj)
+        runner.run = crew_mocker.MagicMock(return_value="test result")
+
         crew_config = {"test": "config"}
         inputs = {"test": "input"}
 
         result = runner.build_and_run(crew_config, inputs)
 
         assert result == "test result"
+        runner.build_crew.assert_called_once_with(crew_config)
+        runner.run.assert_called_once_with(mock_crew_obj, inputs)
 
     def test_build_and_run_uses_empty_inputs_when_none(self, crew_mocker: CrewMocker) -> None:
         """Test that build_and_run uses empty dict when inputs is None."""

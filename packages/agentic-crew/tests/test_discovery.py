@@ -203,3 +203,254 @@ class TestDecomposer:
 
         # langgraph should be preferred over strands
         assert result == "langgraph"
+
+    def test_detect_framework_with_preferred_returns_preferred(self) -> None:
+        """Test that detect_framework returns preferred if available."""
+        from agentic_crew.core.decomposer import detect_framework
+
+        def mock_available(framework):
+            return framework in ["crewai", "langgraph", "strands"]
+
+        with patch(
+            "agentic_crew.core.decomposer.is_framework_available",
+            side_effect=mock_available,
+        ):
+            result = detect_framework(preferred="strands")
+
+        assert result == "strands"
+
+    def test_detect_framework_falls_back_when_preferred_unavailable(self) -> None:
+        """Test that detect_framework falls back when preferred not available."""
+        from agentic_crew.core.decomposer import detect_framework
+
+        def mock_available(framework):
+            return framework in ["langgraph"]
+
+        with patch(
+            "agentic_crew.core.decomposer.is_framework_available",
+            side_effect=mock_available,
+        ):
+            result = detect_framework(preferred="crewai")
+
+        assert result == "langgraph"
+
+    def test_get_available_frameworks_returns_list(self) -> None:
+        """Test that get_available_frameworks returns installed frameworks."""
+        from agentic_crew.core.decomposer import get_available_frameworks
+
+        def mock_available(framework):
+            return framework in ["crewai", "strands"]
+
+        with patch(
+            "agentic_crew.core.decomposer.is_framework_available",
+            side_effect=mock_available,
+        ):
+            result = get_available_frameworks()
+
+        assert isinstance(result, list)
+        assert "crewai" in result
+        assert "strands" in result
+        assert "langgraph" not in result
+
+    def test_get_available_frameworks_returns_empty_when_none_installed(self) -> None:
+        """Test get_available_frameworks returns empty list when none installed."""
+        from agentic_crew.core.decomposer import get_available_frameworks
+
+        with patch(
+            "agentic_crew.core.decomposer.is_framework_available",
+            return_value=False,
+        ):
+            result = get_available_frameworks()
+
+        assert result == []
+
+    def test_get_runner_returns_crewai_runner(self) -> None:
+        """Test that get_runner returns CrewAIRunner for crewai."""
+        from unittest.mock import MagicMock
+
+        from agentic_crew.core.decomposer import get_runner
+
+        mock_runner = MagicMock()
+        mock_runner.framework_name = "crewai"
+
+        with (
+            patch(
+                "agentic_crew.core.decomposer.is_framework_available",
+                return_value=True,
+            ),
+            patch(
+                "agentic_crew.runners.crewai_runner.CrewAIRunner",
+                return_value=mock_runner,
+            ),
+        ):
+            runner = get_runner("crewai")
+
+        assert runner is not None
+        assert runner.framework_name == "crewai"
+
+    def test_get_runner_returns_langgraph_runner(self) -> None:
+        """Test that get_runner returns LangGraphRunner for langgraph."""
+        from unittest.mock import MagicMock
+
+        from agentic_crew.core.decomposer import get_runner
+
+        mock_runner = MagicMock()
+        mock_runner.framework_name = "langgraph"
+
+        with (
+            patch(
+                "agentic_crew.core.decomposer.is_framework_available",
+                return_value=True,
+            ),
+            patch(
+                "agentic_crew.runners.langgraph_runner.LangGraphRunner",
+                return_value=mock_runner,
+            ),
+        ):
+            runner = get_runner("langgraph")
+
+        assert runner is not None
+        assert runner.framework_name == "langgraph"
+
+    def test_get_runner_returns_strands_runner(self) -> None:
+        """Test that get_runner returns StrandsRunner for strands."""
+        from unittest.mock import MagicMock
+
+        from agentic_crew.core.decomposer import get_runner
+
+        mock_runner = MagicMock()
+        mock_runner.framework_name = "strands"
+
+        with (
+            patch(
+                "agentic_crew.core.decomposer.is_framework_available",
+                return_value=True,
+            ),
+            patch(
+                "agentic_crew.runners.strands_runner.StrandsRunner",
+                return_value=mock_runner,
+            ),
+        ):
+            runner = get_runner("strands")
+
+        assert runner is not None
+        assert runner.framework_name == "strands"
+
+    def test_get_runner_auto_detects_framework(self) -> None:
+        """Test that get_runner with no args auto-detects framework."""
+        from unittest.mock import MagicMock
+
+        from agentic_crew.core.decomposer import get_runner
+
+        mock_runner = MagicMock()
+        mock_runner.framework_name = "strands"
+
+        def mock_available(framework):
+            return framework == "strands"
+
+        with (
+            patch(
+                "agentic_crew.core.decomposer.is_framework_available",
+                side_effect=mock_available,
+            ),
+            patch(
+                "agentic_crew.runners.strands_runner.StrandsRunner",
+                return_value=mock_runner,
+            ),
+        ):
+            runner = get_runner()
+
+        assert runner.framework_name == "strands"
+
+    def test_get_runner_raises_for_unknown_framework(self) -> None:
+        """Test that get_runner raises for unknown framework."""
+        from agentic_crew.core.decomposer import get_runner
+
+        with pytest.raises(ValueError, match="Unknown framework"):
+            get_runner("unknown_framework")
+
+    def test_decompose_crew_uses_required_framework(self, tmp_path: Path) -> None:
+        """Test that decompose_crew respects required_framework from config."""
+        from unittest.mock import MagicMock
+
+        from agentic_crew.core.decomposer import decompose_crew
+
+        crew_config = {
+            "name": "test_crew",
+            "required_framework": "strands",
+            "agents": {},
+            "tasks": {},
+        }
+
+        mock_runner = MagicMock()
+        mock_runner.framework_name = "strands"
+        mock_runner.build_crew.return_value = MagicMock()
+
+        def mock_available(framework):
+            return framework in ["crewai", "strands"]
+
+        with (
+            patch(
+                "agentic_crew.core.decomposer.is_framework_available",
+                side_effect=mock_available,
+            ),
+            patch(
+                "agentic_crew.runners.strands_runner.StrandsRunner",
+                return_value=mock_runner,
+            ),
+        ):
+            # decompose_crew returns the result of runner.build_crew()
+            decompose_crew(crew_config)
+
+        # Verify the runner's build_crew was called
+        mock_runner.build_crew.assert_called_once_with(crew_config)
+
+    def test_decompose_crew_raises_when_required_unavailable(self) -> None:
+        """Test decompose_crew raises when required framework not available."""
+        from agentic_crew.core.decomposer import decompose_crew
+
+        crew_config = {
+            "name": "test_crew",
+            "required_framework": "langgraph",
+            "agents": {},
+            "tasks": {},
+        }
+
+        with patch(
+            "agentic_crew.core.decomposer.is_framework_available",
+            return_value=False,
+        ):
+            with pytest.raises(RuntimeError, match="requires langgraph.*not installed"):
+                decompose_crew(crew_config)
+
+    def test_decompose_crew_validates_framework_conflict(self) -> None:
+        """Test decompose_crew validates requested vs required conflict."""
+        from agentic_crew.core.decomposer import decompose_crew
+
+        crew_config = {
+            "name": "test_crew",
+            "required_framework": "crewai",
+            "agents": {},
+            "tasks": {},
+        }
+
+        with patch(
+            "agentic_crew.core.decomposer.is_framework_available",
+            return_value=True,
+        ):
+            with pytest.raises(ValueError, match="requires crewai.*langgraph was requested"):
+                decompose_crew(crew_config, framework="langgraph")
+
+    def test_get_install_command_returns_pip_install(self) -> None:
+        """Test that _get_install_command returns correct pip command."""
+        from agentic_crew.core.decomposer import _get_install_command
+
+        result = _get_install_command("crewai")
+        assert "crewai" in result
+
+    def test_get_install_command_maps_langgraph(self) -> None:
+        """Test that _get_install_command maps langgraph correctly."""
+        from agentic_crew.core.decomposer import _get_install_command
+
+        result = _get_install_command("langgraph")
+        assert "langgraph" in result
