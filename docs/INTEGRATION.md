@@ -1,390 +1,674 @@
-# CrewAI Integration for Otterfall Development
+# External Integration Guide
 
-## Overview
+> **For TypeScript/Node.js applications integrating with agentic-crew via CLI**
 
-The CrewAI system has been integrated into the jbcom-oss-ecosystem monorepo to provide **proper agent-to-agent communication** and **intelligent task decomposition** for the Otterfall game development.
+This guide documents how external tools (especially TypeScript/Node.js applications) should integrate with `agentic-crew` via subprocess calls. This follows the **clean language separation principle**:
 
-## Why CrewAI?
+- `agentic-crew` = Python only (PyPI)
+- External consumers = Any language (invoke via CLI)
 
-The current Kiro workflow has limitations:
-- **Single-agent bottleneck**: One agent tries to do everything
-- **No task decomposition**: Complex features aren't broken down intelligently
-- **No specialization**: Same agent handles design, implementation, testing, QA
-- **No collaboration**: No agent-to-agent communication or review
-
-CrewAI solves this with:
-- **Multi-agent collaboration**: Specialized agents work together
-- **Hierarchical process**: Manager agent coordinates specialized workers
-- **Memory & learning**: Agents learn from past interactions
-- **Planning**: Tasks are decomposed before execution
-- **QA review**: Code is reviewed before approval
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                  OTTERFALL DEVELOPMENT CREW                     │
-├─────────────┬─────────────┬─────────────┬─────────────────────┤
-│ Project     │ Senior      │ QA          │ Chief               │
-│ Manager     │ Engineer    │ Engineer    │ Engineer            │
-│             │             │             │                     │
-│ • Loads     │ • Writes    │ • Reviews   │ • Final             │
-│   context   │   code      │   for       │   approval          │
-│ • Plans     │ • Uses      │   errors    │ • Ensures           │
-│   tasks     │   patterns  │ • Tests     │   completeness      │
-│ • Validates │ • Follows   │   locally   │                     │
-│   prereqs   │   specs     │             │                     │
-└─────────────┴─────────────┴─────────────┴─────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                     MCP TOOLS                                   │
-├─────────────┬─────────────┬─────────────┬─────────────────────┤
-│ ConPort     │ Git         │ Filesystem  │ Playwright          │
-│             │             │             │                     │
-│ Schema      │ Version     │ Read/Write  │ E2E Testing         │
-│ queries     │ control     │ files       │                     │
-└─────────────┴─────────────┴─────────────┴─────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                     KNOWLEDGE BASE                              │
-├─────────────┬─────────────┬─────────────┬─────────────────────┤
-│ Specs       │ Design      │ ECS         │ R3F                 │
-│             │ Patterns    │ Patterns    │ Patterns            │
-│ Req, Design │ Combat,     │ Components, │ Rendering,          │
-│ Tasks docs  │ AI, Terrain │ Systems     │ Shaders             │
-└─────────────┴─────────────┴─────────────┴─────────────────────┘
-```
-
-## Integration Points
-
-### 1. Spec-Driven Development
-
-CrewAI agents read from `.kiro/specs/otterfall-complete/`:
-- `requirements.md` - What to build (52 requirements)
-- `design.md` - How to build it (55 properties)
-- `tasks.md` - Implementation plan (14 sections)
-
-### 2. Knowledge Base
-
-Located in `packages/crew_agents/knowledge/`:
-- `ecs_patterns/` - Miniplex ECS patterns
-- `rendering_patterns/` - React Three Fiber patterns
-- `game_components/` - Otterfall-specific patterns
-- `specs/` - Link to `.kiro/specs/otterfall-complete/`
-
-### 3. Code Generation
-
-Agents write to `packages/otterfall/src/`:
-- `ecs/components/` - ECS component definitions
-- `ecs/systems/` - Game systems
-- `ecs/data/` - Species, biomes, resources
-- `components/` - R3F rendering components
-- `utils/` - Utility functions
-- `stores/` - Zustand state management
-
-### 4. Testing Integration
-
-Agents can:
-- Run unit tests: `pnpm test --run`
-- Run E2E tests: `pnpm run test:e2e`
-- Check diagnostics: Use Kiro's getDiagnostics tool
-- Validate builds: `pnpm run build`
-
-## Usage
-
-### Basic Task Execution
+## Quick Start
 
 ```bash
-# Navigate to crew_agents
-cd packages/crew_agents
+# Install agentic-crew
+pip install agentic-crew
 
-# Build a feature from the task list
-uv run crew_agents build "Implement Section 6.1: Species Data System"
+# Install with a specific framework
+pip install 'agentic-crew[crewai]'
+pip install 'agentic-crew[langgraph]'
+pip install 'agentic-crew[strands]'
 
-# Build with specific requirements
-uv run crew_agents build "Implement combat system with attack types, damage calculation, and cooldowns (Requirements 3-5)"
+# List available crews (JSON output)
+agentic-crew list --json
+
+# Run a crew
+agentic-crew run <package> <crew> --input "..." --json
 ```
 
-### Training the Crew
+## CLI Contract (Stable API)
+
+### Version Compatibility
+
+The CLI contract is versioned and follows semantic versioning:
+- **v0.x**: Current development version, JSON schemas may evolve
+- **v1.0+**: Stable JSON schemas with backwards compatibility guarantees
+
+### Commands
+
+#### List Crews
 
 ```bash
-# Train agents with human feedback
-uv run crew_agents train 5
-
-# Agents learn from:
-# - What code patterns work well
-# - What mistakes to avoid
-# - How to better decompose tasks
+agentic-crew list [package] --json
 ```
 
-### Workflow Patterns
+Lists all available crews or crews in a specific package.
 
-CrewAI supports reusable workflows in `.ruler/`:
-- `tdd_prototype_workflow.yaml` - Test-driven development
-- `meshy_asset_workflow.yaml` - 3D asset generation
-- `prototype_to_production_workflow.yaml` - Refactoring
+**Options:**
+- `package` (optional): Filter to a specific package
+- `--framework`: Filter by framework (`crewai`, `langgraph`, `strands`)
+- `--json`: Output as machine-parseable JSON
 
-## Task Decomposition Example
+**Example:**
+```bash
+# List all crews
+agentic-crew list --json
 
-**Input**: "Implement Section 6: Species and Combat Systems"
+# List crews in a specific package
+agentic-crew list otterfall --json
+```
 
-**CrewAI Decomposition**:
-
-1. **Project Manager** (Alpha Phase):
-   - Load requirements 1-5, 8
-   - Load design properties 19-22
-   - Validate prerequisites (species data exists)
-   - Identify blockers (none)
-
-2. **Senior Engineer** (Implementation):
-   - Task 6.1.1: Create species data definitions
-     - Read existing `species.ts`
-     - Verify all 13 predators defined
-     - Verify all 15 prey defined
-     - Add missing species if any
-   
-   - Task 6.1.2: Implement species component system
-     - Create `SpeciesComponent` with all properties
-     - Implement species assignment on entity creation
-     - Add species-specific model loading
-   
-   - Task 6.2.1: Create combat component and stats
-     - Implement `CombatComponent`
-     - Apply archetype-specific stats
-     - Implement stamina regeneration
-
-3. **QA Engineer** (Review):
-   - Check TypeScript compilation
-   - Verify ECS patterns match `.ruler/ecs_patterns.md`
-   - Run unit tests
-   - Check for edge cases
-
-4. **Chief Engineer** (Approval):
-   - Verify all requirements met
-   - Ensure code quality
-   - Approve for merge
-
-## Configuration
-
-### Environment Variables
+#### Get Crew Info
 
 ```bash
-# Required for LLM access (primary)
-export ANTHROPIC_API_KEY="sk-ant-api03-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# Optional - OpenRouter fallback
-export OPENROUTER_API_KEY="sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# Optional - for asset generation
-export MESHY_API_KEY="msy_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+agentic-crew info <package> <crew> --json
 ```
 
-### LLM Configuration
+Returns detailed information about a specific crew.
 
-Located in `packages/crew_agents/src/crew_agents/config/llm.py`:
+**Options:**
+- `--json`: Output as machine-parseable JSON
 
-```python
-# Default: Claude 3.7 Sonnet (best for code)
-llm = get_llm()  # Uses ANTHROPIC_API_KEY
-
-# Or specify a model
-llm = get_llm("claude-3-5-sonnet-20241022")
-
-# OpenRouter fallback (if OPENROUTER_API_KEY is set)
-llm = get_llm("openrouter-auto")
+**Example:**
+```bash
+agentic-crew info vendor-connectors connector_builder --json
 ```
 
-### Agent Configuration
+#### Run a Crew
 
-Located in `packages/crew_agents/config/agents.yaml`:
+```bash
+agentic-crew run <package> <crew> --input "..." --json
+```
+
+Executes a crew and returns the result.
+
+**Options:**
+- `--input`, `-i`: Input specification as string
+- `--file`, `-f`: Read input from a file
+- `--framework`: Force specific framework (`auto`, `crewai`, `langgraph`, `strands`)
+- `--json`: Output as machine-parseable JSON (recommended for integrations)
+
+**Examples:**
+```bash
+# Run with inline input
+agentic-crew run otterfall game_builder --input "Create a QuestComponent" --json
+
+# Run with input from file
+agentic-crew run vendor-connectors connector_builder --file api_spec.md --json
+
+# Force specific framework
+agentic-crew run mypackage mycrew --input "..." --framework crewai --json
+```
+
+## JSON Output Schemas
+
+### CrewListResult
+
+Returned by `agentic-crew list --json`:
+
+```json
+{
+  "crews": [
+    {
+      "package": "vendor-connectors",
+      "name": "connector_builder",
+      "description": "Build HTTP connectors from API documentation",
+      "required_framework": null
+    },
+    {
+      "package": "otterfall",
+      "name": "game_builder",
+      "description": "Build ECS components and game systems",
+      "required_framework": "crewai"
+    }
+  ]
+}
+```
+
+### CrewInfoResult
+
+Returned by `agentic-crew info <package> <crew> --json`:
+
+```json
+{
+  "package": "vendor-connectors",
+  "name": "connector_builder",
+  "description": "Build HTTP connectors from API documentation",
+  "required_framework": null,
+  "agents": [
+    { "name": "api_analyst", "role": "API Documentation Analyst" },
+    { "name": "connector_engineer", "role": "Senior Python Engineer" }
+  ],
+  "tasks": [
+    { "name": "analyze_api", "description": "Analyze API documentation..." },
+    { "name": "generate_connector", "description": "Generate connector code..." }
+  ],
+  "knowledge_paths": ["knowledge/api_patterns"]
+}
+```
+
+### CrewRunResult
+
+Returned by `agentic-crew run ... --json`:
+
+**Success:**
+```json
+{
+  "success": true,
+  "output": "Generated connector code:\n\nclass MeshyConnector...",
+  "framework_used": "crewai",
+  "duration_ms": 45230
+}
+```
+
+**Failure:**
+```json
+{
+  "success": false,
+  "error": "Package 'unknown' not found",
+  "available_packages": ["vendor-connectors", "otterfall"],
+  "duration_ms": 52
+}
+```
+
+## TypeScript Types
+
+Copy these types into your TypeScript project for type-safe integration:
+
+```typescript
+// types/agentic-crew.ts
+
+/** Result from `agentic-crew list --json` */
+export interface CrewListResult {
+  crews: CrewSummary[];
+}
+
+export interface CrewSummary {
+  /** Package containing the crew */
+  package: string;
+  /** Crew name */
+  name: string;
+  /** Human-readable description */
+  description: string;
+  /** Required framework (null = any framework works) */
+  required_framework: 'crewai' | 'langgraph' | 'strands' | null;
+}
+
+/** Result from `agentic-crew info <package> <crew> --json` */
+export interface CrewInfoResult {
+  package: string;
+  name: string;
+  description: string;
+  required_framework: 'crewai' | 'langgraph' | 'strands' | null;
+  agents: AgentInfo[];
+  tasks: TaskInfo[];
+  knowledge_paths: string[];
+}
+
+export interface AgentInfo {
+  name: string;
+  role: string;
+}
+
+export interface TaskInfo {
+  name: string;
+  description: string;
+}
+
+/** Result from `agentic-crew run ... --json` */
+export interface CrewRunResult {
+  success: boolean;
+  /** Crew output (present when success=true) */
+  output?: string;
+  /** Error message (present when success=false) */
+  error?: string;
+  /** Framework that was used */
+  framework_used?: 'crewai' | 'langgraph' | 'strands';
+  /** Execution duration in milliseconds */
+  duration_ms: number;
+  /** Available packages (present on package not found error) */
+  available_packages?: string[];
+}
+
+/** Exit codes from CLI */
+export enum ExitCode {
+  /** Crew executed successfully */
+  Success = 0,
+  /** Crew execution failed (runtime error) */
+  ExecutionFailed = 1,
+  /** Configuration error (package/crew not found) */
+  ConfigurationError = 2,
+  /** Framework not available */
+  FrameworkNotAvailable = 3,
+}
+```
+
+## Exit Codes
+
+| Code | Name | Description |
+|------|------|-------------|
+| `0` | Success | Crew executed successfully |
+| `1` | ExecutionFailed | Crew execution failed (runtime error) |
+| `2` | ConfigurationError | Package or crew not found |
+| `3` | FrameworkNotAvailable | Required framework is not installed |
+
+**Example handling:**
+```typescript
+const result = spawnSync('agentic-crew', ['run', pkg, crew, '--json']);
+
+switch (result.status) {
+  case 0:
+    const output = JSON.parse(result.stdout.toString()) as CrewRunResult;
+    return output.output;
+  case 1:
+    throw new Error('Crew execution failed');
+  case 2:
+    throw new Error('Package or crew not found');
+  case 3:
+    throw new Error('Framework not installed');
+  default:
+    throw new Error(`Unknown error: exit code ${result.status}`);
+}
+```
+
+## Installation
+
+### Standard Installation
+
+```bash
+# Basic installation (no framework - will auto-detect at runtime)
+pip install agentic-crew
+
+# With CrewAI (recommended for most use cases)
+pip install 'agentic-crew[crewai]'
+
+# With LangGraph
+pip install 'agentic-crew[langgraph]'
+
+# With AWS Strands
+pip install 'agentic-crew[strands]'
+
+# With all frameworks
+pip install 'agentic-crew[ai]'
+```
+
+### Docker Installation
+
+```dockerfile
+# Dockerfile
+FROM python:3.11-slim
+
+# Install with uv (recommended - faster)
+RUN pip install uv
+RUN uv pip install --system 'agentic-crew[crewai]'
+
+# Or with pip
+# RUN pip install 'agentic-crew[crewai]'
+
+# Set environment variables
+ENV ANTHROPIC_API_KEY=""
+
+# Verify installation
+RUN agentic-crew list
+```
+
+### Docker Compose Example
 
 ```yaml
-project_manager:
-  role: "Project Manager"
-  goal: "Load context, validate prerequisites, plan tasks"
-  backstory: "Expert at understanding requirements and planning"
-
-senior_engineer:
-  role: "Senior TypeScript Engineer"
-  goal: "Write production-quality code following patterns"
-  backstory: "10+ years React, Three.js, ECS architecture"
-
-qa_engineer:
-  role: "QA Engineer"
-  goal: "Review code for errors and convention violations"
-  backstory: "Expert at catching bugs before production"
-
-chief_engineer:
-  role: "Chief Engineer"
-  goal: "Ensure completeness and approve final code"
-  backstory: "Architect with deep game development experience"
+# docker-compose.yml
+version: '3.8'
+services:
+  agentic-crew:
+    build: .
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - ./packages:/workspace/packages:ro
 ```
 
-## Benefits for Otterfall
+## TypeScript Integration Examples
 
-### 1. Proper Task Decomposition
+### Basic Integration (Node.js)
 
-Instead of:
-```
-❌ "Implement combat system" → One massive task
-```
+```typescript
+// crews/crew-tool.ts
+import { spawn, spawnSync } from 'child_process';
+import type { CrewRunResult, CrewListResult } from './types/agentic-crew';
 
-CrewAI does:
-```
-✅ "Implement combat system"
-   ├─ Load requirements 3-5
-   ├─ Create CombatComponent
-   ├─ Implement attack types
-   ├─ Add damage calculation
-   ├─ Implement cooldowns
-   ├─ Write unit tests
-   └─ Write property tests
-```
+export class CrewTool {
+  /**
+   * List all available crews
+   */
+  async listCrews(): Promise<CrewListResult> {
+    return new Promise((resolve, reject) => {
+      const proc = spawn('agentic-crew', ['list', '--json']);
+      let stdout = '';
+      let stderr = '';
 
-### 2. Specialized Agents
+      proc.stdout.on('data', (data) => { stdout += data; });
+      proc.stderr.on('data', (data) => { stderr += data; });
 
-- **Project Manager**: Understands specs, plans work
-- **Senior Engineer**: Writes code, follows patterns
-- **QA Engineer**: Catches bugs, runs tests
-- **Chief Engineer**: Ensures quality, approves
+      proc.on('close', (code) => {
+        if (code === 0) {
+          resolve(JSON.parse(stdout));
+        } else {
+          reject(new Error(`Failed to list crews: ${stderr}`));
+        }
+      });
+    });
+  }
 
-### 3. Memory & Learning
+  /**
+   * Invoke a crew and return the result
+   */
+  async invokeCrew(params: {
+    package: string;
+    crew: string;
+    input: string;
+    framework?: 'auto' | 'crewai' | 'langgraph' | 'strands';
+  }): Promise<CrewRunResult> {
+    const args = [
+      'run',
+      params.package,
+      params.crew,
+      '--input', params.input,
+      '--json',
+    ];
 
-Agents remember:
-- What patterns work well
-- What mistakes were made
-- How to better decompose tasks
-- User preferences and feedback
+    if (params.framework && params.framework !== 'auto') {
+      args.push('--framework', params.framework);
+    }
 
-### 4. Quality Assurance
+    return new Promise((resolve, reject) => {
+      const proc = spawn('agentic-crew', args);
+      let stdout = '';
+      let stderr = '';
 
-Every piece of code goes through:
-1. Implementation (Senior Engineer)
-2. Review (QA Engineer)
-3. Testing (QA Engineer)
-4. Approval (Chief Engineer)
+      proc.stdout.on('data', (data) => { stdout += data; });
+      proc.stderr.on('data', (data) => { stderr += data; });
 
-## Integration with Kiro
-
-CrewAI **complements** Kiro, not replaces it:
-
-| Aspect | Kiro | CrewAI |
-|--------|------|--------|
-| **Spec Creation** | ✅ Excellent | ❌ Not designed for this |
-| **Task Planning** | ✅ Good | ✅ Excellent |
-| **Code Generation** | ✅ Good | ✅ Excellent |
-| **Multi-agent** | ❌ Single agent | ✅ Multiple specialized |
-| **QA Review** | ❌ No review | ✅ Built-in review |
-| **Learning** | ❌ No memory | ✅ Learns from feedback |
-
-**Recommended Workflow**:
-1. Use **Kiro** to create specs (requirements, design, tasks)
-2. Use **CrewAI** to implement tasks from the spec
-3. Use **Kiro** for quick fixes and iterations
-4. Use **CrewAI** for complex features requiring decomposition
-
-## Next Steps
-
-### 1. Add Otterfall Knowledge
-
-```bash
-cd packages/crew_agents/knowledge
-
-# Add Otterfall-specific patterns
-mkdir -p otterfall_patterns
-cp ../../otterfall/src/ecs/components.ts otterfall_patterns/
-cp ../../otterfall/src/ecs/systems/*.ts otterfall_patterns/
-
-# Document patterns
-cat > otterfall_patterns/README.md << 'EOF'
-# Otterfall Patterns
-
-## ECS Architecture
-- Miniplex for entity management
-- Components are pure data
-- Systems contain logic
-
-## Rendering
-- React Three Fiber for 3D
-- Zustand for state management
-- Custom shaders for effects
-EOF
+      proc.on('close', (code) => {
+        try {
+          const result = JSON.parse(stdout) as CrewRunResult;
+          resolve(result);
+        } catch {
+          reject(new Error(`Failed to parse output: ${stdout || stderr}`));
+        }
+      });
+    });
+  }
+}
 ```
 
-### 2. Link Specs to Knowledge
+### Vercel AI SDK Integration
 
-```bash
-cd packages/crew_agents/knowledge
-ln -s ../../../.kiro/specs/otterfall-complete specs
+The **Vercel AI SDK** provides excellent tool abstraction support, enabling seamless agent-to-crew communication. This is the recommended pattern for AI agent orchestrators.
+
+```typescript
+// tools/invoke-crew.ts
+import { tool } from 'ai';
+import { z } from 'zod';
+import { CrewTool } from './crews/crew-tool.js';
+
+const crewTool = new CrewTool();
+
+/**
+ * Define crew invocation as a Vercel AI tool
+ */
+export const invokeCrewTool = tool({
+  description: 'Delegate a task to a specialized AI crew. Use this when a task ' +
+    'requires specialized agents working together (e.g., code generation, ' +
+    'analysis, content creation).',
+  parameters: z.object({
+    package: z.string().describe('Package containing the crew (e.g., "otterfall", "vendor-connectors")'),
+    crew: z.string().describe('Crew name (e.g., "game_builder", "connector_builder")'),
+    input: z.string().describe('Task specification for the crew - be detailed and specific'),
+  }),
+  execute: async ({ package: pkg, crew, input }) => {
+    const result = await crewTool.invokeCrew({ package: pkg, crew, input });
+    
+    if (!result.success) {
+      throw new Error(result.error || 'Crew execution failed');
+    }
+    
+    return result.output;
+  },
+});
+
+// Example: Using in an agent
+import { generateText } from 'ai';
+import { anthropic } from '@ai-sdk/anthropic';
+
+const result = await generateText({
+  model: anthropic('claude-sonnet-4-20250514'),
+  tools: { invokeCrew: invokeCrewTool },
+  maxSteps: 5,
+  prompt: 'Design and implement a quest system for the game. ' +
+    'Delegate the implementation to the appropriate crew.',
+});
+
+console.log(result.text);
 ```
 
-### 3. Configure for Otterfall
+### Agent-to-Agent Communication Architecture
 
-Edit `packages/crew_agents/crewbase.yaml`:
-
-```yaml
-# Add Otterfall-specific configuration
-project_root: "../packages/otterfall"
-allowed_write_dirs:
-  - "src/ecs/components"
-  - "src/ecs/systems"
-  - "src/ecs/data"
-  - "src/components"
-  - "src/utils"
-  - "src/stores"
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    Your App (TypeScript/Node.js)                 │
+│                         Vercel AI SDK                            │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────────────┐  │
+│  │ Fleet Agent │    │Triage Agent │    │ Coordinator Agent   │  │
+│  └──────┬──────┘    └──────┬──────┘    └──────────┬──────────┘  │
+│         │                  │                      │              │
+│         └──────────────────┴──────────────────────┘              │
+│                            │                                     │
+│                    ┌───────▼───────┐                             │
+│                    │ invokeCrew()  │  ← Vercel AI Tool           │
+│                    │    Tool       │                             │
+│                    └───────┬───────┘                             │
+└────────────────────────────┼────────────────────────────────────┘
+                             │ subprocess: agentic-crew CLI
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                     agentic-crew (Python)                        │
+│                    Framework Decomposition                       │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────────────┐  │
+│  │   CrewAI    │    │  LangGraph  │    │      Strands        │  │
+│  │   Runner    │    │   Runner    │    │      Runner         │  │
+│  └──────┬──────┘    └──────┬──────┘    └──────────┬──────────┘  │
+│         │                  │                      │              │
+│         └──────────────────┴──────────────────────┘              │
+│                            │                                     │
+│                    ┌───────▼───────┐                             │
+│                    │ Multi-Agent   │                             │
+│                    │    Crews      │                             │
+│                    └───────────────┘                             │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### 4. Train on Existing Code
+## Environment Variables
 
-```bash
-cd packages/crew_agents
+Set these environment variables for the Python process:
 
-# Train agents on existing Otterfall patterns
-uv run crew_agents train 10 -f otterfall_training.pkl
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `ANTHROPIC_API_KEY` | Yes* | Claude API access (primary LLM) |
+| `OPENAI_API_KEY` | No | OpenAI API access (alternative) |
+| `OPENROUTER_API_KEY` | No | OpenRouter fallback |
+| `AWS_ACCESS_KEY_ID` | No | For Strands with AWS Bedrock |
+| `AWS_SECRET_ACCESS_KEY` | No | For Strands with AWS Bedrock |
+| `AWS_DEFAULT_REGION` | No | AWS region for Bedrock |
+
+*At least one LLM provider API key is required.
+
+**Example:**
+```typescript
+import { spawn } from 'child_process';
+
+const proc = spawn('agentic-crew', args, {
+  env: {
+    ...process.env,
+    ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+  },
+});
 ```
 
-### 5. Start Building
+## Error Handling
 
-```bash
-# Implement next task from spec
-uv run crew_agents build "Implement Section 6.1: Species Data System"
+### Structured Error Responses
+
+When `--json` flag is used, errors are returned as structured JSON:
+
+```typescript
+async function runCrewSafe(pkg: string, crew: string, input: string) {
+  const result = await crewTool.invokeCrew({ package: pkg, crew, input });
+  
+  if (!result.success) {
+    // Check for specific error types
+    if (result.available_packages) {
+      // Package not found - suggest alternatives
+      console.error(`Package not found. Available: ${result.available_packages.join(', ')}`);
+    } else if (result.error?.includes('framework')) {
+      // Framework not installed
+      console.error('Required framework not installed');
+    } else {
+      // General execution error
+      console.error(`Crew failed: ${result.error}`);
+    }
+    return null;
+  }
+  
+  return result.output;
+}
+```
+
+### Timeout Handling
+
+Crews can take significant time to execute. Configure appropriate timeouts:
+
+```typescript
+import { spawn } from 'child_process';
+
+function invokeCrewWithTimeout(args: string[], timeoutMs = 300000) {
+  return new Promise((resolve, reject) => {
+    const proc = spawn('agentic-crew', args);
+    
+    const timeout = setTimeout(() => {
+      proc.kill('SIGTERM');
+      reject(new Error(`Crew execution timed out after ${timeoutMs}ms`));
+    }, timeoutMs);
+    
+    let stdout = '';
+    proc.stdout.on('data', (data) => { stdout += data; });
+    
+    proc.on('close', (code) => {
+      clearTimeout(timeout);
+      resolve({ code, stdout });
+    });
+  });
+}
+```
+
+## Best Practices
+
+### 1. Always Use `--json` Flag
+
+For programmatic integration, always use the `--json` flag to get structured output:
+
+```typescript
+// Good
+const args = ['run', pkg, crew, '--input', input, '--json'];
+
+// Bad - output format may change
+const args = ['run', pkg, crew, '--input', input];
+```
+
+### 2. Handle Long-Running Operations
+
+Crews can take minutes to complete. Design your integration accordingly:
+
+```typescript
+// Stream progress to the user
+const proc = spawn('agentic-crew', args);
+
+proc.stderr.on('data', (data) => {
+  // Log progress (stderr contains status messages in non-JSON mode)
+  console.log(`Progress: ${data.toString()}`);
+});
+```
+
+### 3. Cache Crew List
+
+The list of available crews rarely changes. Cache it:
+
+```typescript
+let crewListCache: CrewListResult | null = null;
+let cacheTime = 0;
+const CACHE_TTL = 60000; // 1 minute
+
+async function getCachedCrewList(): Promise<CrewListResult> {
+  if (crewListCache && Date.now() - cacheTime < CACHE_TTL) {
+    return crewListCache;
+  }
+  crewListCache = await crewTool.listCrews();
+  cacheTime = Date.now();
+  return crewListCache;
+}
+```
+
+### 4. Validate Input Before Calling
+
+Validate crew existence before expensive operations:
+
+```typescript
+async function safeInvokeCrew(pkg: string, crew: string, input: string) {
+  const list = await getCachedCrewList();
+  const exists = list.crews.some(c => c.package === pkg && c.name === crew);
+  
+  if (!exists) {
+    throw new Error(`Crew ${pkg}/${crew} not found`);
+  }
+  
+  return crewTool.invokeCrew({ package: pkg, crew, input });
+}
 ```
 
 ## Troubleshooting
 
-### Issue: Agents don't understand Otterfall patterns
+### Command Not Found
 
-**Solution**: Add more examples to knowledge base
 ```bash
-cd packages/crew_agents/knowledge/otterfall_patterns
-# Add working code examples from packages/otterfall/src
+# Verify installation
+which agentic-crew
+
+# If not found, ensure Python bin is in PATH
+export PATH="$PATH:$(python -m site --user-base)/bin"
 ```
 
-### Issue: Code doesn't match conventions
+### Framework Errors
 
-**Solution**: Train agents with feedback
 ```bash
-uv run crew_agents train 5
-# Provide feedback on what's wrong
+# Check available frameworks
+agentic-crew list --json 2>&1 | head -20
+
+# Install missing framework
+pip install 'agentic-crew[crewai]'
 ```
 
-### Issue: Tasks are too large
+### API Key Issues
 
-**Solution**: Break down in task description
 ```bash
-# Instead of:
-uv run crew_agents build "Implement combat system"
+# Verify API key is set
+echo $ANTHROPIC_API_KEY | head -c 10
 
-# Do:
-uv run crew_agents build "Implement CombatComponent with health, stamina, armor, dodge properties"
+# Test with a simple command
+ANTHROPIC_API_KEY="your-key" agentic-crew list --json
 ```
 
-## See Also
+## Related Resources
 
+- [agentic-crew GitHub](https://github.com/jbcom/agentic-crew)
+- [Vercel AI SDK Documentation](https://sdk.vercel.ai/docs)
 - [CrewAI Documentation](https://docs.crewai.com/)
-- [Otterfall Spec](.kiro/specs/otterfall-complete/)
-- [ECS Patterns](knowledge/ecs_patterns/)
-- [Kiro Documentation](https://kiro.ai/docs)
-
+- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/)
