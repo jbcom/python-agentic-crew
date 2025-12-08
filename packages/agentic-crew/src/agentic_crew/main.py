@@ -443,8 +443,12 @@ def cmd_list_runners(args):
                             "required_env": runner.get_required_env_vars(),
                         }
                     )
-                except Exception:
-                    # Skip profiles that fail to load
+                except Exception as e:
+                    # Skip profiles that fail to load, but warn the user
+                    print(
+                        f"Warning: Could not load profile '{profile}': {e}",
+                        file=sys.stderr,
+                    )
                     continue
 
             print(json.dumps({"runners": runners_info}, indent=2))
@@ -467,8 +471,12 @@ def cmd_list_runners(args):
                         print(f"    Requires: {', '.join(runner.get_required_env_vars())}")
 
                     print()
-                except Exception:
-                    # Skip profiles that fail to load
+                except Exception as e:
+                    # Skip profiles that fail to load, but warn the user
+                    print(
+                        f"Warning: Could not load profile '{profile}': {e}",
+                        file=sys.stderr,
+                    )
                     continue
 
     except FileNotFoundError as e:
