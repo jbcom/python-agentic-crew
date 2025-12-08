@@ -1,10 +1,31 @@
-"""Discovery module - finds packages with .crewai/ directories."""
+"""Discovery module - finds packages with crew configuration directories.
+
+Supports framework-specific configuration directories:
+- .crewai/   - CrewAI-specific configurations (default)
+- .langgraph/ - LangGraph-specific configurations
+- .strands/  - Strands-specific configurations
+
+The discovery order matches framework priority for auto-detection.
+"""
 
 from __future__ import annotations
 
 from pathlib import Path
 
 import yaml
+
+# Framework directory names in priority order
+FRAMEWORK_DIRS = [".crewai", ".langgraph", ".strands"]
+
+# Mapping from directory name to framework name
+DIR_TO_FRAMEWORK = {
+    ".crewai": "crewai",
+    ".langgraph": "langgraph",
+    ".strands": "strands",
+}
+
+# Mapping from framework name to directory name
+FRAMEWORK_TO_DIR = {v: k for k, v in DIR_TO_FRAMEWORK.items()}
 
 
 def get_workspace_root() -> Path:
@@ -20,19 +41,31 @@ def get_workspace_root() -> Path:
     return Path.cwd()
 
 
-def discover_packages(workspace_root: Path | None = None) -> dict[str, Path]:
-    """Discover all packages with .crewai/ directories.
+def discover_packages(
+    workspace_root: Path | None = None,
+    framework: str | None = None,
+) -> dict[str, Path]:
+    """Discover all packages with crew configuration directories.
 
     Args:
         workspace_root: Root of the workspace. If None, auto-detected.
+        framework: Optional framework to filter by (crewai, langgraph, strands).
+                   If None, returns first found directory per package.
 
     Returns:
-        Dict mapping package name to its .crewai/ directory path.
+        Dict mapping package name to its config directory path.
     """
     if workspace_root is None:
         workspace_root = get_workspace_root()
 
     packages = {}
+
+    # Determine which directories to look for
+    if framework:
+        dir_name = FRAMEWORK_TO_DIR.get(framework)
+        dirs_to_check = [dir_name] if dir_name else FRAMEWORK_DIRS
+    else:
+        dirs_to_check = FRAMEWORK_DIRS
 
     # Check packages/ directory
     packages_dir = workspace_root / "packages"
@@ -40,9 +73,75 @@ def discover_packages(workspace_root: Path | None = None) -> dict[str, Path]:
         for pkg_dir in packages_dir.iterdir():
             if not pkg_dir.is_dir():
                 continue
-            crewai_dir = pkg_dir / ".crewai"
-            if crewai_dir.exists() and (crewai_dir / "manifest.yaml").exists():
-                packages[pkg_dir.name] = crewai_dir
+            
+            # Try each framework directory in priority order
+            for dir_name in dirs_to_check:
+                config_dir = pkg_dir / dir_name
+                if config_dir.exists() and (config_dir / "manifest.yaml").exists():
+                    packages[pkg_dir.name] = config_dir
+                    break  # Use first found (highest priority)
+
+    # Also check workspace root for standalone projects
+    for dir_name in dirs_to_check:
+        config_dir = workspace_root / dir_name
+        if config_dir.exists() and (config_dir / "manifest.yaml").exists():
+            # Use the workspace name or a default
+            pkg_name = workspace_root.name or "default"
+            if pkg_name not in packages:
+                packages[pkg_name] = config_dir
+            break
+
+    return packages
+
+
+def discover_all_framework_configs(
+    workspace_root: Path | None = None,
+) -> dict[str, dict[str, Path]]:
+    """Discover all framework-specific config directories for all packages.
+
+    This finds ALL framework directories, not just the first one per package.
+
+    Args:
+        workspace_root: Root of the workspace. If None, auto-detected.
+
+    Returns:
+        Dict mapping package name to dict of framework -> config_dir.
+        Example: {"otterfall": {"crewai": Path(...), "strands": Path(...)}}
+    """
+    if workspace_root is None:
+        workspace_root = get_workspace_root()
+
+    packages: dict[str, dict[str, Path]] = {}
+
+    # Check packages/ directory
+    packages_dir = workspace_root / "packages"
+    if packages_dir.exists():
+        for pkg_dir in packages_dir.iterdir():
+            if not pkg_dir.is_dir():
+                continue
+            
+            pkg_configs: dict[str, Path] = {}
+            for dir_name in FRAMEWORK_DIRS:
+                config_dir = pkg_dir / dir_name
+                if config_dir.exists() and (config_dir / "manifest.yaml").exists():
+                    framework = DIR_TO_FRAMEWORK[dir_name]
+                    pkg_configs[framework] = config_dir
+            
+            if pkg_configs:
+                packages[pkg_dir.name] = pkg_configs
+
+    # Also check workspace root
+    root_configs: dict[str, Path] = {}
+    for dir_name in FRAMEWORK_DIRS:
+        config_dir = workspace_root / dir_name
+        if config_dir.exists() and (config_dir / "manifest.yaml").exists():
+            framework = DIR_TO_FRAMEWORK[dir_name]
+            root_configs[framework] = config_dir
+    
+    if root_configs:
+        pkg_name = workspace_root.name or "default"
+        if pkg_name not in packages:
+            packages[pkg_name] = root_configs
 
     return packages
 
