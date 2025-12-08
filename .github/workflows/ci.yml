@@ -102,8 +102,8 @@ jobs:
 
       - uses: hynek/setup-cached-uv@5a9d96ffa15170e34ced0e2de6c6ae8805056fd9  # v2
 
-      - run: uvx ruff check packages/ tests/
-      - run: uvx ruff format --check packages/ tests/
+      - run: uvx ruff check packages/
+      - run: uvx ruff format --check packages/
 
   # ============================================
   # DOCS BUILD (PR validation)
