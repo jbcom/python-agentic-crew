@@ -1,189 +1,158 @@
-# GitHub Copilot Instructions for agentic-crew
+# Python Copilot Instructions
 
-## Overview
+## Python Environment
 
-`agentic-crew` is a **framework-agnostic AI crew orchestration library** that enables declaring crews once and running them on **CrewAI**, **LangGraph**, or **AWS Strands** depending on what's installed.
-
-## Critical: GitHub Authentication
-
+### Package Manager: uv (preferred) or pip
 ```bash
-# ALWAYS use GITHUB_JBCOM_TOKEN for jbcom repos
-GH_TOKEN="$GITHUB_JBCOM_TOKEN" gh <command>
+# Install uv if not present
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install dependencies
+uv sync --extra tests  # REQUIRED for testing
+uv sync --all-extras   # For all optional features
 ```
 
-## Quick Reference
-
+### Virtual Environment
 ```bash
-# Install dependencies
-uv sync --extra dev --extra tests --extra crewai
+# uv manages venv automatically, but if needed:
+uv venv
+source .venv/bin/activate
+```
 
-# Run tests
-uv run pytest tests/ -v --ignore=tests/e2e
+## Development Commands
 
-# Lint and format
-uvx ruff check src/ tests/ --fix
+### Testing (ALWAYS run tests)
+```bash
+# Run all tests
+uv run pytest tests/ -v
+
+# Run with coverage
+uv run pytest tests/ -v --cov=src --cov-report=term-missing
+
+# Run specific test
+uv run pytest tests/test_specific.py -v
+
+# Run tests matching pattern
+uv run pytest tests/ -v -k "test_pattern"
+```
+
+### Linting & Formatting
+```bash
+# Check linting (ruff)
+uvx ruff check src/ tests/
+
+# Auto-fix linting issues
+uvx ruff check --fix src/ tests/
+
+# Format code
 uvx ruff format src/ tests/
 
-# Type check
+# Type checking (if configured)
 uv run mypy src/
-
-# Run a crew
-uv run agentic-crew run <package> <crew> --input "..."
 ```
 
-## Architecture
-
-### Core Concept: Framework Decomposition
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    agentic-crew                                  │
-│                                                                  │
-│  manifest.yaml → Loader → Decomposer → Runner                    │
-│                               │                                  │
-│              ┌────────────────┼────────────────┐                │
-│              ▼                ▼                ▼                │
-│         CrewAI            LangGraph         Strands             │
-│         Runner             Runner            Runner             │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-**Key insight**: Declare crews once in YAML, run on any framework based on what's installed.
-
-### Directory Structure
-
-```
-src/agentic_crew/
-├── core/                    # Framework-agnostic core
-│   ├── discovery.py         # Find .crewai/ directories
-│   ├── loader.py            # Load YAML configs
-│   ├── runner.py            # Execute crews
-│   └── decomposer.py        # Framework auto-detection
-├── runners/                 # Framework-specific runners
-│   ├── base.py              # Abstract base runner
-│   ├── crewai_runner.py     # CrewAI implementation
-│   ├── langgraph_runner.py  # LangGraph implementation
-│   └── strands_runner.py    # Strands implementation
-├── base/
-│   └── archetypes.yaml      # Reusable agent templates
-├── tools/
-│   └── file_tools.py        # Shared file tools
-└── crews/                   # Built-in example crews
-```
-
-### Manifest Format (.crewai/manifest.yaml)
-
-```yaml
-name: my-package
-version: "1.0"
-description: Package description
-
-llm:
-  provider: anthropic
-  model: claude-sonnet-4-20250514
-
-crews:
-  my_crew:
-    description: What this crew does
-    agents: crews/my_crew/agents.yaml
-    tasks: crews/my_crew/tasks.yaml
-    knowledge:
-      - knowledge/domain_docs
-    preferred_framework: auto  # or crewai, langgraph, strands
-```
-
-## Key Files
-
-| File | Purpose |
-|------|---------|
-| `src/agentic_crew/core/decomposer.py` | Framework detection and runner selection |
-| `src/agentic_crew/runners/base.py` | Abstract runner interface |
-| `src/agentic_crew/runners/crewai_runner.py` | CrewAI implementation |
-| `src/agentic_crew/runners/langgraph_runner.py` | LangGraph implementation |
-| `src/agentic_crew/runners/strands_runner.py` | Strands implementation |
-| `src/agentic_crew/core/loader.py` | YAML config to crew objects |
-| `AGENTS.md` | Comprehensive agent documentation |
-
-## Code Style
-
-- **Python**: 3.11+ required
-- **Linting**: Ruff (100 char line length)
-- **Type hints**: Required on all public functions
-- **Docstrings**: Google style
-- **Imports**: Absolute, organized by stdlib/third-party/local
-
-## Commit Messages
-
-Use conventional commits:
-- `feat(runners): add new runner` → minor version bump
-- `fix(decomposer): handle edge case` → patch version bump
-- `docs: update README` → no version bump
-- `refactor(loader): simplify parsing` → no version bump
-- `test: add runner tests` → no version bump
-- `chore: update deps` → no version bump
-
-## Common Tasks
-
-### Adding a New Framework Runner
-
-1. Create `src/agentic_crew/runners/{framework}_runner.py`
-2. Implement `BaseRunner` interface (see `runners/base.py`)
-3. Register in `core/decomposer.py`:
-   - Add to `FRAMEWORK_PRIORITY`
-   - Add detection in `is_framework_available()`
-   - Add creation in `get_runner()`
-4. Add tests in `tests/test_runners.py`
-5. Update documentation
-
-### Adding a New Built-in Crew
-
-1. Create directory: `src/agentic_crew/crews/{crew_name}/`
-2. Add `config/agents.yaml` with agent definitions
-3. Add `config/tasks.yaml` with task definitions
-4. Add `{crew_name}_crew.py` with Crew class
-5. Export in `crews/__init__.py`
-6. Add tests
-
-### Testing Framework Decomposition
-
-```python
-from agentic_crew.core.decomposer import detect_framework, get_runner
-
-# Check what's available
-print(detect_framework())  # "crewai", "langgraph", or "strands"
-
-# Get runner for specific framework
-runner = get_runner("langgraph")
-```
-
-## Environment Variables
-
-| Variable | Purpose |
-|----------|---------|
-| `ANTHROPIC_API_KEY` | Required for Claude LLM |
-| `GITHUB_JBCOM_TOKEN` | Required for GitHub operations |
-| `MESHY_API_KEY` | For Meshy-related crews (optional) |
-| `OPENROUTER_API_KEY` | Fallback LLM provider |
-
-## Testing
-
+### Building
 ```bash
-# Unit tests (fast, no API calls)
-uv run pytest tests/ -v --ignore=tests/e2e
-
-# With coverage
-uv run pytest tests/ --cov=agentic_crew --cov-report=term-missing
-
-# Specific test file
-uv run pytest tests/test_decomposer.py -v
-
-# E2E tests (requires API keys, slow)
-uv run pytest tests/e2e/ --e2e -v
+uv build
 ```
 
-## Related Repositories
+## Code Patterns
 
-- [vendor-connectors](https://github.com/jbcom/vendor-connectors) - HTTP connector library (uses agentic-crew for dev)
-- [CrewAI](https://github.com/crewAIInc/crewAI) - Original crew framework
-- [LangGraph](https://github.com/langchain-ai/langgraph) - Graph-based agents
-- [Strands](https://github.com/strands-agents/strands-agents-python) - AWS agent framework
+### Imports
+```python
+# Standard library first
+import os
+from pathlib import Path
+
+# Third-party
+import pytest
+from pydantic import BaseModel
+
+# Local
+from .module import function
+```
+
+### Type Hints (Required)
+```python
+def process_data(items: list[str], config: Config | None = None) -> dict[str, Any]:
+    """Process items with optional config.
+    
+    Args:
+        items: List of items to process
+        config: Optional configuration
+        
+    Returns:
+        Processed results
+    """
+    ...
+```
+
+### Error Handling
+```python
+from typing import Never
+
+class ProcessingError(Exception):
+    """Raised when processing fails."""
+    pass
+
+def process(data: str) -> Result:
+    try:
+        return do_processing(data)
+    except ValueError as e:
+        raise ProcessingError(f"Invalid data: {e}") from e
+```
+
+### Testing Patterns
+```python
+import pytest
+
+class TestProcessor:
+    """Tests for Processor class."""
+    
+    @pytest.fixture
+    def processor(self) -> Processor:
+        return Processor(config=test_config)
+    
+    def test_process_valid_input(self, processor: Processor) -> None:
+        result = processor.process("valid")
+        assert result.success is True
+    
+    def test_process_invalid_input_raises(self, processor: Processor) -> None:
+        with pytest.raises(ProcessingError, match="Invalid"):
+            processor.process("")
+```
+
+## Common Issues
+
+### "Module not found"
+```bash
+# Ensure package is installed in editable mode
+uv pip install -e .
+```
+
+### Tests not finding fixtures
+```bash
+# Ensure conftest.py is in tests/ directory
+# Ensure __init__.py exists in test directories
+```
+
+### Import errors in tests
+```python
+# Use absolute imports from package root
+from package_name.module import thing  # ✅
+from .module import thing  # ❌ in tests
+```
+
+## File Structure
+```
+src/
+├── package_name/
+│   ├── __init__.py
+│   ├── core.py
+│   └── utils.py
+tests/
+├── __init__.py
+├── conftest.py
+└── test_core.py
+pyproject.toml
+```
