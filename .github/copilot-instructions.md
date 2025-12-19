@@ -1,158 +1,69 @@
-# Python Copilot Instructions
+# Copilot Instructions
 
-## Python Environment
+> **Repository-specific instructions should be in `.github/copilot-instructions-local.md`**
+> This file provides common patterns. Local instructions take precedence.
 
-### Package Manager: uv (preferred) or pip
-```bash
-# Install uv if not present
-curl -LsSf https://astral.sh/uv/install.sh | sh
+## Before Starting Any Task
 
-# Install dependencies
-uv sync --extra tests  # REQUIRED for testing
-uv sync --all-extras   # For all optional features
+1. **Read the issue/PR description completely**
+2. **Check for existing patterns** in the codebase before creating new ones
+3. **Run the test suite** before and after changes
+4. **Follow the repository's established conventions**
+
+## Code Quality Requirements
+
+### All Changes Must:
+- [ ] Pass linting (`npm run lint` / `uv run ruff check`)
+- [ ] Pass tests (`npm test` / `uv run pytest`)
+- [ ] Include tests for new functionality
+- [ ] Follow existing code style and patterns
+- [ ] Have clear, descriptive commit messages
+
+### Commit Message Format
+```
+<type>(<scope>): <description>
+
+Types: feat, fix, docs, style, refactor, test, chore
 ```
 
-### Virtual Environment
-```bash
-# uv manages venv automatically, but if needed:
-uv venv
-source .venv/bin/activate
-```
-
-## Development Commands
-
-### Testing (ALWAYS run tests)
-```bash
-# Run all tests
-uv run pytest tests/ -v
-
-# Run with coverage
-uv run pytest tests/ -v --cov=src --cov-report=term-missing
-
-# Run specific test
-uv run pytest tests/test_specific.py -v
-
-# Run tests matching pattern
-uv run pytest tests/ -v -k "test_pattern"
-```
-
-### Linting & Formatting
-```bash
-# Check linting (ruff)
-uvx ruff check src/ tests/
-
-# Auto-fix linting issues
-uvx ruff check --fix src/ tests/
-
-# Format code
-uvx ruff format src/ tests/
-
-# Type checking (if configured)
-uv run mypy src/
-```
-
-### Building
-```bash
-uv build
-```
-
-## Code Patterns
-
-### Imports
-```python
-# Standard library first
-import os
-from pathlib import Path
-
-# Third-party
-import pytest
-from pydantic import BaseModel
-
-# Local
-from .module import function
-```
-
-### Type Hints (Required)
-```python
-def process_data(items: list[str], config: Config | None = None) -> dict[str, Any]:
-    """Process items with optional config.
-    
-    Args:
-        items: List of items to process
-        config: Optional configuration
-        
-    Returns:
-        Processed results
-    """
-    ...
-```
+## Common Patterns
 
 ### Error Handling
-```python
-from typing import Never
+- Always handle errors explicitly
+- Log errors with context
+- Throw typed errors when possible
 
-class ProcessingError(Exception):
-    """Raised when processing fails."""
-    pass
+### Testing
+- Write tests FIRST when fixing bugs (TDD)
+- Test edge cases, not just happy paths
+- Mock external dependencies
 
-def process(data: str) -> Result:
-    try:
-        return do_processing(data)
-    except ValueError as e:
-        raise ProcessingError(f"Invalid data: {e}") from e
-```
+### Documentation
+- Update README if adding features
+- Add JSDoc/docstrings to public APIs
+- Include usage examples
 
-### Testing Patterns
-```python
-import pytest
+## Issue Resolution Workflow
 
-class TestProcessor:
-    """Tests for Processor class."""
-    
-    @pytest.fixture
-    def processor(self) -> Processor:
-        return Processor(config=test_config)
-    
-    def test_process_valid_input(self, processor: Processor) -> None:
-        result = processor.process("valid")
-        assert result.success is True
-    
-    def test_process_invalid_input_raises(self, processor: Processor) -> None:
-        with pytest.raises(ProcessingError, match="Invalid"):
-            processor.process("")
-```
+1. **Understand**: Read issue, check related code
+2. **Reproduce**: If bug, write failing test first
+3. **Implement**: Make minimal changes to fix/add feature
+4. **Test**: Ensure all tests pass
+5. **Document**: Update docs if needed
+6. **Commit**: Clear message referencing issue
 
-## Common Issues
+## What NOT To Do
 
-### "Module not found"
-```bash
-# Ensure package is installed in editable mode
-uv pip install -e .
-```
+- ❌ Don't refactor unrelated code
+- ❌ Don't add dependencies without justification
+- ❌ Don't skip tests
+- ❌ Don't change formatting of untouched code
+- ❌ Don't make breaking changes without discussion
 
-### Tests not finding fixtures
-```bash
-# Ensure conftest.py is in tests/ directory
-# Ensure __init__.py exists in test directories
-```
+## Getting Help
 
-### Import errors in tests
-```python
-# Use absolute imports from package root
-from package_name.module import thing  # ✅
-from .module import thing  # ❌ in tests
-```
-
-## File Structure
-```
-src/
-├── package_name/
-│   ├── __init__.py
-│   ├── core.py
-│   └── utils.py
-tests/
-├── __init__.py
-├── conftest.py
-└── test_core.py
-pyproject.toml
-```
+If blocked:
+1. Check `memory-bank/` for project context
+2. Check `docs/` for architecture decisions
+3. Look at recent PRs for patterns
+4. Ask in the issue for clarification
