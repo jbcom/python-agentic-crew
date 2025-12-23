@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agentic-crew"
-version = "0.1.0"
+version = "1.0.0"
 description = "Framework-agnostic AI crew orchestration - declare once, run on CrewAI, LangGraph, or Strands"
 requires-python = ">=3.10"
 license = { text = "MIT" }
