@@ -29,12 +29,11 @@ class TestGetWorkspaceRoot:
         # Create pyproject.toml at workspace root
         (temp_workspace / "pyproject.toml").write_text("[project]\nname = 'test'")
 
-        with patch.dict(os.environ, {"TARGET_PACKAGE": "other_package"}):
-            with patch(
-                "agentic_crew.tools.file_tools._find_workspace_root",
-                return_value=temp_workspace,
-            ):
-                root = get_workspace_root()
+        with patch.dict(os.environ, {"TARGET_PACKAGE": "other_package"}), patch(
+            "agentic_crew.tools.file_tools._find_workspace_root",
+            return_value=temp_workspace,
+        ):
+            root = get_workspace_root()
 
         assert root == other_pkg
 

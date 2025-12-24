@@ -145,10 +145,7 @@ def load_crew_from_config(crew_config: dict) -> Crew:
 
     for agent_name, agent_cfg in agents_config.items():
         # Determine which tools to give based on agent role
-        if "engineer" in agent_name.lower() or "developer" in agent_name.lower():
-            tools = all_tools
-        else:
-            tools = read_tools
+        tools = all_tools if "engineer" in agent_name.lower() or "developer" in agent_name.lower() else read_tools
 
         agents[agent_name] = create_agent_from_config(agent_name, agent_cfg, tools)
 

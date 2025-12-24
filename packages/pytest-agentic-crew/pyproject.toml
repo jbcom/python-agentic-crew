@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "pytest-agentic-crew"
 version = "0.1.0"
 description = "Pytest plugin with fixtures for agentic-crew E2E testing"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 license = { text = "MIT" }
 readme = "README.md"
 authors = [{ name = "Jon Bogaty", email = "jon@jonbogaty.com" }]
@@ -16,11 +16,12 @@ classifiers = [
     "Framework :: Pytest",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Testing",
 ]
 dependencies = [

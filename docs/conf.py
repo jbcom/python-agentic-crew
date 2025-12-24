@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 # Configuration file for the Sphinx documentation builder.
 # Synced from jbcom-control-center - customize as needed
-
 import os
 import sys
 

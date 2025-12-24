@@ -229,13 +229,17 @@ def get_crew_config(config_dir: Path, crew_name: str) -> dict:
 
     # Also check manifest-level preferred_framework (can be overridden by dir)
     manifest_framework = crew_config.get("preferred_framework")
-    if manifest_framework and manifest_framework != "auto":
+    if (
+        manifest_framework
+        and manifest_framework != "auto"
+        and required_framework
+        and manifest_framework != required_framework
+    ):
         # Manifest can specify preference, but directory takes precedence
-        if required_framework and manifest_framework != required_framework:
-            print(
-                f"Warning: Crew '{crew_name}' specifies preferred_framework={manifest_framework} "
-                f"but is in {config_dir.name}/ directory which requires {required_framework}"
-            )
+        print(
+            f"Warning: Crew '{crew_name}' specifies preferred_framework={manifest_framework} "
+            f"but is in {config_dir.name}/ directory which requires {required_framework}"
+        )
 
     # Get LLM config from manifest
     llm_config = manifest.get("llm", crew_config.get("llm", {}))
