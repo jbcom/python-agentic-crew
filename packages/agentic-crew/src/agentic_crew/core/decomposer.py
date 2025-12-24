@@ -76,9 +76,8 @@ def detect_framework(preferred: str | None = None) -> str:
         RuntimeError: If no frameworks are installed.
     """
     # Check preferred first
-    if preferred and preferred != "auto":
-        if is_framework_available(preferred):
-            return preferred
+    if preferred and preferred != "auto" and is_framework_available(preferred):
+        return preferred
         # Fall through to auto-detect if preferred not available
 
     # Auto-detect based on priority

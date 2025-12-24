@@ -62,20 +62,22 @@ class TestManagerAgent:
             "tasks": {},
         }
 
-        with patch("agentic_crew.core.manager.discover_packages") as mock_discover:
-            with patch("agentic_crew.core.manager.get_crew_config") as mock_get_config:
-                with patch("agentic_crew.core.manager.run_crew_auto") as mock_run:
-                    mock_discover.return_value = mock_packages
-                    mock_get_config.return_value = mock_config
-                    mock_run.return_value = "Design complete"
+        with (
+            patch("agentic_crew.core.manager.discover_packages") as mock_discover,
+            patch("agentic_crew.core.manager.get_crew_config") as mock_get_config,
+            patch("agentic_crew.core.manager.run_crew_auto") as mock_run,
+        ):
+            mock_discover.return_value = mock_packages
+            mock_get_config.return_value = mock_config
+            mock_run.return_value = "Design complete"
 
-                    result = manager.delegate("design", "Create a game design")
+            result = manager.delegate("design", "Create a game design")
 
-                    assert result == "Design complete"
-                    # Verify string was converted to dict
-                    mock_run.assert_called_once()
-                    call_args = mock_run.call_args
-                    assert call_args[1]["inputs"] == {"task": "Create a game design"}
+            assert result == "Design complete"
+            # Verify string was converted to dict
+            mock_run.assert_called_once()
+            call_args = mock_run.call_args
+            assert call_args[1]["inputs"] == {"task": "Create a game design"}
 
     def test_delegate_with_dict_input(self):
         """Test delegation with dict input."""
@@ -87,20 +89,22 @@ class TestManagerAgent:
         mock_packages = {"test_pkg": Path("/test/.crewai")}
         mock_config = {"name": "game_design", "agents": {}, "tasks": {}}
 
-        with patch("agentic_crew.core.manager.discover_packages") as mock_discover:
-            with patch("agentic_crew.core.manager.get_crew_config") as mock_get_config:
-                with patch("agentic_crew.core.manager.run_crew_auto") as mock_run:
-                    mock_discover.return_value = mock_packages
-                    mock_get_config.return_value = mock_config
-                    mock_run.return_value = "Design complete"
+        with (
+            patch("agentic_crew.core.manager.discover_packages") as mock_discover,
+            patch("agentic_crew.core.manager.get_crew_config") as mock_get_config,
+            patch("agentic_crew.core.manager.run_crew_auto") as mock_run,
+        ):
+            mock_discover.return_value = mock_packages
+            mock_get_config.return_value = mock_config
+            mock_run.return_value = "Design complete"
 
-                    inputs = {"task": "Create design", "theme": "fantasy"}
-                    result = manager.delegate("design", inputs)
+            inputs = {"task": "Create design", "theme": "fantasy"}
+            result = manager.delegate("design", inputs)
 
-                    assert result == "Design complete"
-                    mock_run.assert_called_once()
-                    call_args = mock_run.call_args
-                    assert call_args[1]["inputs"] == inputs
+            assert result == "Design complete"
+            mock_run.assert_called_once()
+            call_args = mock_run.call_args
+            assert call_args[1]["inputs"] == inputs
 
     def test_delegate_unknown_role_raises_error(self):
         """Test that delegating to unknown role raises ValueError."""
@@ -132,25 +136,27 @@ class TestManagerAgent:
         }
         mock_config = {"name": "game_design", "agents": {}, "tasks": {}}
 
-        with patch("agentic_crew.core.manager.discover_packages") as mock_discover:
-            with patch("agentic_crew.core.manager.get_crew_config") as mock_get_config:
-                with patch("agentic_crew.core.manager.run_crew_auto") as mock_run:
-                    mock_discover.return_value = mock_packages
+        with (
+            patch("agentic_crew.core.manager.discover_packages") as mock_discover,
+            patch("agentic_crew.core.manager.get_crew_config") as mock_get_config,
+            patch("agentic_crew.core.manager.run_crew_auto") as mock_run,
+        ):
+            mock_discover.return_value = mock_packages
 
-                    # First package doesn't have the crew
-                    def get_config_side_effect(pkg_dir, crew_name):
-                        if pkg_dir == Path("/pkg1/.crewai"):
-                            raise ValueError("Crew not found")
-                        return mock_config
+            # First package doesn't have the crew
+            def get_config_side_effect(pkg_dir, crew_name):
+                if pkg_dir == Path("/pkg1/.crewai"):
+                    raise ValueError("Crew not found")
+                return mock_config
 
-                    mock_get_config.side_effect = get_config_side_effect
-                    mock_run.return_value = "Success"
+            mock_get_config.side_effect = get_config_side_effect
+            mock_run.return_value = "Success"
 
-                    result = manager.delegate("design", "test task")
+            result = manager.delegate("design", "test task")
 
-                    assert result == "Success"
-                    # Should have tried pkg1 (failed), then found in pkg2 (config is cached)
-                    assert mock_get_config.call_count == 2
+            assert result == "Success"
+            # Should have tried pkg1 (failed), then found in pkg2 (config is cached)
+            assert mock_get_config.call_count == 2
 
     def test_delegate_crew_not_found_raises_error(self):
         """Test that crew not found in any package raises ValueError."""
@@ -158,13 +164,15 @@ class TestManagerAgent:
 
         mock_packages = {"pkg1": Path("/pkg1/.crewai")}
 
-        with patch("agentic_crew.core.manager.discover_packages") as mock_discover:
-            with patch("agentic_crew.core.manager.get_crew_config") as mock_get_config:
-                mock_discover.return_value = mock_packages
-                mock_get_config.side_effect = ValueError("Crew not found")
+        with (
+            patch("agentic_crew.core.manager.discover_packages") as mock_discover,
+            patch("agentic_crew.core.manager.get_crew_config") as mock_get_config,
+        ):
+            mock_discover.return_value = mock_packages
+            mock_get_config.side_effect = ValueError("Crew not found")
 
-                with pytest.raises(ValueError, match="Crew 'nonexistent_crew' not found"):
-                    manager.delegate("design", "test task")
+            with pytest.raises(ValueError, match="Crew 'nonexistent_crew' not found"):
+                manager.delegate("design", "test task")
 
     @pytest.mark.asyncio
     async def test_delegate_async(self):
@@ -177,16 +185,18 @@ class TestManagerAgent:
         mock_packages = {"test_pkg": Path("/test/.crewai")}
         mock_config = {"name": "game_design", "agents": {}, "tasks": {}}
 
-        with patch("agentic_crew.core.manager.discover_packages") as mock_discover:
-            with patch("agentic_crew.core.manager.get_crew_config") as mock_get_config:
-                with patch("agentic_crew.core.manager.run_crew_auto") as mock_run:
-                    mock_discover.return_value = mock_packages
-                    mock_get_config.return_value = mock_config
-                    mock_run.return_value = "Async result"
+        with (
+            patch("agentic_crew.core.manager.discover_packages") as mock_discover,
+            patch("agentic_crew.core.manager.get_crew_config") as mock_get_config,
+            patch("agentic_crew.core.manager.run_crew_auto") as mock_run,
+        ):
+            mock_discover.return_value = mock_packages
+            mock_get_config.return_value = mock_config
+            mock_run.return_value = "Async result"
 
-                    result = await manager.delegate_async("design", "test task")
+            result = await manager.delegate_async("design", "test task")
 
-                    assert result == "Async result"
+            assert result == "Async result"
 
     @pytest.mark.asyncio
     async def test_delegate_parallel(self):
@@ -198,41 +208,43 @@ class TestManagerAgent:
 
         mock_packages = {"test_pkg": Path("/test/.crewai")}
 
-        with patch("agentic_crew.core.manager.discover_packages") as mock_discover:
-            with patch("agentic_crew.core.manager.get_crew_config") as mock_get_config:
-                with patch("agentic_crew.core.manager.run_crew_auto") as mock_run:
-                    mock_discover.return_value = mock_packages
+        with (
+            patch("agentic_crew.core.manager.discover_packages") as mock_discover,
+            patch("agentic_crew.core.manager.get_crew_config") as mock_get_config,
+            patch("agentic_crew.core.manager.run_crew_auto") as mock_run,
+        ):
+            mock_discover.return_value = mock_packages
 
-                    # Return different configs for different crews to distinguish them
-                    def get_config_side_effect(pkg_dir, crew_name):
-                        return {"name": crew_name, "agents": {}, "tasks": {}}
+            # Return different configs for different crews to distinguish them
+            def get_config_side_effect(pkg_dir, crew_name):
+                return {"name": crew_name, "agents": {}, "tasks": {}}
 
-                    mock_get_config.side_effect = get_config_side_effect
+            mock_get_config.side_effect = get_config_side_effect
 
-                    # Mock different results based on crew name in config
-                    def run_side_effect(config, inputs, framework=None):
-                        crew_name = config["name"]
-                        if crew_name == "game_design":
-                            return "Design done"
-                        elif crew_name == "asset_gen":
-                            return "Assets done"
-                        return f"Unknown crew: {crew_name}"
+            # Mock different results based on crew name in config
+            def run_side_effect(config, inputs, framework=None):
+                crew_name = config["name"]
+                if crew_name == "game_design":
+                    return "Design done"
+                elif crew_name == "asset_gen":
+                    return "Assets done"
+                return f"Unknown crew: {crew_name}"
 
-                    mock_run.side_effect = run_side_effect
+            mock_run.side_effect = run_side_effect
 
-                    results = await manager.delegate_parallel(
-                        [
-                            ("design", "Create design"),
-                            ("assets", "Generate assets"),
-                        ]
-                    )
+            results = await manager.delegate_parallel(
+                [
+                    ("design", "Create design"),
+                    ("assets", "Generate assets"),
+                ]
+            )
 
-                    assert len(results) == 2
-                    # Verify correct results returned (order matches input order)
-                    assert "Design done" in results
-                    assert "Assets done" in results
-                    # Both should have been executed
-                    assert mock_run.call_count == 2
+            assert len(results) == 2
+            # Verify correct results returned (order matches input order)
+            assert "Design done" in results
+            assert "Assets done" in results
+            # Both should have been executed
+            assert mock_run.call_count == 2
 
     def test_delegate_sequential(self):
         """Test sequential delegation to multiple crews."""
@@ -244,26 +256,28 @@ class TestManagerAgent:
         mock_packages = {"test_pkg": Path("/test/.crewai")}
         mock_config = {"name": "test", "agents": {}, "tasks": {}}
 
-        with patch("agentic_crew.core.manager.discover_packages") as mock_discover:
-            with patch("agentic_crew.core.manager.get_crew_config") as mock_get_config:
-                with patch("agentic_crew.core.manager.run_crew_auto") as mock_run:
-                    mock_discover.return_value = mock_packages
-                    mock_get_config.return_value = mock_config
-                    mock_run.side_effect = ["Design result", "Implementation result"]
+        with (
+            patch("agentic_crew.core.manager.discover_packages") as mock_discover,
+            patch("agentic_crew.core.manager.get_crew_config") as mock_get_config,
+            patch("agentic_crew.core.manager.run_crew_auto") as mock_run,
+        ):
+            mock_discover.return_value = mock_packages
+            mock_get_config.return_value = mock_config
+            mock_run.side_effect = ["Design result", "Implementation result"]
 
-                    results = manager.delegate_sequential(
-                        [
-                            ("design", "Create design"),
-                            ("impl", "Implement design"),
-                        ]
-                    )
+            results = manager.delegate_sequential(
+                [
+                    ("design", "Create design"),
+                    ("impl", "Implement design"),
+                ]
+            )
 
-                    assert results == ["Design result", "Implementation result"]
-                    assert mock_run.call_count == 2
-                    # Verify they were called in order
-                    calls = mock_run.call_args_list
-                    assert calls[0][1]["inputs"]["task"] == "Create design"
-                    assert calls[1][1]["inputs"]["task"] == "Implement design"
+            assert results == ["Design result", "Implementation result"]
+            assert mock_run.call_count == 2
+            # Verify they were called in order
+            calls = mock_run.call_args_list
+            assert calls[0][1]["inputs"]["task"] == "Create design"
+            assert calls[1][1]["inputs"]["task"] == "Implement design"
 
     def test_checkpoint_auto_approve(self):
         """Test checkpoint with auto_approve=True."""
@@ -321,17 +335,19 @@ class TestManagerAgentSubclass:
         mock_packages = {"test_pkg": Path("/test/.crewai")}
         mock_config = {"name": "test", "agents": {}, "tasks": {}}
 
-        with patch("agentic_crew.core.manager.discover_packages") as mock_discover:
-            with patch("agentic_crew.core.manager.get_crew_config") as mock_get_config:
-                with patch("agentic_crew.core.manager.run_crew_auto") as mock_run:
-                    mock_discover.return_value = mock_packages
-                    mock_get_config.return_value = mock_config
-                    mock_run.side_effect = ["Design done", "Implementation done"]
+        with (
+            patch("agentic_crew.core.manager.discover_packages") as mock_discover,
+            patch("agentic_crew.core.manager.get_crew_config") as mock_get_config,
+            patch("agentic_crew.core.manager.run_crew_auto") as mock_run,
+        ):
+            mock_discover.return_value = mock_packages
+            mock_get_config.return_value = mock_config
+            mock_run.side_effect = ["Design done", "Implementation done"]
 
-                    result = await manager.execute_workflow("Build a game")
+            result = await manager.execute_workflow("Build a game")
 
-                    assert result == "Implementation done"
-                    assert mock_run.call_count == 2
+            assert result == "Implementation done"
+            assert mock_run.call_count == 2
 
     @pytest.mark.asyncio
     async def test_custom_workflow_with_parallel_execution(self):
@@ -364,14 +380,16 @@ class TestManagerAgentSubclass:
         mock_packages = {"test_pkg": Path("/test/.crewai")}
         mock_config = {"name": "test", "agents": {}, "tasks": {}}
 
-        with patch("agentic_crew.core.manager.discover_packages") as mock_discover:
-            with patch("agentic_crew.core.manager.get_crew_config") as mock_get_config:
-                with patch("agentic_crew.core.manager.run_crew_auto") as mock_run:
-                    mock_discover.return_value = mock_packages
-                    mock_get_config.return_value = mock_config
-                    mock_run.side_effect = ["Design done", "Assets done", "QA passed"]
+        with (
+            patch("agentic_crew.core.manager.discover_packages") as mock_discover,
+            patch("agentic_crew.core.manager.get_crew_config") as mock_get_config,
+            patch("agentic_crew.core.manager.run_crew_auto") as mock_run,
+        ):
+            mock_discover.return_value = mock_packages
+            mock_get_config.return_value = mock_config
+            mock_run.side_effect = ["Design done", "Assets done", "QA passed"]
 
-                    result = await manager.execute_workflow("Build game")
+            result = await manager.execute_workflow("Build game")
 
-                    assert result == "QA passed"
-                    assert mock_run.call_count == 3
+            assert result == "QA passed"
+            assert mock_run.call_count == 3

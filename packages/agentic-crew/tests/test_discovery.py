@@ -184,9 +184,11 @@ class TestDecomposer:
         """Test that detect_framework raises when no frameworks are available."""
         from agentic_crew.core.decomposer import detect_framework
 
-        with patch("agentic_crew.core.decomposer.is_framework_available", return_value=False):
-            with pytest.raises(RuntimeError, match="No AI frameworks installed"):
-                detect_framework()
+        with (
+            patch("agentic_crew.core.decomposer.is_framework_available", return_value=False),
+            pytest.raises(RuntimeError, match="No AI frameworks installed"),
+        ):
+            detect_framework()
 
     def test_detect_framework_respects_priority(self) -> None:
         """Test that frameworks are detected in priority order."""
@@ -419,9 +421,8 @@ class TestDecomposer:
         with patch(
             "agentic_crew.core.decomposer.is_framework_available",
             return_value=False,
-        ):
-            with pytest.raises(RuntimeError, match="requires langgraph.*not installed"):
-                decompose_crew(crew_config)
+        ), pytest.raises(RuntimeError, match="requires langgraph.*not installed"):
+            decompose_crew(crew_config)
 
     def test_decompose_crew_validates_framework_conflict(self) -> None:
         """Test decompose_crew validates requested vs required conflict."""
@@ -437,9 +438,8 @@ class TestDecomposer:
         with patch(
             "agentic_crew.core.decomposer.is_framework_available",
             return_value=True,
-        ):
-            with pytest.raises(ValueError, match="requires crewai.*langgraph was requested"):
-                decompose_crew(crew_config, framework="langgraph")
+        ), pytest.raises(ValueError, match="requires crewai.*langgraph was requested"):
+            decompose_crew(crew_config, framework="langgraph")
 
     def test_get_install_command_returns_pip_install(self) -> None:
         """Test that _get_install_command returns correct pip command."""

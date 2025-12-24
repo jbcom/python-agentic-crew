@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "agentic-crew"
 version = "1.0.0"
 description = "Framework-agnostic AI crew orchestration - declare once, run on CrewAI, LangGraph, or Strands"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 license = { text = "MIT" }
 readme = "README.md"
 authors = [{ name = "Jon Bogaty", email = "jon@jonbogaty.com" }]
@@ -15,10 +15,12 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 # Core dependencies - NO framework required (auto-detected at runtime)
 dependencies = [
