@@ -30,7 +30,7 @@ docs = [
 
 [[package]]
 name = "agentic-crew"
-version = "0.1.0"
+version = "1.0.0"
 source = { editable = "packages/agentic-crew" }
 dependencies = [
     { name = "pydantic" },
@@ -50,6 +50,7 @@ all = [
     { name = "langchain-anthropic" },
     { name = "langgraph" },
     { name = "mcp" },
+    { name = "requests" },
     { name = "strands-agents" },
 ]
 crewai = [
@@ -77,6 +78,7 @@ mcp = [
 scraping = [
     { name = "beautifulsoup4" },
     { name = "crewai", extra = ["tools"] },
+    { name = "requests" },
 ]
 strands = [
     { name = "strands-agents" },
@@ -114,6 +116,8 @@ requires-dist = [
     { name = "pytest-mock", marker = "extra == 'tests'", specifier = ">=3.15.1" },
     { name = "pytest-timeout", marker = "extra == 'tests'", specifier = ">=2.4.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
+    { name = "requests", marker = "extra == 'all'", specifier = ">=2.31.0" },
+    { name = "requests", marker = "extra == 'scraping'", specifier = ">=2.31.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.1.0" },
     { name = "sphinx", marker = "extra == 'docs'", specifier = ">=7.0.0" },
     { name = "sphinx-autodoc-typehints", marker = "extra == 'docs'", specifier = ">=2.0.0" },
