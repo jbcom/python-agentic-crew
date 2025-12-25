@@ -24,9 +24,7 @@ class StrandsRunner(BaseRunner):
         try:
             import strands  # noqa: F401
         except ImportError as e:
-            raise RuntimeError(
-                "Strands not installed. Install with: pip install strands-agents"
-            ) from e
+            raise RuntimeError("Strands not installed. Install with: pip install strands-agents") from e
 
     def build_crew(self, crew_config: dict[str, Any]) -> Any:
         """Build a Strands agent from configuration.

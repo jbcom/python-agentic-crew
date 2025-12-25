@@ -145,8 +145,7 @@ class LocalCLIRunner(SingleAgentRunner):
         profiles_file = Path(__file__).parent / "local_cli_profiles.yaml"
         if not profiles_file.exists():
             raise FileNotFoundError(
-                f"Profiles file not found: {profiles_file}\n"
-                f"Expected local_cli_profiles.yaml in runners directory."
+                f"Profiles file not found: {profiles_file}\nExpected local_cli_profiles.yaml in runners directory."
             )
 
         # Load and parse YAML
@@ -262,9 +261,7 @@ class LocalCLIRunner(SingleAgentRunner):
                 f"stderr: {e.stderr}"
             ) from e
         except subprocess.TimeoutExpired as e:
-            raise RuntimeError(
-                f"Command timed out after {self.config.timeout}s\nCommand: {' '.join(cmd)}"
-            ) from e
+            raise RuntimeError(f"Command timed out after {self.config.timeout}s\nCommand: {' '.join(cmd)}") from e
 
     def _build_command(
         self,

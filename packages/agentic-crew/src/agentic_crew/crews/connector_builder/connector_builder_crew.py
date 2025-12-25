@@ -9,21 +9,22 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from agentic_crew.utils import load_config
 from crewai import Agent, Crew, Task
+
+from agentic_crew.utils import load_config
 
 
 class ConnectorBuilderCrew:
     """Manages the agents and tasks for the connector builder crew.
 
-    This class loads agent and task configurations from YAML files,
-    instantiates the necessary CrewAI components, and provides a method
-to
-    execute the crew's workflow.
+        This class loads agent and task configurations from YAML files,
+        instantiates the necessary CrewAI components, and provides a method
+    to
+        execute the crew's workflow.
 
-    Attributes:
-        crew: An instance of the CrewAI Crew, configured with agents and
-              tasks for connector building.
+        Attributes:
+            crew: An instance of the CrewAI Crew, configured with agents and
+                  tasks for connector building.
     """
 
     def __init__(self, output_dir: str = "output"):
@@ -50,9 +51,7 @@ to
         self.analyze_api = Task(**task_config["analyze_api"])
 
         generate_code_config = task_config["generate_code"].copy()
-        generate_code_config["description"] = generate_code_config[
-            "description"
-        ].format(output_dir=output_dir)
+        generate_code_config["description"] = generate_code_config["description"].format(output_dir=output_dir)
         self.generate_code = Task(**generate_code_config)
 
         self.crew = Crew(

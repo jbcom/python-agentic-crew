@@ -6,7 +6,6 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 from crewai_tools import ScrapeWebsiteTool
-from pydantic import BaseModel, Field
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -51,10 +50,7 @@ class CrawlWebsiteTool(ScrapeWebsiteTool):
 
                 for link in soup.find_all("a", href=True):
                     next_url = urljoin(current_url, link["href"])
-                    if (
-                        urlparse(next_url).netloc == base_netloc
-                        and next_url not in visited_urls
-                    ):
+                    if urlparse(next_url).netloc == base_netloc and next_url not in visited_urls:
                         urls_to_visit.append(next_url)
 
             except requests.RequestException as e:

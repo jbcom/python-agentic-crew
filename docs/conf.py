@@ -6,11 +6,11 @@ import os
 import sys
 
 # Add source to path for autodoc
-sys.path.insert(0, os.path.abspath("../src"))
+sys.path.insert(0, os.path.abspath("../packages/agentic-crew/src"))
+sys.path.insert(0, os.path.abspath("../packages/pytest-agentic-crew/src"))
 
 # -- Project information -----------------------------------------------------
-# TODO: Update these for your project
-project = "PACKAGE_NAME"
+project = "agentic-crew"
 copyright = "2025, Jon Bogaty"
 author = "Jon Bogaty"
 
@@ -57,6 +57,7 @@ source_suffix = {
 
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
+html_css_files = ["custom.css"]
 html_title = f"{project} Documentation"
 
 html_theme_options = {

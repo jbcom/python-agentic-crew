@@ -249,13 +249,9 @@ class CrewMocker:
         """
         # If the module is already mocked, return its TextFileKnowledgeSource
         if "crewai.knowledge.source.text_file_knowledge_source" in self.mocked_modules:
-            return self.mocked_modules[
-                "crewai.knowledge.source.text_file_knowledge_source"
-            ].TextFileKnowledgeSource
+            return self.mocked_modules["crewai.knowledge.source.text_file_knowledge_source"].TextFileKnowledgeSource
         # Otherwise, fall back to patching
-        return self.mocker.patch(
-            "crewai.knowledge.source.text_file_knowledge_source.TextFileKnowledgeSource"
-        )
+        return self.mocker.patch("crewai.knowledge.source.text_file_knowledge_source.TextFileKnowledgeSource")
 
     # =========================================================================
     # LangGraph Mocking Helpers

@@ -119,8 +119,7 @@ class TestLangGraphFlow:
                 "messages": [
                     (
                         "user",
-                        "If a train travels 60 miles in 1 hour, "
-                        "how far does it travel in 30 minutes?",
+                        "If a train travels 60 miles in 1 hour, how far does it travel in 30 minutes?",
                     )
                 ]
             }
@@ -211,9 +210,7 @@ class TestLangGraphTools:
         agent = create_react_agent(llm, [get_magic_number])
 
         # Run agent that should use the tool
-        result = agent.invoke(
-            {"messages": [("user", "What is the magic number? Use the get_magic_number tool.")]}
-        )
+        result = agent.invoke({"messages": [("user", "What is the magic number? Use the get_magic_number tool.")]})
 
         # Verify we got a result
         assert result is not None

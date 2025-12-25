@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>agentic_crew.core.discovery &mdash; agentic-crew Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=7df63eae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7026087e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            agentic-crew
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html#install-from-pypi">Install from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html#install-from-source">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html#verify-installation">Verify Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started/quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#install-agentic-crew">1. Install agentic-crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#define-a-crew-yaml">2. Define a Crew (YAML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#run-your-crew">3. Run Your Crew</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../getting-started/quickstart.html#from-python">From Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../getting-started/quickstart.html#from-cli">From CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#try-different-frameworks">4. Try Different Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#common-patterns">Common Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../getting-started/quickstart.html#multi-agent-collaboration">Multi-Agent Collaboration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../getting-started/quickstart.html#knowledge-base-integration">Knowledge Base Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../getting-started/quickstart.html#single-agent-cli-execution">Single-Agent CLI Execution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../QUICKSTART.html">CrewAI Quickstart for Otterfall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#setup-one-time">Setup (One-time)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#using-crewai-for-task-implementation">Using CrewAI for Task Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#example-implement-section-6-1-species-data-system">Example: Implement Section 6.1 (Species Data System)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#what-happens">What Happens</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#task-decomposition-examples">Task Decomposition Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#too-vague">❌ Too Vague</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#good-specific-with-context">✅ Good - Specific with Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#best-with-requirements-and-validation">✅ Best - With Requirements and Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#training-the-crew">Training the Crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#checking-progress">Checking Progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#integration-with-kiro-workflow">Integration with Kiro Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#recommended-workflow">Recommended Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#when-to-use-which">When to Use Which</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#issue-no-such-file-or-directory">Issue: “No such file or directory”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#issue-anthropic-api-key-not-set">Issue: “ANTHROPIC_API_KEY not set”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#issue-agents-don-t-understand-otterfall-patterns">Issue: Agents don’t understand Otterfall patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#issue-code-doesn-t-match-conventions">Issue: Code doesn’t match conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE.html">CrewAI Modular Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#current-implementation">Current Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ARCHITECTURE.html#generic-engine-internal-crewai">1. Generic Engine (<code class="docutils literal notranslate"><span class="pre">internal/crewai</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ARCHITECTURE.html#package-specific-crews-packages-name-crewai">2. Package-Specific Crews (<code class="docutils literal notranslate"><span class="pre">packages/&lt;name&gt;/.crewai/</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#solution-package-defined-crews">Solution: Package-Defined Crews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#package-manifest-manifest-yaml">Package Manifest (manifest.yaml)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#agent-template-system">Agent Template System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#cli-usage">CLI Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#github-actions-workflow">GitHub Actions Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#discovery-implementation">Discovery Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#migration-path">Migration Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#benefits">Benefits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../INTEGRATION.html">External Integration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#cli-contract-stable-api">CLI Contract (Stable API)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#version-compatibility">Version Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#commands">Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../INTEGRATION.html#list-crews">List Crews</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../INTEGRATION.html#get-crew-info">Get Crew Info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../INTEGRATION.html#run-a-crew">Run a Crew</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#json-output-schemas">JSON Output Schemas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#crewlistresult">CrewListResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#crewinforesult">CrewInfoResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#crewrunresult">CrewRunResult</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#typescript-types">TypeScript Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#exit-codes">Exit Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#standard-installation">Standard Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#docker-installation">Docker Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#docker-compose-example">Docker Compose Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#typescript-integration-examples">TypeScript Integration Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#basic-integration-node-js">Basic Integration (Node.js)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#vercel-ai-sdk-integration">Vercel AI SDK Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#agent-to-agent-communication-architecture">Agent-to-Agent Communication Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#structured-error-responses">Structured Error Responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#timeout-handling">Timeout Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#always-use-json-flag">1. Always Use <code class="docutils literal notranslate"><span class="pre">--json</span></code> Flag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#handle-long-running-operations">2. Handle Long-Running Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#cache-crew-list">3. Cache Crew List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#validate-input-before-calling">4. Validate Input Before Calling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#command-not-found">Command Not Found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#framework-errors">Framework Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#api-key-issues">API Key Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#related-resources">Related Resources</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#module-index">Module Index</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/modules.html">Modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../development/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#development-setup">Development Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#commit-messages">Commit Messages</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">agentic-crew</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">agentic_crew.core.discovery</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for agentic_crew.core.discovery</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Discovery module - finds packages with crew configuration directories.</span>
+
+<span class="sd">Supports framework-specific configuration directories:</span>
+<span class="sd">- .crewai/   - CrewAI-specific configurations (default)</span>
+<span class="sd">- .langgraph/ - LangGraph-specific configurations</span>
+<span class="sd">- .strands/  - Strands-specific configurations</span>
+
+<span class="sd">The discovery order matches framework priority for auto-detection.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+<span class="c1"># Framework directory names in priority order</span>
+<span class="c1"># .crew is framework-agnostic (can run on any available framework)</span>
+<span class="c1"># Framework-specific dirs enforce that framework</span>
+<span class="n">FRAMEWORK_DIRS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.crew&quot;</span><span class="p">,</span> <span class="s2">&quot;.crewai&quot;</span><span class="p">,</span> <span class="s2">&quot;.langgraph&quot;</span><span class="p">,</span> <span class="s2">&quot;.strands&quot;</span><span class="p">]</span>
+
+<span class="c1"># Mapping from directory name to framework name</span>
+<span class="c1"># .crew maps to None (framework-agnostic, auto-detect at runtime)</span>
+<span class="n">DIR_TO_FRAMEWORK</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;.crew&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># Framework-agnostic</span>
+    <span class="s2">&quot;.crewai&quot;</span><span class="p">:</span> <span class="s2">&quot;crewai&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;.langgraph&quot;</span><span class="p">:</span> <span class="s2">&quot;langgraph&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;.strands&quot;</span><span class="p">:</span> <span class="s2">&quot;strands&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Mapping from framework name to directory name</span>
+<span class="c1"># None (agnostic) maps to .crew</span>
+<span class="n">FRAMEWORK_TO_DIR</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="kc">None</span><span class="p">:</span> <span class="s2">&quot;.crew&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;crewai&quot;</span><span class="p">:</span> <span class="s2">&quot;.crewai&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;langgraph&quot;</span><span class="p">:</span> <span class="s2">&quot;.langgraph&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;strands&quot;</span><span class="p">:</span> <span class="s2">&quot;.strands&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="get_workspace_root">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.get_workspace_root">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_workspace_root</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the workspace root directory.</span>
+
+<span class="sd">    Walks up from the current file to find the root (where pyproject.toml is).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">parent</span> <span class="ow">in</span> <span class="n">current</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;pyproject.toml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;packages&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">parent</span>
+    <span class="c1"># Fallback to current working directory</span>
+    <span class="k">return</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="discover_packages">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.discover_packages">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">discover_packages</span><span class="p">(</span>
+    <span class="n">workspace_root</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">framework</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Discover all packages with crew configuration directories.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        workspace_root: Root of the workspace. If None, auto-detected.</span>
+<span class="sd">        framework: Optional framework to filter by (crewai, langgraph, strands).</span>
+<span class="sd">                   If None, returns first found directory per package.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict mapping package name to its config directory path.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">workspace_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">workspace_root</span> <span class="o">=</span> <span class="n">get_workspace_root</span><span class="p">()</span>
+
+    <span class="n">packages</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Determine which directories to look for</span>
+    <span class="k">if</span> <span class="n">framework</span><span class="p">:</span>
+        <span class="n">dir_name</span> <span class="o">=</span> <span class="n">FRAMEWORK_TO_DIR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">framework</span><span class="p">)</span>
+        <span class="n">dirs_to_check</span> <span class="o">=</span> <span class="p">[</span><span class="n">dir_name</span><span class="p">]</span> <span class="k">if</span> <span class="n">dir_name</span> <span class="k">else</span> <span class="n">FRAMEWORK_DIRS</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dirs_to_check</span> <span class="o">=</span> <span class="n">FRAMEWORK_DIRS</span>
+
+    <span class="c1"># Check packages/ directory</span>
+    <span class="n">packages_dir</span> <span class="o">=</span> <span class="n">workspace_root</span> <span class="o">/</span> <span class="s2">&quot;packages&quot;</span>
+    <span class="k">if</span> <span class="n">packages_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">pkg_dir</span> <span class="ow">in</span> <span class="n">packages_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pkg_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Try each framework directory in priority order</span>
+            <span class="k">for</span> <span class="n">dir_name</span> <span class="ow">in</span> <span class="n">dirs_to_check</span><span class="p">:</span>
+                <span class="n">config_dir</span> <span class="o">=</span> <span class="n">pkg_dir</span> <span class="o">/</span> <span class="n">dir_name</span>
+                <span class="k">if</span> <span class="n">config_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">config_dir</span> <span class="o">/</span> <span class="s2">&quot;manifest.yaml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="n">packages</span><span class="p">[</span><span class="n">pkg_dir</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">config_dir</span>
+                    <span class="k">break</span>  <span class="c1"># Use first found (highest priority)</span>
+
+    <span class="c1"># Also check workspace root for standalone projects</span>
+    <span class="k">for</span> <span class="n">dir_name</span> <span class="ow">in</span> <span class="n">dirs_to_check</span><span class="p">:</span>
+        <span class="n">config_dir</span> <span class="o">=</span> <span class="n">workspace_root</span> <span class="o">/</span> <span class="n">dir_name</span>
+        <span class="k">if</span> <span class="n">config_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">config_dir</span> <span class="o">/</span> <span class="s2">&quot;manifest.yaml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="c1"># Use the workspace name or a default</span>
+            <span class="n">pkg_name</span> <span class="o">=</span> <span class="n">workspace_root</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s2">&quot;default&quot;</span>
+            <span class="k">if</span> <span class="n">pkg_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
+                <span class="n">packages</span><span class="p">[</span><span class="n">pkg_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">config_dir</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">packages</span></div>
+
+
+
+<div class="viewcode-block" id="discover_all_framework_configs">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.discover_all_framework_configs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">discover_all_framework_configs</span><span class="p">(</span>
+    <span class="n">workspace_root</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Discover all framework-specific config directories for all packages.</span>
+
+<span class="sd">    This finds ALL framework directories, not just the first one per package.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        workspace_root: Root of the workspace. If None, auto-detected.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict mapping package name to dict of framework -&gt; config_dir.</span>
+<span class="sd">        Example: {&quot;otterfall&quot;: {&quot;crewai&quot;: Path(...), &quot;strands&quot;: Path(...)}}</span>
+<span class="sd">        Framework can be None for framework-agnostic .crew/ directories.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">workspace_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">workspace_root</span> <span class="o">=</span> <span class="n">get_workspace_root</span><span class="p">()</span>
+
+    <span class="n">packages</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Check packages/ directory</span>
+    <span class="n">packages_dir</span> <span class="o">=</span> <span class="n">workspace_root</span> <span class="o">/</span> <span class="s2">&quot;packages&quot;</span>
+    <span class="k">if</span> <span class="n">packages_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">pkg_dir</span> <span class="ow">in</span> <span class="n">packages_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pkg_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="k">continue</span>
+
+            <span class="n">pkg_configs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">dir_name</span> <span class="ow">in</span> <span class="n">FRAMEWORK_DIRS</span><span class="p">:</span>
+                <span class="n">config_dir</span> <span class="o">=</span> <span class="n">pkg_dir</span> <span class="o">/</span> <span class="n">dir_name</span>
+                <span class="k">if</span> <span class="n">config_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">config_dir</span> <span class="o">/</span> <span class="s2">&quot;manifest.yaml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="n">framework</span> <span class="o">=</span> <span class="n">DIR_TO_FRAMEWORK</span><span class="p">[</span><span class="n">dir_name</span><span class="p">]</span>
+                    <span class="n">pkg_configs</span><span class="p">[</span><span class="n">framework</span><span class="p">]</span> <span class="o">=</span> <span class="n">config_dir</span>
+
+            <span class="k">if</span> <span class="n">pkg_configs</span><span class="p">:</span>
+                <span class="n">packages</span><span class="p">[</span><span class="n">pkg_dir</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pkg_configs</span>
+
+    <span class="c1"># Also check workspace root</span>
+    <span class="n">root_configs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">dir_name</span> <span class="ow">in</span> <span class="n">FRAMEWORK_DIRS</span><span class="p">:</span>
+        <span class="n">config_dir</span> <span class="o">=</span> <span class="n">workspace_root</span> <span class="o">/</span> <span class="n">dir_name</span>
+        <span class="k">if</span> <span class="n">config_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">config_dir</span> <span class="o">/</span> <span class="s2">&quot;manifest.yaml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">framework</span> <span class="o">=</span> <span class="n">DIR_TO_FRAMEWORK</span><span class="p">[</span><span class="n">dir_name</span><span class="p">]</span>
+            <span class="n">root_configs</span><span class="p">[</span><span class="n">framework</span><span class="p">]</span> <span class="o">=</span> <span class="n">config_dir</span>
+
+    <span class="k">if</span> <span class="n">root_configs</span><span class="p">:</span>
+        <span class="n">pkg_name</span> <span class="o">=</span> <span class="n">workspace_root</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s2">&quot;default&quot;</span>
+        <span class="k">if</span> <span class="n">pkg_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
+            <span class="n">packages</span><span class="p">[</span><span class="n">pkg_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">root_configs</span>
+
+    <span class="k">return</span> <span class="n">packages</span></div>
+
+
+
+<div class="viewcode-block" id="load_manifest">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.load_manifest">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_manifest</span><span class="p">(</span><span class="n">crewai_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a package&#39;s CrewAI manifest.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        crewai_dir: Path to the .crewai/ directory.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Parsed manifest as a dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">manifest_path</span> <span class="o">=</span> <span class="n">crewai_dir</span> <span class="o">/</span> <span class="s2">&quot;manifest.yaml&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">manifest_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="p">{}</span></div>
+
+
+
+<div class="viewcode-block" id="get_framework_from_config_dir">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.get_framework_from_config_dir">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_framework_from_config_dir</span><span class="p">(</span><span class="n">config_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine the required framework from a config directory path.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config_dir: Path to a framework config directory (.crewai, .strands, etc.)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Framework name if directory indicates a specific framework, None otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dir_name</span> <span class="o">=</span> <span class="n">config_dir</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">return</span> <span class="n">DIR_TO_FRAMEWORK</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_crew_config">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.get_crew_config">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_crew_config</span><span class="p">(</span><span class="n">config_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">crew_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a specific crew&#39;s configuration.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config_dir: Path to the config directory (.crewai/, .strands/, .langgraph/).</span>
+<span class="sd">        crew_name: Name of the crew to load.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict with agents, tasks, knowledge_paths, and required_framework.</span>
+<span class="sd">        The required_framework field indicates which framework MUST be used</span>
+<span class="sd">        if the config is in a framework-specific directory.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If crew not found in manifest.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">manifest</span> <span class="o">=</span> <span class="n">load_manifest</span><span class="p">(</span><span class="n">config_dir</span><span class="p">)</span>
+    <span class="n">crews</span> <span class="o">=</span> <span class="n">manifest</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;crews&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">crew_config</span> <span class="o">=</span> <span class="n">crews</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">crew_name</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">crew_config</span><span class="p">:</span>
+        <span class="n">available</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">crews</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Crew &#39;</span><span class="si">{</span><span class="n">crew_name</span><span class="si">}</span><span class="s2">&#39; not found. Available: </span><span class="si">{</span><span class="n">available</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Load agents and tasks YAML</span>
+    <span class="n">agents_path</span> <span class="o">=</span> <span class="n">config_dir</span> <span class="o">/</span> <span class="n">crew_config</span><span class="p">[</span><span class="s2">&quot;agents&quot;</span><span class="p">]</span>
+    <span class="n">tasks_path</span> <span class="o">=</span> <span class="n">config_dir</span> <span class="o">/</span> <span class="n">crew_config</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">]</span>
+
+    <span class="n">agents</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">agents_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span> <span class="k">if</span> <span class="n">agents_path</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="p">{}</span>
+    <span class="n">tasks</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">tasks_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span> <span class="k">if</span> <span class="n">tasks_path</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="p">{}</span>
+
+    <span class="c1"># Resolve knowledge paths</span>
+    <span class="n">knowledge_paths</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">kp</span> <span class="ow">in</span> <span class="n">crew_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;knowledge&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="n">full_path</span> <span class="o">=</span> <span class="n">config_dir</span> <span class="o">/</span> <span class="n">kp</span>
+        <span class="k">if</span> <span class="n">full_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">knowledge_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_path</span><span class="p">)</span>
+
+    <span class="c1"># Determine required framework from directory name</span>
+    <span class="c1"># If config is in .crewai/, it MUST run on CrewAI, etc.</span>
+    <span class="n">required_framework</span> <span class="o">=</span> <span class="n">get_framework_from_config_dir</span><span class="p">(</span><span class="n">config_dir</span><span class="p">)</span>
+
+    <span class="c1"># Also check manifest-level preferred_framework (can be overridden by dir)</span>
+    <span class="n">manifest_framework</span> <span class="o">=</span> <span class="n">crew_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;preferred_framework&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">manifest_framework</span>
+        <span class="ow">and</span> <span class="n">manifest_framework</span> <span class="o">!=</span> <span class="s2">&quot;auto&quot;</span>
+        <span class="ow">and</span> <span class="n">required_framework</span>
+        <span class="ow">and</span> <span class="n">manifest_framework</span> <span class="o">!=</span> <span class="n">required_framework</span>
+    <span class="p">):</span>
+        <span class="c1"># Manifest can specify preference, but directory takes precedence</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Warning: Crew &#39;</span><span class="si">{</span><span class="n">crew_name</span><span class="si">}</span><span class="s2">&#39; specifies preferred_framework=</span><span class="si">{</span><span class="n">manifest_framework</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;but is in </span><span class="si">{</span><span class="n">config_dir</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">/ directory which requires </span><span class="si">{</span><span class="n">required_framework</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Get LLM config from manifest</span>
+    <span class="n">llm_config</span> <span class="o">=</span> <span class="n">manifest</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;llm&quot;</span><span class="p">,</span> <span class="n">crew_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;llm&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">crew_name</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">crew_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;agents&quot;</span><span class="p">:</span> <span class="n">agents</span><span class="p">,</span>
+        <span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="n">tasks</span><span class="p">,</span>
+        <span class="s2">&quot;knowledge_paths&quot;</span><span class="p">:</span> <span class="n">knowledge_paths</span><span class="p">,</span>
+        <span class="s2">&quot;manifest&quot;</span><span class="p">:</span> <span class="n">manifest</span><span class="p">,</span>
+        <span class="s2">&quot;config_dir&quot;</span><span class="p">:</span> <span class="n">config_dir</span><span class="p">,</span>
+        <span class="c1"># Framework enforcement</span>
+        <span class="s2">&quot;required_framework&quot;</span><span class="p">:</span> <span class="n">required_framework</span><span class="p">,</span>
+        <span class="s2">&quot;preferred_framework&quot;</span><span class="p">:</span> <span class="n">manifest_framework</span><span class="p">,</span>
+        <span class="c1"># LLM configuration</span>
+        <span class="s2">&quot;llm&quot;</span><span class="p">:</span> <span class="n">llm_config</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="list_crews">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.list_crews">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_crews</span><span class="p">(</span>
+    <span class="n">package_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">framework</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;List all available crews, optionally filtered by package or framework.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        package_name: If provided, only list crews for this package.</span>
+<span class="sd">        framework: If provided, only list crews that can run on this framework.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict mapping package name to list of crew info dicts.</span>
+<span class="sd">        Each crew dict includes:</span>
+<span class="sd">        - name: Crew name</span>
+<span class="sd">        - description: Crew description</span>
+<span class="sd">        - required_framework: Framework required (if in framework-specific dir)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">packages</span> <span class="o">=</span> <span class="n">discover_packages</span><span class="p">(</span><span class="n">framework</span><span class="o">=</span><span class="n">framework</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">pkg_name</span><span class="p">,</span> <span class="n">config_dir</span> <span class="ow">in</span> <span class="n">packages</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">package_name</span> <span class="ow">and</span> <span class="n">pkg_name</span> <span class="o">!=</span> <span class="n">package_name</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">manifest</span> <span class="o">=</span> <span class="n">load_manifest</span><span class="p">(</span><span class="n">config_dir</span><span class="p">)</span>
+        <span class="n">required_framework</span> <span class="o">=</span> <span class="n">get_framework_from_config_dir</span><span class="p">(</span><span class="n">config_dir</span><span class="p">)</span>
+
+        <span class="n">crews</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">crew_name</span><span class="p">,</span> <span class="n">crew_config</span> <span class="ow">in</span> <span class="n">manifest</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;crews&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">crews</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">crew_name</span><span class="p">,</span>
+                    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">crew_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                    <span class="s2">&quot;required_framework&quot;</span><span class="p">:</span> <span class="n">required_framework</span><span class="p">,</span>
+                    <span class="s2">&quot;preferred_framework&quot;</span><span class="p">:</span> <span class="n">crew_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;preferred_framework&quot;</span><span class="p">),</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">pkg_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">crews</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jon Bogaty.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

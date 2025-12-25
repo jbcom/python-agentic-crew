@@ -74,9 +74,7 @@ def pytest_collection_modifyitems(config: Any, items: list[pytest.Item]) -> None
     framework_filter = config.getoption("--framework")
 
     skip_e2e = pytest.mark.skip(reason="E2E tests disabled (need --e2e flag)")
-    skip_framework = pytest.mark.skip(
-        reason=f"Test not for framework '{framework_filter}' (--framework filter)"
-    )
+    skip_framework = pytest.mark.skip(reason=f"Test not for framework '{framework_filter}' (--framework filter)")
 
     for item in items:
         if "e2e" in item.keywords and not e2e_enabled:

@@ -1,0 +1,1217 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytest-agentic-crew API Reference &mdash; agentic-crew Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7df63eae" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7026087e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            agentic-crew
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html#install-from-pypi">Install from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html#install-from-source">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html#verify-installation">Verify Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/quickstart.html#install-agentic-crew">1. Install agentic-crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/quickstart.html#define-a-crew-yaml">2. Define a Crew (YAML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/quickstart.html#run-your-crew">3. Run Your Crew</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started/quickstart.html#from-python">From Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started/quickstart.html#from-cli">From CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/quickstart.html#try-different-frameworks">4. Try Different Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/quickstart.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/quickstart.html#common-patterns">Common Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started/quickstart.html#multi-agent-collaboration">Multi-Agent Collaboration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started/quickstart.html#knowledge-base-integration">Knowledge Base Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started/quickstart.html#single-agent-cli-execution">Single-Agent CLI Execution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../QUICKSTART.html">CrewAI Quickstart for Otterfall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#setup-one-time">Setup (One-time)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#using-crewai-for-task-implementation">Using CrewAI for Task Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#example-implement-section-6-1-species-data-system">Example: Implement Section 6.1 (Species Data System)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#what-happens">What Happens</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#task-decomposition-examples">Task Decomposition Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#too-vague">❌ Too Vague</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#good-specific-with-context">✅ Good - Specific with Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#best-with-requirements-and-validation">✅ Best - With Requirements and Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#training-the-crew">Training the Crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#checking-progress">Checking Progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#integration-with-kiro-workflow">Integration with Kiro Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#recommended-workflow">Recommended Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#when-to-use-which">When to Use Which</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#issue-no-such-file-or-directory">Issue: “No such file or directory”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#issue-anthropic-api-key-not-set">Issue: “ANTHROPIC_API_KEY not set”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#issue-agents-don-t-understand-otterfall-patterns">Issue: Agents don’t understand Otterfall patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#issue-code-doesn-t-match-conventions">Issue: Code doesn’t match conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ARCHITECTURE.html">CrewAI Modular Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#current-implementation">Current Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ARCHITECTURE.html#generic-engine-internal-crewai">1. Generic Engine (<code class="docutils literal notranslate"><span class="pre">internal/crewai</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ARCHITECTURE.html#package-specific-crews-packages-name-crewai">2. Package-Specific Crews (<code class="docutils literal notranslate"><span class="pre">packages/&lt;name&gt;/.crewai/</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#solution-package-defined-crews">Solution: Package-Defined Crews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#package-manifest-manifest-yaml">Package Manifest (manifest.yaml)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#agent-template-system">Agent Template System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#cli-usage">CLI Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#github-actions-workflow">GitHub Actions Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#discovery-implementation">Discovery Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#migration-path">Migration Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#benefits">Benefits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../INTEGRATION.html">External Integration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#cli-contract-stable-api">CLI Contract (Stable API)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#version-compatibility">Version Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#commands">Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../INTEGRATION.html#list-crews">List Crews</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../INTEGRATION.html#get-crew-info">Get Crew Info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../INTEGRATION.html#run-a-crew">Run a Crew</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#json-output-schemas">JSON Output Schemas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#crewlistresult">CrewListResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#crewinforesult">CrewInfoResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#crewrunresult">CrewRunResult</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#typescript-types">TypeScript Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#exit-codes">Exit Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#standard-installation">Standard Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#docker-installation">Docker Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#docker-compose-example">Docker Compose Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#typescript-integration-examples">TypeScript Integration Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#basic-integration-node-js">Basic Integration (Node.js)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#vercel-ai-sdk-integration">Vercel AI SDK Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#agent-to-agent-communication-architecture">Agent-to-Agent Communication Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#structured-error-responses">Structured Error Responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#timeout-handling">Timeout Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#always-use-json-flag">1. Always Use <code class="docutils literal notranslate"><span class="pre">--json</span></code> Flag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#handle-long-running-operations">2. Handle Long-Running Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#cache-crew-list">3. Cache Crew List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#validate-input-before-calling">4. Validate Input Before Calling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#command-not-found">Command Not Found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#framework-errors">Framework Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#api-key-issues">API Key Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#related-resources">Related Resources</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#module-index">Module Index</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules.html">Modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#development-setup">Development Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#commit-messages">Commit Messages</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">agentic-crew</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pytest-agentic-crew API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/pytest_agentic_crew.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pytest-agentic-crew-api-reference">
+<h1>pytest-agentic-crew API Reference<a class="headerlink" href="#pytest-agentic-crew-api-reference" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>pytest-agentic-crew provides pytest fixtures and VCR integration for testing
+agentic-crew applications with real or recorded LLM API calls.</p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pytest-agentic-crew<span class="o">[</span>all<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="module-pytest_agentic_crew">
+<span id="core-module"></span><h2>Core Module<a class="headerlink" href="#module-pytest_agentic_crew" title="Link to this heading"></a></h2>
+<p>Pytest plugin with fixtures for agentic-crew E2E testing.</p>
+<p>This package provides pytest fixtures and CLI options for building
+E2E tests with agentic-crew framework runners (CrewAI, LangGraph, Strands).</p>
+<dl>
+<dt>Installation:</dt><dd><p>pip install pytest-agentic-crew[all]</p>
+</dd>
+<dt>Usage:</dt><dd><p>Fixtures are automatically available when the package is installed:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
+import pytest</p>
+<p>&#64;pytest.mark.e2e
+&#64;pytest.mark.crewai
+def test_my_crew(check_api_key, simple_crew_config):</p>
+<blockquote>
+<div><p>from agentic_crew.runners.crewai_runner import CrewAIRunner</p>
+<p>runner = CrewAIRunner()
+result = runner.build_and_run(simple_crew_config, {“input”: “test”})
+assert result is not None</p>
+</div></blockquote>
+<p><a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+</dd>
+<dt>For unit testing with mocked frameworks:</dt><dd><p><a href="#id9"><span class="problematic" id="id10">``</span></a><a href="#id11"><span class="problematic" id="id12">`</span></a>python
+def test_runner_behavior(crew_mocker):</p>
+<blockquote>
+<div><p># Mock all frameworks
+crew_mocker.mock_all_frameworks()</p>
+<p># Or mock specific framework
+crew_mocker.mock_crewai()</p>
+<p># Patch specific components
+mock_agent = crew_mocker.patch_crewai_agent()
+mock_llm = crew_mocker.patch_get_llm()</p>
+<p># Test your code
+from agentic_crew.runners.crewai_runner import CrewAIRunner
+runner = CrewAIRunner()
+…</p>
+</div></blockquote>
+<p><a href="#id13"><span class="problematic" id="id14">``</span></a><a href="#id15"><span class="problematic" id="id16">`</span></a></p>
+</dd>
+<dt>Available fixtures:</dt><dd><p>E2E Testing:
+- check_api_key: Skips test if ANTHROPIC_API_KEY not set
+- check_aws_credentials: Skips test if AWS credentials not configured
+- simple_agent_config: Basic agent configuration dict
+- simple_task_config: Basic task configuration dict
+- simple_crew_config: Single agent/task crew configuration
+- multi_agent_crew_config: Multi-agent crew configuration
+- crew_with_knowledge: Crew with knowledge sources
+- temp_crew_dir: Temporary crew directory for testing</p>
+<p>Unit Testing (Mocking):
+- crew_mocker: CrewMocker instance for comprehensive mocking
+- mock_frameworks: Mock all AI framework modules
+- mock_crewai: Mock only CrewAI modules
+- mock_langgraph: Mock only LangGraph modules
+- mock_strands: Mock only Strands modules</p>
+</dd>
+<dt>Command line options:</dt><dd><p>–e2e: Enable E2E tests (disabled by default)
+–framework=&lt;name&gt;: Filter tests by framework (crewai, langgraph, strands)</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.</span></span><span class="sig-name descname"><span class="pre">CrewMocker</span></span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Enhanced mocker specifically for agentic-crew testing.</p>
+<p>This class wraps pytest-mock’s MockerFixture and provides convenience
+methods for mocking AI framework components commonly used in agentic-crew.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mocker">
+<span class="sig-name descname"><span class="pre">mocker</span></span><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mocker" title="Link to this definition"></a></dt>
+<dd><p>The underlying pytest-mock MockerFixture.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mocked_modules">
+<span class="sig-name descname"><span class="pre">mocked_modules</span></span><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mocked_modules" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of currently mocked framework modules.</p>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<dl>
+<dt>def test_crewai_runner(crew_mocker):</dt><dd><p># Mock CrewAI components
+mock_agent = crew_mocker.mock_crewai_agent()
+mock_crew = crew_mocker.mock_crewai_crew()</p>
+<p># Test runner behavior
+from agentic_crew.runners.crewai_runner import CrewAIRunner
+runner = CrewAIRunner()
+…</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.MagicMock">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MagicMock</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></em><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.MagicMock" title="Link to this definition"></a></dt>
+<dd><p>Access to mocker.MagicMock.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.Mock">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Mock</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></em><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.Mock" title="Link to this definition"></a></dt>
+<dd><p>Access to mocker.Mock.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mocker</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mocked_modules=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_original_modules=&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mocker</strong> (<em>MockerFixture</em>)</p></li>
+<li><p><strong>mocked_modules</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a><em>]</em>)</p></li>
+<li><p><strong>_original_modules</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_all_frameworks">
+<span class="sig-name descname"><span class="pre">mock_all_frameworks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_all_frameworks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_all_frameworks" title="Link to this definition"></a></dt>
+<dd><p>Mock all AI framework modules (CrewAI, LangGraph, Strands).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of all mocked framework modules.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_crewai">
+<span class="sig-name descname"><span class="pre">mock_crewai</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_crewai"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_crewai" title="Link to this definition"></a></dt>
+<dd><p>Mock all CrewAI framework modules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of mocked CrewAI modules.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_crewai_agent">
+<span class="sig-name descname"><span class="pre">mock_crewai_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_crewai_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_crewai_agent" title="Link to this definition"></a></dt>
+<dd><p>Create a mock for crewai.Agent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span>) – Additional attributes to set on the mock.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mock Agent object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_crewai_crew">
+<span class="sig-name descname"><span class="pre">mock_crewai_crew</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Test</span> <span class="pre">result'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_crewai_crew"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_crewai_crew" title="Link to this definition"></a></dt>
+<dd><p>Create a mock for crewai.Crew with kickoff behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The result to return from kickoff().</p></li>
+<li><p><strong>**kwargs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span>) – Additional attributes to set on the mock.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mock Crew object with kickoff configured.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_crewai_task">
+<span class="sig-name descname"><span class="pre">mock_crewai_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_crewai_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_crewai_task" title="Link to this definition"></a></dt>
+<dd><p>Create a mock for crewai.Task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span>) – Additional attributes to set on the mock.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mock Task object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_langgraph">
+<span class="sig-name descname"><span class="pre">mock_langgraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_langgraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_langgraph" title="Link to this definition"></a></dt>
+<dd><p>Mock all LangGraph framework modules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of mocked LangGraph modules.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_langgraph_graph">
+<span class="sig-name descname"><span class="pre">mock_langgraph_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Test</span> <span class="pre">response'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_langgraph_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_langgraph_graph" title="Link to this definition"></a></dt>
+<dd><p>Create a mock LangGraph graph with invoke behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The result content to return from invoke().</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mock graph object with invoke configured.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_module">
+<span class="sig-name descname"><span class="pre">mock_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_module" title="Link to this definition"></a></dt>
+<dd><p>Mock a single module in sys.modules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>module_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Full module path (e.g., ‘crewai.Agent’).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The mock object for the module.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_modules">
+<span class="sig-name descname"><span class="pre">mock_modules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_modules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_modules" title="Link to this definition"></a></dt>
+<dd><p>Mock multiple modules in sys.modules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>module_names</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – List of module paths to mock.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary mapping module names to their mock objects.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_strands">
+<span class="sig-name descname"><span class="pre">mock_strands</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_strands"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_strands" title="Link to this definition"></a></dt>
+<dd><p>Mock all Strands framework modules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of mocked Strands modules.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.mock_strands_agent">
+<span class="sig-name descname"><span class="pre">mock_strands_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Test</span> <span class="pre">response'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.mock_strands_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.mock_strands_agent" title="Link to this definition"></a></dt>
+<dd><p>Create a mock Strands agent with call behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The result to return when agent is called.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mock agent object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">patch</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></em><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch" title="Link to this definition"></a></dt>
+<dd><p>Access to mocker.patch.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_chat_anthropic">
+<span class="sig-name descname"><span class="pre">patch_chat_anthropic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_chat_anthropic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_chat_anthropic" title="Link to this definition"></a></dt>
+<dd><p>Get the ChatAnthropic mock from the mocked langchain_anthropic module.</p>
+<p>Note: Must call mock_langgraph() first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mock for ChatAnthropic.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_create_react_agent">
+<span class="sig-name descname"><span class="pre">patch_create_react_agent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_create_react_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_create_react_agent" title="Link to this definition"></a></dt>
+<dd><p>Get the create_react_agent mock from the mocked langgraph module.</p>
+<p>Note: Must call mock_langgraph() first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mock for create_react_agent.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_crewai_agent">
+<span class="sig-name descname"><span class="pre">patch_crewai_agent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_crewai_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_crewai_agent" title="Link to this definition"></a></dt>
+<dd><p>Patch crewai.Agent and return the mock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mock for crewai.Agent.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_crewai_crew">
+<span class="sig-name descname"><span class="pre">patch_crewai_crew</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_crewai_crew"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_crewai_crew" title="Link to this definition"></a></dt>
+<dd><p>Patch crewai.Crew and return the mock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mock for crewai.Crew.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_crewai_process">
+<span class="sig-name descname"><span class="pre">patch_crewai_process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_crewai_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_crewai_process" title="Link to this definition"></a></dt>
+<dd><p>Patch crewai.Process and return the mock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mock for crewai.Process.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_crewai_task">
+<span class="sig-name descname"><span class="pre">patch_crewai_task</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_crewai_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_crewai_task" title="Link to this definition"></a></dt>
+<dd><p>Patch crewai.Task and return the mock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mock for crewai.Task.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_discover_packages">
+<span class="sig-name descname"><span class="pre">patch_discover_packages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">packages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_discover_packages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_discover_packages" title="Link to this definition"></a></dt>
+<dd><p>Patch agentic_crew.core.discovery.discover_packages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>packages</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Dictionary of packages to return. If None, returns empty dict.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The mock for discover_packages.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_get_crew_config">
+<span class="sig-name descname"><span class="pre">patch_get_crew_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_get_crew_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_get_crew_config" title="Link to this definition"></a></dt>
+<dd><p>Patch agentic_crew.core.discovery.get_crew_config.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Config to return. If None, returns minimal valid config.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The mock for get_crew_config.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_get_llm">
+<span class="sig-name descname"><span class="pre">patch_get_llm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_get_llm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_get_llm" title="Link to this definition"></a></dt>
+<dd><p>Patch agentic_crew.config.llm.get_llm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>return_value</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span>) – Value to return from get_llm. If None, creates a MagicMock.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The mock for get_llm.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_knowledge_source">
+<span class="sig-name descname"><span class="pre">patch_knowledge_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_knowledge_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_knowledge_source" title="Link to this definition"></a></dt>
+<dd><p>Get the TextFileKnowledgeSource mock from the mocked crewai module.</p>
+<p>Note: Must call mock_crewai() first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mock for TextFileKnowledgeSource.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_run_crew_auto">
+<span class="sig-name descname"><span class="pre">patch_run_crew_auto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Test</span> <span class="pre">result'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_run_crew_auto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_run_crew_auto" title="Link to this definition"></a></dt>
+<dd><p>Patch agentic_crew.core.decomposer.run_crew_auto.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Result string to return from run_crew_auto.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The mock for run_crew_auto.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.patch_strands_agent">
+<span class="sig-name descname"><span class="pre">patch_strands_agent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.patch_strands_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.patch_strands_agent" title="Link to this definition"></a></dt>
+<dd><p>Patch strands.Agent and return the mock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mock for strands.Agent.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.restore_modules">
+<span class="sig-name descname"><span class="pre">restore_modules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/mocking.html#CrewMocker.restore_modules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.restore_modules" title="Link to this definition"></a></dt>
+<dd><p>Restore all mocked modules to their original state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.spy">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></em><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.spy" title="Link to this definition"></a></dt>
+<dd><p>Access to mocker.spy.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pytest_agentic_crew.CrewMocker.stub">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stub</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></em><a class="headerlink" href="#pytest_agentic_crew.CrewMocker.stub" title="Link to this definition"></a></dt>
+<dd><p>Access to mocker.stub.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">mocker</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">MockerFixture</span></code></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id17">
+<span class="sig-name descname"><span class="pre">mocked_modules</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#id17" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.get_anthropic_model">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.</span></span><span class="sig-name descname"><span class="pre">get_anthropic_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'haiku-4.5'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/models.html#get_anthropic_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.get_anthropic_model" title="Link to this definition"></a></dt>
+<dd><p>Get Anthropic API model identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Short model name (haiku-4.5, sonnet-4.5, sonnet-4, opus-4)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Full model identifier for Anthropic API</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_anthropic_model</span><span class="p">(</span><span class="s2">&quot;haiku-4.5&quot;</span><span class="p">)</span>
+<span class="go">&#39;claude-haiku-4-5-20251001&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.get_bedrock_model">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.</span></span><span class="sig-name descname"><span class="pre">get_bedrock_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'haiku-4.5'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/models.html#get_bedrock_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.get_bedrock_model" title="Link to this definition"></a></dt>
+<dd><p>Get AWS Bedrock model identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Short model name (haiku-4.5, sonnet-4.5, sonnet-4, opus-4)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Full model identifier for AWS Bedrock</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_bedrock_model</span><span class="p">(</span><span class="s2">&quot;haiku-4.5&quot;</span><span class="p">)</span>
+<span class="go">&#39;anthropic.claude-haiku-4-5-20251001-v1:0&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-pytest_agentic_crew.models">
+<span id="models"></span><h2>Models<a class="headerlink" href="#module-pytest_agentic_crew.models" title="Link to this heading"></a></h2>
+<p>Model configuration helpers for agentic-crew E2E tests.</p>
+<p>Provides standardized model identifiers for testing across different providers.</p>
+<p>See: <a class="reference external" href="https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock">https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock</a></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.models.get_anthropic_model">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.models.</span></span><span class="sig-name descname"><span class="pre">get_anthropic_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'haiku-4.5'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/models.html#get_anthropic_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.models.get_anthropic_model" title="Link to this definition"></a></dt>
+<dd><p>Get Anthropic API model identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Short model name (haiku-4.5, sonnet-4.5, sonnet-4, opus-4)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Full model identifier for Anthropic API</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_anthropic_model</span><span class="p">(</span><span class="s2">&quot;haiku-4.5&quot;</span><span class="p">)</span>
+<span class="go">&#39;claude-haiku-4-5-20251001&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.models.get_bedrock_model">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.models.</span></span><span class="sig-name descname"><span class="pre">get_bedrock_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'haiku-4.5'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/models.html#get_bedrock_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.models.get_bedrock_model" title="Link to this definition"></a></dt>
+<dd><p>Get AWS Bedrock model identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Short model name (haiku-4.5, sonnet-4.5, sonnet-4, opus-4)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Full model identifier for AWS Bedrock</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_bedrock_model</span><span class="p">(</span><span class="s2">&quot;haiku-4.5&quot;</span><span class="p">)</span>
+<span class="go">&#39;anthropic.claude-haiku-4-5-20251001-v1:0&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-pytest_agentic_crew.vcr">
+<span id="vcr-integration"></span><h2>VCR Integration<a class="headerlink" href="#module-pytest_agentic_crew.vcr" title="Link to this heading"></a></h2>
+<p>VCR.py integration for recording/replaying LLM API calls.</p>
+<p>This module provides pytest fixtures for recording HTTP interactions with
+LLM APIs (Anthropic, OpenAI, Bedrock) for deterministic test replay.</p>
+<dl>
+<dt>Usage:</dt><dd><p>&#64;pytest.mark.vcr
+def test_llm_call(vcr_cassette):</p>
+<blockquote>
+<div><p># First run: records to cassettes/test_llm_call.yaml
+# Subsequent runs: replays from cassette
+result = call_llm(“Hello”)
+assert “Hello” in result</p>
+</div></blockquote>
+</dd>
+<dt>Command line options:</dt><dd><p>–vcr-record=MODE: Set recording mode (once, new_episodes, none, all)
+–disable-vcr: Disable VCR, make real API calls</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.vcr.pytest_addoption">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.vcr.</span></span><span class="sig-name descname"><span class="pre">pytest_addoption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/vcr.html#pytest_addoption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.vcr.pytest_addoption" title="Link to this definition"></a></dt>
+<dd><p>Add VCR-related command line options.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>parser</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.vcr.vcr_config">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.vcr.</span></span><span class="sig-name descname"><span class="pre">vcr_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/vcr.html#vcr_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.vcr.vcr_config" title="Link to this definition"></a></dt>
+<dd><p>VCR configuration for LLM API recording.</p>
+<p>Override in conftest.py to customize:</p>
+<blockquote>
+<div><p>&#64;pytest.fixture(scope=’module’)
+def vcr_config():</p>
+<blockquote>
+<div><dl class="simple">
+<dt>return {</dt><dd><p>‘record_mode’: ‘none’,
+‘match_on’: [‘method’, ‘uri’],</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.vcr.vcr_cassette_dir">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.vcr.</span></span><span class="sig-name descname"><span class="pre">vcr_cassette_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/vcr.html#vcr_cassette_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.vcr.vcr_cassette_dir" title="Link to this definition"></a></dt>
+<dd><p>Directory for VCR cassette files.</p>
+<p>Default: tests/cassettes/&lt;module_name&gt;/</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>request</strong> (<em>FixtureRequest</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.vcr.vcr_cassette_name">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.vcr.</span></span><span class="sig-name descname"><span class="pre">vcr_cassette_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/vcr.html#vcr_cassette_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.vcr.vcr_cassette_name" title="Link to this definition"></a></dt>
+<dd><p>Name of the VCR cassette file (without extension).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>request</strong> (<em>FixtureRequest</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.vcr.vcr">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.vcr.</span></span><span class="sig-name descname"><span class="pre">vcr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcr_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcr_cassette_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/vcr.html#vcr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.vcr.vcr" title="Link to this definition"></a></dt>
+<dd><p>The VCR instance configured for LLM API recording.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>request</strong> (<em>FixtureRequest</em>)</p></li>
+<li><p><strong>vcr_config</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a><em>]</em>)</p></li>
+<li><p><strong>vcr_cassette_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.vcr.vcr_cassette">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.vcr.</span></span><span class="sig-name descname"><span class="pre">vcr_cassette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcr_cassette_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/vcr.html#vcr_cassette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.vcr.vcr_cassette" title="Link to this definition"></a></dt>
+<dd><p>Context manager for VCR cassette recording/playback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>request</strong> (<em>FixtureRequest</em>)</p></li>
+<li><p><strong>vcr</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a>)</p></li>
+<li><p><strong>vcr_cassette_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Usage:</dt><dd><dl class="simple">
+<dt>def test_api_call(vcr_cassette):</dt><dd><p># Requests are recorded/replayed
+response = requests.get(”<a class="reference external" href="https://api.example.com">https://api.example.com</a>”)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pytest_agentic_crew.plugin">
+<span id="plugin-fixtures"></span><h2>Plugin Fixtures<a class="headerlink" href="#module-pytest_agentic_crew.plugin" title="Link to this heading"></a></h2>
+<p>Pytest plugin for agentic-crew E2E test fixtures.</p>
+<p>This module is registered as a pytest plugin via entry points.
+All fixtures and hooks are automatically available when the package is installed.</p>
+<p>Includes:
+- VCR.py integration for recording/replaying LLM API calls
+- Framework mocking fixtures (via pytest-mock integration)
+- Crew configuration fixtures for testing</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.plugin.pytest_addoption">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.plugin.</span></span><span class="sig-name descname"><span class="pre">pytest_addoption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/plugin.html#pytest_addoption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.plugin.pytest_addoption" title="Link to this definition"></a></dt>
+<dd><p>Add custom command line options for E2E tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>parser</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a>)</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Options:</dt><dd><p>–e2e: Enable E2E tests (disabled by default)
+–framework: Filter tests by framework (crewai, langgraph, strands)
+–vcr-record: VCR recording mode (once, new_episodes, none, all)
+–disable-vcr: Disable VCR cassette recording/playback</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.plugin.pytest_collection_modifyitems">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.plugin.</span></span><span class="sig-name descname"><span class="pre">pytest_collection_modifyitems</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/plugin.html#pytest_collection_modifyitems"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.plugin.pytest_collection_modifyitems" title="Link to this definition"></a></dt>
+<dd><p>Modify test collection to handle E2E and framework filtering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>config</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a>)</p></li>
+<li><p><strong>items</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><em>Item</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Behavior:</dt><dd><ul class="simple">
+<li><p>Tests marked with &#64;pytest.mark.e2e are skipped unless –e2e flag is set</p></li>
+<li><p>When –framework=&lt;name&gt; is set, only tests with matching marker run</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.plugin.check_api_key">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.plugin.</span></span><span class="sig-name descname"><span class="pre">check_api_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/plugin.html#check_api_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.plugin.check_api_key" title="Link to this definition"></a></dt>
+<dd><p>Check that ANTHROPIC_API_KEY is available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pytest.skip</strong> – If ANTHROPIC_API_KEY is not set.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.plugin.check_aws_credentials">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.plugin.</span></span><span class="sig-name descname"><span class="pre">check_aws_credentials</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/plugin.html#check_aws_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.plugin.check_aws_credentials" title="Link to this definition"></a></dt>
+<dd><p>Check that AWS credentials are available for Bedrock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pytest.skip</strong> – If AWS credentials are not configured.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.plugin.temp_crew_dir">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.plugin.</span></span><span class="sig-name descname"><span class="pre">temp_crew_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmp_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/plugin.html#temp_crew_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.plugin.temp_crew_dir" title="Link to this definition"></a></dt>
+<dd><p>Create a temporary crew directory with minimal structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Path to the .crewai directory.</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tmp_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.plugin.simple_agent_config">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.plugin.</span></span><span class="sig-name descname"><span class="pre">simple_agent_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/plugin.html#simple_agent_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.plugin.simple_agent_config" title="Link to this definition"></a></dt>
+<dd><p>Get a simple agent configuration for testing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.plugin.simple_task_config">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.plugin.</span></span><span class="sig-name descname"><span class="pre">simple_task_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/plugin.html#simple_task_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.plugin.simple_task_config" title="Link to this definition"></a></dt>
+<dd><p>Get a simple task configuration for testing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.plugin.simple_crew_config">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.plugin.</span></span><span class="sig-name descname"><span class="pre">simple_crew_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simple_agent_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simple_task_config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/plugin.html#simple_crew_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.plugin.simple_crew_config" title="Link to this definition"></a></dt>
+<dd><p>Get a simple crew configuration for testing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>simple_agent_config</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a><em>]</em>)</p></li>
+<li><p><strong>simple_task_config</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.plugin.multi_agent_crew_config">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.plugin.</span></span><span class="sig-name descname"><span class="pre">multi_agent_crew_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/plugin.html#multi_agent_crew_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.plugin.multi_agent_crew_config" title="Link to this definition"></a></dt>
+<dd><p>Get a multi-agent crew configuration for testing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_agentic_crew.plugin.crew_with_knowledge">
+<span class="sig-prename descclassname"><span class="pre">pytest_agentic_crew.plugin.</span></span><span class="sig-name descname"><span class="pre">crew_with_knowledge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmp_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pytest_agentic_crew/plugin.html#crew_with_knowledge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_agentic_crew.plugin.crew_with_knowledge" title="Link to this definition"></a></dt>
+<dd><p>Get a crew configuration with knowledge sources.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>tmp_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="available-fixtures">
+<h3>Available Fixtures<a class="headerlink" href="#available-fixtures" title="Link to this heading"></a></h3>
+<p>The following fixtures are automatically available when pytest-agentic-crew is installed:</p>
+<p><strong>API Key Checks</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">check_api_key</span></code> - Skips test if <code class="docutils literal notranslate"><span class="pre">ANTHROPIC_API_KEY</span></code> not set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">check_aws_credentials</span></code> - Skips test if AWS credentials not configured</p></li>
+</ul>
+<p><strong>Crew Configurations</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_agent_config</span></code> - Basic agent configuration dict</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_task_config</span></code> - Basic task configuration dict</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_crew_config</span></code> - Single agent/task crew configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multi_agent_crew_config</span></code> - Multi-agent crew with researcher/writer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crew_with_knowledge</span></code> - Crew with knowledge sources</p></li>
+</ul>
+<p><strong>VCR Cassettes</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">vcr</span></code> - VCR instance for recording HTTP interactions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vcr_cassette</span></code> - Context manager for cassette recording/playback</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vcr_config</span></code> - Override to customize VCR settings</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vcr_cassette_dir</span></code> - Directory for cassette files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vcr_cassette_name</span></code> - Name of the cassette file</p></li>
+</ul>
+<p><strong>Utilities</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">temp_crew_dir</span></code> - Temporary <code class="docutils literal notranslate"><span class="pre">.crewai</span></code> directory</p></li>
+</ul>
+</section>
+<section id="command-line-options">
+<h3>Command Line Options<a class="headerlink" href="#command-line-options" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--e2e                 Enable E2E tests (disabled by default)
+--framework=NAME      Filter tests by framework (crewai, langgraph, strands)
+--vcr-record=MODE     VCR recording mode (once, new_episodes, none, all)
+--disable-vcr         Disable VCR cassette recording/playback
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jon Bogaty.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

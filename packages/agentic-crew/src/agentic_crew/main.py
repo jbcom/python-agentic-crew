@@ -381,8 +381,7 @@ def cmd_info(args):
                     "description": config.get("description", ""),
                     "required_framework": config.get("required_framework"),
                     "agents": [
-                        {"name": name, "role": cfg.get("role", name)}
-                        for name, cfg in config.get("agents", {}).items()
+                        {"name": name, "role": cfg.get("role", name)} for name, cfg in config.get("agents", {}).items()
                     ],
                     "tasks": [
                         {"name": name, "description": cfg.get("description", "")}
@@ -534,17 +533,11 @@ Exit codes:
         choices=["crewai", "langgraph", "strands"],
         help="Filter crews by framework",
     )
-    list_parser.add_argument(
-        "--json", action="store_true", help="Output as JSON (for external tools)"
-    )
+    list_parser.add_argument("--json", action="store_true", help="Output as JSON (for external tools)")
 
     # List runners command
-    list_runners_parser = subparsers.add_parser(
-        "list-runners", help="List available single-agent CLI runners"
-    )
-    list_runners_parser.add_argument(
-        "--json", action="store_true", help="Output as JSON (for external tools)"
-    )
+    list_runners_parser = subparsers.add_parser("list-runners", help="List available single-agent CLI runners")
+    list_runners_parser.add_argument("--json", action="store_true", help="Output as JSON (for external tools)")
 
     # Run command
     run_parser = subparsers.add_parser("run", help="Run a crew or single-agent task")
@@ -574,17 +567,13 @@ Exit codes:
         default=True,
         help="Auto-approve changes (default: true). Use --no-auto-approve to disable.",
     )
-    run_parser.add_argument(
-        "--json", action="store_true", help="Output as JSON (for external tools)"
-    )
+    run_parser.add_argument("--json", action="store_true", help="Output as JSON (for external tools)")
 
     # Info command
     info_parser = subparsers.add_parser("info", help="Show crew details")
     info_parser.add_argument("package", help="Package name")
     info_parser.add_argument("crew", help="Crew name")
-    info_parser.add_argument(
-        "--json", action="store_true", help="Output as JSON (for external tools)"
-    )
+    info_parser.add_argument("--json", action="store_true", help="Output as JSON (for external tools)")
 
     # Legacy build command (for backwards compatibility)
     build_parser = subparsers.add_parser("build", help="Build a game component (legacy)")

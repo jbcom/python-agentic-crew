@@ -109,9 +109,7 @@ class ManagerAgent:
             ValueError: If crew_role not found in crews mapping.
         """
         if crew_role not in self.crews:
-            raise ValueError(
-                f"Unknown crew role '{crew_role}'. Available: {list(self.crews.keys())}"
-            )
+            raise ValueError(f"Unknown crew role '{crew_role}'. Available: {list(self.crews.keys())}")
 
         crew_name = self.crews[crew_role]
 
@@ -130,9 +128,7 @@ class ManagerAgent:
             # Use specified package
             packages = self._get_packages()
             if self.package_name not in packages:
-                raise ValueError(
-                    f"Package '{self.package_name}' not found. Available: {list(packages.keys())}"
-                )
+                raise ValueError(f"Package '{self.package_name}' not found. Available: {list(packages.keys())}")
             crewai_dir = packages[self.package_name]
             crew_config = get_crew_config(crewai_dir, crew_name)
         else:
@@ -148,8 +144,7 @@ class ManagerAgent:
 
             if found_config is None:
                 raise ValueError(
-                    f"Crew '{crew_name}' not found in any package. "
-                    f"Available packages: {list(packages.keys())}"
+                    f"Crew '{crew_name}' not found in any package. Available packages: {list(packages.keys())}"
                 )
             crew_config = found_config
 
@@ -201,9 +196,7 @@ class ManagerAgent:
             design_result, assets_result = results
             ```
         """
-        tasks = [
-            self.delegate_async(crew_role, inputs, framework) for crew_role, inputs in delegations
-        ]
+        tasks = [self.delegate_async(crew_role, inputs, framework) for crew_role, inputs in delegations]
         return await asyncio.gather(*tasks)
 
     def delegate_sequential(
@@ -286,6 +279,4 @@ class ManagerAgent:
         Raises:
             NotImplementedError: If not overridden by subclass.
         """
-        raise NotImplementedError(
-            "Subclasses must implement execute_workflow() to define their orchestration logic"
-        )
+        raise NotImplementedError("Subclasses must implement execute_workflow() to define their orchestration logic")

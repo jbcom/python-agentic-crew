@@ -27,9 +27,7 @@ class CrewAIRunner(BaseRunner):
         try:
             import crewai  # noqa: F401
         except ImportError as e:
-            raise RuntimeError(
-                "CrewAI not installed. Install with: pip install crewai[tools]"
-            ) from e
+            raise RuntimeError("CrewAI not installed. Install with: pip install crewai[tools]") from e
 
     def build_crew(self, crew_config: dict[str, Any]) -> Any:
         """Build a CrewAI Crew from configuration.

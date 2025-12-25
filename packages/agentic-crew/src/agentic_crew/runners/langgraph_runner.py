@@ -24,9 +24,7 @@ class LangGraphRunner(BaseRunner):
         try:
             import langgraph  # noqa: F401
         except ImportError as e:
-            raise RuntimeError(
-                "LangGraph not installed. Install with: pip install langgraph"
-            ) from e
+            raise RuntimeError("LangGraph not installed. Install with: pip install langgraph") from e
 
     def build_crew(self, crew_config: dict[str, Any]) -> Any:
         """Build a LangGraph workflow from configuration.

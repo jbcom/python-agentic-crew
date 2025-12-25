@@ -81,9 +81,7 @@ ALLOWED_EXTENSIONS = {".ts", ".tsx", ".json", ".md"}
 class WriteFileInput(BaseModel):
     """Input schema for GameCodeWriterTool."""
 
-    file_path: str = Field(
-        description="Relative path from workspace root (e.g., 'src/ecs/data/NewComponent.ts')"
-    )
+    file_path: str = Field(description="Relative path from workspace root (e.g., 'src/ecs/data/NewComponent.ts')")
     content: str = Field(description="The TypeScript/TSX code content to write")
 
 
@@ -130,14 +128,9 @@ class GameCodeWriterTool(BaseTool):
                 return f"Error: Invalid path '{clean_path}'. Path traversal not allowed."
 
             # Check allowed directories
-            is_allowed = any(
-                clean_path.startswith(allowed_dir) for allowed_dir in ALLOWED_WRITE_DIRS
-            )
+            is_allowed = any(clean_path.startswith(allowed_dir) for allowed_dir in ALLOWED_WRITE_DIRS)
             if not is_allowed:
-                return (
-                    f"Error: Path '{clean_path}' is not in an allowed directory. "
-                    f"Allowed: {ALLOWED_WRITE_DIRS}"
-                )
+                return f"Error: Path '{clean_path}' is not in an allowed directory. Allowed: {ALLOWED_WRITE_DIRS}"
 
             # Check extension
             ext = Path(clean_path).suffix.lower()
@@ -166,9 +159,7 @@ class GameCodeWriterTool(BaseTool):
 class ReadFileInput(BaseModel):
     """Input schema for GameCodeReaderTool."""
 
-    file_path: str = Field(
-        description="Relative path from workspace root (e.g., 'src/ecs/components.ts')"
-    )
+    file_path: str = Field(description="Relative path from workspace root (e.g., 'src/ecs/components.ts')")
 
 
 class GameCodeReaderTool(BaseTool):
@@ -228,9 +219,7 @@ class GameCodeReaderTool(BaseTool):
 class ListDirInput(BaseModel):
     """Input schema for DirectoryListTool."""
 
-    directory: str = Field(
-        description="Relative directory path from workspace root (e.g., 'src/ecs')"
-    )
+    directory: str = Field(description="Relative directory path from workspace root (e.g., 'src/ecs')")
 
 
 class DirectoryListTool(BaseTool):

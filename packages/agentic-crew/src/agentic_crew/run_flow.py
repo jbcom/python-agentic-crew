@@ -20,9 +20,7 @@ def run_meshy_asset(species: str, prompt: str, retexture_prompt: str):
     from agentic_crew.flows.meshy_asset_flow import MeshyAssetFlow
 
     flow = MeshyAssetFlow()
-    result = flow.kickoff(
-        inputs={"species": species, "prompt": prompt, "retexture_prompt": retexture_prompt}
-    )
+    result = flow.kickoff(inputs={"species": species, "prompt": prompt, "retexture_prompt": retexture_prompt})
     return result
 
 

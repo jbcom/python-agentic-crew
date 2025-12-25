@@ -30,7 +30,5 @@ def test_connector_builder_crew(
 
     result = crew_instance.kickoff(inputs={"url": "http://example.com"})
 
-    mock_crew_instance.kickoff.assert_called_once_with(
-        inputs={"url": "http://example.com"}
-    )
+    mock_crew_instance.kickoff.assert_called_once_with(inputs={"url": "http://example.com"})
     assert result == "Success"

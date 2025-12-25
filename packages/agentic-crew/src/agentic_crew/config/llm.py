@@ -55,9 +55,7 @@ MODELS = {
 
 # Predefined configurations for common use cases
 LLM_CONFIGS = {
-    "reasoning": LLMConfig(
-        model=_CLAUDE_OPUS_4, temperature=0.3, description="Optimized for complex reasoning tasks"
-    ),
+    "reasoning": LLMConfig(model=_CLAUDE_OPUS_4, temperature=0.3, description="Optimized for complex reasoning tasks"),
     "creative": LLMConfig(
         model=_CLAUDE_SONNET_45,
         temperature=0.8,
@@ -76,9 +74,7 @@ LLM_CONFIGS = {
 }
 
 
-def get_llm(
-    model: str = DEFAULT_MODEL, temperature: float = 0.7, provider: LLMProvider | None = None
-) -> LLM | None:
+def get_llm(model: str = DEFAULT_MODEL, temperature: float = 0.7, provider: LLMProvider | None = None) -> LLM | None:
     """Get configured LLM instance for CrewAI agents.
 
     Args:
@@ -159,9 +155,7 @@ def _create_openrouter_llm(model: str, temperature: float, api_key: str) -> LLM:
     )
 
 
-def get_llm_or_raise(
-    model: str = DEFAULT_MODEL, temperature: float = 0.7, provider: LLMProvider | None = None
-) -> LLM:
+def get_llm_or_raise(model: str = DEFAULT_MODEL, temperature: float = 0.7, provider: LLMProvider | None = None) -> LLM:
     """Get configured LLM instance, raising if API key not set.
 
     Use this when you need to ensure an LLM is available.

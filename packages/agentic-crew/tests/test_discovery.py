@@ -418,10 +418,13 @@ class TestDecomposer:
             "tasks": {},
         }
 
-        with patch(
-            "agentic_crew.core.decomposer.is_framework_available",
-            return_value=False,
-        ), pytest.raises(RuntimeError, match="requires langgraph.*not installed"):
+        with (
+            patch(
+                "agentic_crew.core.decomposer.is_framework_available",
+                return_value=False,
+            ),
+            pytest.raises(RuntimeError, match="requires langgraph.*not installed"),
+        ):
             decompose_crew(crew_config)
 
     def test_decompose_crew_validates_framework_conflict(self) -> None:
@@ -435,10 +438,13 @@ class TestDecomposer:
             "tasks": {},
         }
 
-        with patch(
-            "agentic_crew.core.decomposer.is_framework_available",
-            return_value=True,
-        ), pytest.raises(ValueError, match="requires crewai.*langgraph was requested"):
+        with (
+            patch(
+                "agentic_crew.core.decomposer.is_framework_available",
+                return_value=True,
+            ),
+            pytest.raises(ValueError, match="requires crewai.*langgraph was requested"),
+        ):
             decompose_crew(crew_config, framework="langgraph")
 
     def test_get_install_command_returns_pip_install(self) -> None:

@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>agentic_crew.config.llm &mdash; agentic-crew Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=7df63eae" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7026087e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            agentic-crew
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html#install-from-pypi">Install from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html#install-from-source">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html#verify-installation">Verify Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started/quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#install-agentic-crew">1. Install agentic-crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#define-a-crew-yaml">2. Define a Crew (YAML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#run-your-crew">3. Run Your Crew</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../getting-started/quickstart.html#from-python">From Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../getting-started/quickstart.html#from-cli">From CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#try-different-frameworks">4. Try Different Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/quickstart.html#common-patterns">Common Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../getting-started/quickstart.html#multi-agent-collaboration">Multi-Agent Collaboration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../getting-started/quickstart.html#knowledge-base-integration">Knowledge Base Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../getting-started/quickstart.html#single-agent-cli-execution">Single-Agent CLI Execution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../QUICKSTART.html">CrewAI Quickstart for Otterfall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#setup-one-time">Setup (One-time)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#using-crewai-for-task-implementation">Using CrewAI for Task Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#example-implement-section-6-1-species-data-system">Example: Implement Section 6.1 (Species Data System)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#what-happens">What Happens</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#task-decomposition-examples">Task Decomposition Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#too-vague">❌ Too Vague</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#good-specific-with-context">✅ Good - Specific with Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#best-with-requirements-and-validation">✅ Best - With Requirements and Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#training-the-crew">Training the Crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#checking-progress">Checking Progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#integration-with-kiro-workflow">Integration with Kiro Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#recommended-workflow">Recommended Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#when-to-use-which">When to Use Which</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#issue-no-such-file-or-directory">Issue: “No such file or directory”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#issue-anthropic-api-key-not-set">Issue: “ANTHROPIC_API_KEY not set”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#issue-agents-don-t-understand-otterfall-patterns">Issue: Agents don’t understand Otterfall patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../QUICKSTART.html#issue-code-doesn-t-match-conventions">Issue: Code doesn’t match conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../QUICKSTART.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE.html">CrewAI Modular Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#current-implementation">Current Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ARCHITECTURE.html#generic-engine-internal-crewai">1. Generic Engine (<code class="docutils literal notranslate"><span class="pre">internal/crewai</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ARCHITECTURE.html#package-specific-crews-packages-name-crewai">2. Package-Specific Crews (<code class="docutils literal notranslate"><span class="pre">packages/&lt;name&gt;/.crewai/</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#solution-package-defined-crews">Solution: Package-Defined Crews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#package-manifest-manifest-yaml">Package Manifest (manifest.yaml)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#agent-template-system">Agent Template System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#cli-usage">CLI Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#github-actions-workflow">GitHub Actions Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#discovery-implementation">Discovery Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#migration-path">Migration Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ARCHITECTURE.html#benefits">Benefits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../INTEGRATION.html">External Integration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#cli-contract-stable-api">CLI Contract (Stable API)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#version-compatibility">Version Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#commands">Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../INTEGRATION.html#list-crews">List Crews</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../INTEGRATION.html#get-crew-info">Get Crew Info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../INTEGRATION.html#run-a-crew">Run a Crew</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#json-output-schemas">JSON Output Schemas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#crewlistresult">CrewListResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#crewinforesult">CrewInfoResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#crewrunresult">CrewRunResult</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#typescript-types">TypeScript Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#exit-codes">Exit Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#standard-installation">Standard Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#docker-installation">Docker Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#docker-compose-example">Docker Compose Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#typescript-integration-examples">TypeScript Integration Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#basic-integration-node-js">Basic Integration (Node.js)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#vercel-ai-sdk-integration">Vercel AI SDK Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#agent-to-agent-communication-architecture">Agent-to-Agent Communication Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#structured-error-responses">Structured Error Responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#timeout-handling">Timeout Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#always-use-json-flag">1. Always Use <code class="docutils literal notranslate"><span class="pre">--json</span></code> Flag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#handle-long-running-operations">2. Handle Long-Running Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#cache-crew-list">3. Cache Crew List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#validate-input-before-calling">4. Validate Input Before Calling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#command-not-found">Command Not Found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#framework-errors">Framework Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../INTEGRATION.html#api-key-issues">API Key Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../INTEGRATION.html#related-resources">Related Resources</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#module-index">Module Index</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/modules.html">Modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../development/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#development-setup">Development Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development/contributing.html#commit-messages">Commit Messages</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">agentic-crew</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">agentic_crew.config.llm</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for agentic_crew.config.llm</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;LLM Configuration for CrewAI agents.</span>
+
+<span class="sd">Uses Anthropic Claude directly via ANTHROPIC_API_KEY.</span>
+<span class="sd">Falls back to OpenRouter if OPENROUTER_API_KEY is set.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">crewai</span><span class="w"> </span><span class="kn">import</span> <span class="n">LLM</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Allow module to load even if crewai not installed (for testing)</span>
+    <span class="n">LLM</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: ignore</span>
+
+
+<div class="viewcode-block" id="LLMProvider">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.config.llm.LLMProvider">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LLMProvider</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Available LLM providers.&quot;&quot;&quot;</span>
+
+    <span class="n">ANTHROPIC</span> <span class="o">=</span> <span class="s2">&quot;anthropic&quot;</span>
+    <span class="n">OPENROUTER</span> <span class="o">=</span> <span class="s2">&quot;openrouter&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="LLMConfig">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.config.llm.LLMConfig">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LLMConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for specific LLM use cases.&quot;&quot;&quot;</span>
+
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span></div>
+
+
+
+<span class="c1"># Model identifiers</span>
+<span class="n">_CLAUDE_HAIKU_45</span> <span class="o">=</span> <span class="s2">&quot;claude-haiku-4-5-20251001&quot;</span>
+<span class="n">_CLAUDE_SONNET_45</span> <span class="o">=</span> <span class="s2">&quot;claude-sonnet-4-5-20250929&quot;</span>
+<span class="n">_CLAUDE_SONNET_4</span> <span class="o">=</span> <span class="s2">&quot;claude-sonnet-4-20250514&quot;</span>
+<span class="n">_CLAUDE_OPUS_4</span> <span class="o">=</span> <span class="s2">&quot;claude-opus-4-20250514&quot;</span>
+
+<span class="c1"># Default model - Claude Haiku 4.5 for fast, cost-effective operations</span>
+<span class="n">DEFAULT_MODEL</span> <span class="o">=</span> <span class="n">_CLAUDE_HAIKU_45</span>
+
+<span class="c1"># Alternative models</span>
+<span class="n">MODELS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;haiku&quot;</span><span class="p">:</span> <span class="n">_CLAUDE_HAIKU_45</span><span class="p">,</span>
+    <span class="s2">&quot;sonnet&quot;</span><span class="p">:</span> <span class="n">_CLAUDE_SONNET_45</span><span class="p">,</span>
+    <span class="s2">&quot;sonnet-4&quot;</span><span class="p">:</span> <span class="n">_CLAUDE_SONNET_4</span><span class="p">,</span>
+    <span class="s2">&quot;opus&quot;</span><span class="p">:</span> <span class="n">_CLAUDE_OPUS_4</span><span class="p">,</span>
+    <span class="c1"># OpenRouter fallbacks</span>
+    <span class="s2">&quot;openrouter-auto&quot;</span><span class="p">:</span> <span class="s2">&quot;openrouter/auto&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;openrouter-haiku&quot;</span><span class="p">:</span> <span class="s2">&quot;openrouter/anthropic/claude-haiku-4.5&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Predefined configurations for common use cases</span>
+<span class="n">LLM_CONFIGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;reasoning&quot;</span><span class="p">:</span> <span class="n">LLMConfig</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">_CLAUDE_OPUS_4</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Optimized for complex reasoning tasks&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;creative&quot;</span><span class="p">:</span> <span class="n">LLMConfig</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">_CLAUDE_SONNET_45</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Optimized for creative content generation&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">LLMConfig</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">_CLAUDE_SONNET_45</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Optimized for code generation and analysis&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="n">LLMConfig</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">_CLAUDE_HAIKU_45</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Balanced configuration for general use&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="get_llm">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.config.llm.get_llm">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_llm</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_MODEL</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="n">LLMProvider</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LLM</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get configured LLM instance for CrewAI agents.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model: Model identifier. Defaults to claude-haiku-4-5-20251001 (DEFAULT_MODEL)</span>
+<span class="sd">        temperature: Sampling temperature (0.0-1.0). Lower = more focused,</span>
+<span class="sd">                    higher = more creative.</span>
+<span class="sd">        provider: Force specific provider (ANTHROPIC or OPENROUTER).</span>
+<span class="sd">                 If None, auto-detects based on available API keys.</span>
+
+<span class="sd">    Available models:</span>
+<span class="sd">        - claude-haiku-4-5-20251001 (default - fast, cost-effective)</span>
+<span class="sd">        - claude-sonnet-4-5-20250929 (best for code and creative)</span>
+<span class="sd">        - claude-sonnet-4-20250514 (capable general purpose)</span>
+<span class="sd">        - claude-opus-4-20250514 (most capable)</span>
+<span class="sd">        - openrouter/auto (fallback via OpenRouter)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Configured LLM instance, or None if no API key set</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Tries ANTHROPIC_API_KEY first, falls back to OPENROUTER_API_KEY.</span>
+<span class="sd">        Returns None if neither is set, allowing CrewAI to use its default.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; llm = get_llm()  # Uses Claude Haiku 4.5</span>
+<span class="sd">        &gt;&gt;&gt; llm = get_llm(&quot;claude-opus-4-20250514&quot;, temperature=0.3)</span>
+<span class="sd">        &gt;&gt;&gt; llm = get_llm(provider=LLMProvider.OPENROUTER)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">LLM</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Determine provider</span>
+    <span class="n">anthropic_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;ANTHROPIC_API_KEY&quot;</span><span class="p">)</span>
+    <span class="n">openrouter_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENROUTER_API_KEY&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Force provider if specified</span>
+    <span class="k">if</span> <span class="n">provider</span> <span class="o">==</span> <span class="n">LLMProvider</span><span class="o">.</span><span class="n">ANTHROPIC</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">anthropic_key</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">_create_anthropic_llm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">anthropic_key</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">provider</span> <span class="o">==</span> <span class="n">LLMProvider</span><span class="o">.</span><span class="n">OPENROUTER</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">openrouter_key</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">_create_openrouter_llm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">openrouter_key</span><span class="p">)</span>
+
+    <span class="c1"># Auto-detect: Try Anthropic first for direct Claude models</span>
+    <span class="k">if</span> <span class="n">anthropic_key</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">model</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;openrouter/&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_create_anthropic_llm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">anthropic_key</span><span class="p">)</span>
+
+    <span class="c1"># Fall back to OpenRouter</span>
+    <span class="k">if</span> <span class="n">openrouter_key</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_create_openrouter_llm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">openrouter_key</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_anthropic_llm</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LLM</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create Anthropic LLM instance.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">LLM</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_openrouter_llm</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LLM</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create OpenRouter LLM instance.&quot;&quot;&quot;</span>
+    <span class="c1"># Convert model name to OpenRouter format if needed</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">model</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;openrouter/&quot;</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">MODELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;openrouter-auto&quot;</span><span class="p">,</span> <span class="s2">&quot;openrouter/auto&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">LLM</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span>
+        <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://openrouter.ai/api/v1&quot;</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_llm_or_raise">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.config.llm.get_llm_or_raise">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_llm_or_raise</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_MODEL</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="n">LLMProvider</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LLM</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get configured LLM instance, raising if API key not set.</span>
+
+<span class="sd">    Use this when you need to ensure an LLM is available.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model: Model identifier (see get_llm for options)</span>
+<span class="sd">        temperature: Sampling temperature (0.0-1.0)</span>
+<span class="sd">        provider: Force specific provider (optional)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Configured LLM instance</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If neither ANTHROPIC_API_KEY nor OPENROUTER_API_KEY is set</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">get_llm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">provider</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">llm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;ANTHROPIC_API_KEY or OPENROUTER_API_KEY environment variable must be set. &quot;</span>
+            <span class="s2">&quot;Get Anthropic key at https://console.anthropic.com/ or &quot;</span>
+            <span class="s2">&quot;OpenRouter key at https://openrouter.ai/&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">llm</span></div>
+
+
+
+<div class="viewcode-block" id="get_llm_for_task">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.config.llm.get_llm_for_task">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_llm_for_task</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LLM</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get LLM configured for a specific task type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        task: Task type - one of: &#39;reasoning&#39;, &#39;creative&#39;, &#39;code&#39;, &#39;default&#39;</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Configured LLM instance, or None if no API key set</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If task type is unknown</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; llm = get_llm_for_task(&#39;code&#39;)  # Low temp, optimized for code</span>
+<span class="sd">        &gt;&gt;&gt; llm = get_llm_for_task(&#39;creative&#39;)  # High temp, creative output</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LLM_CONFIGS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown task type: </span><span class="si">{</span><span class="n">task</span><span class="si">}</span><span class="s2">. Available: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">LLM_CONFIGS</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">LLM_CONFIGS</span><span class="p">[</span><span class="n">task</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">get_llm</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Convenience functions for specific use cases (backward compatibility)</span>
+<div class="viewcode-block" id="get_reasoning_llm">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.config.llm.get_reasoning_llm">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_reasoning_llm</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">LLM</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get LLM optimized for complex reasoning tasks.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_llm_for_task</span><span class="p">(</span><span class="s2">&quot;reasoning&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_creative_llm">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.config.llm.get_creative_llm">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_creative_llm</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">LLM</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get LLM optimized for creative tasks.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_llm_for_task</span><span class="p">(</span><span class="s2">&quot;creative&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_code_llm">
+<a class="viewcode-back" href="../../../api/agentic_crew.html#agentic_crew.config.llm.get_code_llm">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_code_llm</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">LLM</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get LLM optimized for code generation.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_llm_for_task</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jon Bogaty.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
