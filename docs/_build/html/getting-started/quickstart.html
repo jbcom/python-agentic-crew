@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quickstart &mdash; agentic-crew Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7df63eae" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7026087e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CrewAI Quickstart for Otterfall" href="../QUICKSTART.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            agentic-crew
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-pypi">Install from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#verify-installation">Verify Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-agentic-crew">1. Install agentic-crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#define-a-crew-yaml">2. Define a Crew (YAML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-your-crew">3. Run Your Crew</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#from-python">From Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-cli">From CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#try-different-frameworks">4. Try Different Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#common-patterns">Common Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#multi-agent-collaboration">Multi-Agent Collaboration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#knowledge-base-integration">Knowledge Base Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#single-agent-cli-execution">Single-Agent CLI Execution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../QUICKSTART.html">CrewAI Quickstart for Otterfall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#setup-one-time">Setup (One-time)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#using-crewai-for-task-implementation">Using CrewAI for Task Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#example-implement-section-6-1-species-data-system">Example: Implement Section 6.1 (Species Data System)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#what-happens">What Happens</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#task-decomposition-examples">Task Decomposition Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#too-vague">❌ Too Vague</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#good-specific-with-context">✅ Good - Specific with Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#best-with-requirements-and-validation">✅ Best - With Requirements and Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#training-the-crew">Training the Crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#checking-progress">Checking Progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#integration-with-kiro-workflow">Integration with Kiro Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#recommended-workflow">Recommended Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#when-to-use-which">When to Use Which</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#issue-no-such-file-or-directory">Issue: “No such file or directory”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#issue-anthropic-api-key-not-set">Issue: “ANTHROPIC_API_KEY not set”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#issue-agents-don-t-understand-otterfall-patterns">Issue: Agents don’t understand Otterfall patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../QUICKSTART.html#issue-code-doesn-t-match-conventions">Issue: Code doesn’t match conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QUICKSTART.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ARCHITECTURE.html">CrewAI Modular Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#current-implementation">Current Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ARCHITECTURE.html#generic-engine-internal-crewai">1. Generic Engine (<code class="docutils literal notranslate"><span class="pre">internal/crewai</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ARCHITECTURE.html#package-specific-crews-packages-name-crewai">2. Package-Specific Crews (<code class="docutils literal notranslate"><span class="pre">packages/&lt;name&gt;/.crewai/</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#solution-package-defined-crews">Solution: Package-Defined Crews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#package-manifest-manifest-yaml">Package Manifest (manifest.yaml)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#agent-template-system">Agent Template System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#cli-usage">CLI Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#github-actions-workflow">GitHub Actions Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#discovery-implementation">Discovery Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#migration-path">Migration Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ARCHITECTURE.html#benefits">Benefits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../INTEGRATION.html">External Integration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#cli-contract-stable-api">CLI Contract (Stable API)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#version-compatibility">Version Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#commands">Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../INTEGRATION.html#list-crews">List Crews</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../INTEGRATION.html#get-crew-info">Get Crew Info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../INTEGRATION.html#run-a-crew">Run a Crew</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#json-output-schemas">JSON Output Schemas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#crewlistresult">CrewListResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#crewinforesult">CrewInfoResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#crewrunresult">CrewRunResult</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#typescript-types">TypeScript Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#exit-codes">Exit Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#standard-installation">Standard Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#docker-installation">Docker Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#docker-compose-example">Docker Compose Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#typescript-integration-examples">TypeScript Integration Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#basic-integration-node-js">Basic Integration (Node.js)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#vercel-ai-sdk-integration">Vercel AI SDK Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#agent-to-agent-communication-architecture">Agent-to-Agent Communication Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#structured-error-responses">Structured Error Responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#timeout-handling">Timeout Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#always-use-json-flag">1. Always Use <code class="docutils literal notranslate"><span class="pre">--json</span></code> Flag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#handle-long-running-operations">2. Handle Long-Running Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#cache-crew-list">3. Cache Crew List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#validate-input-before-calling">4. Validate Input Before Calling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#command-not-found">Command Not Found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#framework-errors">Framework Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../INTEGRATION.html#api-key-issues">API Key Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../INTEGRATION.html#related-resources">Related Resources</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/index.html#module-index">Module Index</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/modules.html">Modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#development-setup">Development Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/contributing.html#commit-messages">Commit Messages</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">agentic-crew</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Quickstart</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting-started/quickstart.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading"></a></h1>
+<p>This guide will get you running your first agentic-crew in 5 minutes.</p>
+<section id="install-agentic-crew">
+<h2>1. Install agentic-crew<a class="headerlink" href="#install-agentic-crew" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>agentic-crew<span class="o">[</span>crewai<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="define-a-crew-yaml">
+<h2>2. Define a Crew (YAML)<a class="headerlink" href="#define-a-crew-yaml" title="Link to this heading"></a></h2>
+<p>Create a minimal crew structure:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>.crewai/crews/analyzer
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">.crewai/manifest.yaml</span></code></strong>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-first-crew</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0&quot;</span>
+
+<span class="nt">crews</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">analyzer</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Analyze code and provide feedback</span>
+<span class="w">    </span><span class="nt">agents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crews/analyzer/agents.yaml</span>
+<span class="w">    </span><span class="nt">tasks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crews/analyzer/tasks.yaml</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">crews/analyzer/agents.yaml</span></code></strong>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">code_reviewer</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Senior Code Reviewer</span>
+<span class="w">  </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Review code for bugs, security issues, and improvements</span>
+<span class="w">  </span><span class="nt">backstory</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">    </span><span class="no">You are an expert software engineer with 15 years of experience.</span>
+<span class="w">    </span><span class="no">You excel at finding subtle bugs and suggesting improvements.</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">crews/analyzer/tasks.yaml</span></code></strong>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">review_code</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Review the provided code for issues and improvements</span>
+<span class="w">  </span><span class="nt">expected_output</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">    </span><span class="no">A detailed list of findings with:</span>
+<span class="w">    </span><span class="no">- Issue description</span>
+<span class="w">    </span><span class="no">- Severity (critical/high/medium/low)</span>
+<span class="w">    </span><span class="no">- Suggested fix</span>
+<span class="w">  </span><span class="nt">agent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">code_reviewer</span>
+</pre></div>
+</div>
+</section>
+<section id="run-your-crew">
+<h2>3. Run Your Crew<a class="headerlink" href="#run-your-crew" title="Link to this heading"></a></h2>
+<section id="from-python">
+<h3>From Python<a class="headerlink" href="#from-python" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">agentic_crew</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_crew</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">run_crew</span><span class="p">(</span>
+    <span class="s2">&quot;my-first-crew&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;analyzer&quot;</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">def calculate_total(items):</span>
+<span class="s2">    total = 0</span>
+<span class="s2">    for item in items:</span>
+<span class="s2">        total += item[&#39;price&#39;]</span>
+<span class="s2">    return total</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="from-cli">
+<h3>From CLI<a class="headerlink" href="#from-cli" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-key-here&quot;</span>
+
+agentic-crew<span class="w"> </span>run<span class="w"> </span>my-first-crew<span class="w"> </span>analyzer<span class="w"> </span>--input<span class="w"> </span><span class="s2">&quot;Review this code: ...&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="try-different-frameworks">
+<h2>4. Try Different Frameworks<a class="headerlink" href="#try-different-frameworks" title="Link to this heading"></a></h2>
+<p>agentic-crew auto-detects available frameworks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">agentic_crew.core.decomposer</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_framework</span><span class="p">,</span> <span class="n">get_available_frameworks</span>
+
+<span class="c1"># See what you have installed</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_available_frameworks</span><span class="p">())</span>  <span class="c1"># [&#39;crewai&#39;, &#39;langgraph&#39;]</span>
+
+<span class="c1"># Force a specific framework</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">run_crew</span><span class="p">(</span>
+    <span class="s2">&quot;my-first-crew&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;analyzer&quot;</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">},</span>
+    <span class="n">framework</span><span class="o">=</span><span class="s2">&quot;langgraph&quot;</span>  <span class="c1"># Force LangGraph</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../ARCHITECTURE.html"><span class="std std-doc">Architecture Guide</span></a></strong> - Understand how decomposition works</p></li>
+<li><p><strong><a class="reference internal" href="../INTEGRATION.html"><span class="std std-doc">Integration Guide</span></a></strong> - Integrate with your projects</p></li>
+<li><p><strong><a class="reference internal" href="../api/index.html"><span class="std std-doc">API Reference</span></a></strong> - Detailed API documentation</p></li>
+</ul>
+</section>
+<section id="common-patterns">
+<h2>Common Patterns<a class="headerlink" href="#common-patterns" title="Link to this heading"></a></h2>
+<section id="multi-agent-collaboration">
+<h3>Multi-Agent Collaboration<a class="headerlink" href="#multi-agent-collaboration" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># agents.yaml</span>
+<span class="nt">planner</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Project Planner</span>
+<span class="w">  </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Break down complex tasks</span>
+
+<span class="nt">implementer</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Code Implementer</span>
+<span class="w">  </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Write production code</span>
+
+<span class="nt">reviewer</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Code Reviewer</span>
+<span class="w">  </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ensure quality</span>
+
+<span class="c1"># tasks.yaml</span>
+<span class="nt">plan</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create implementation plan</span>
+<span class="w">  </span><span class="nt">agent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">planner</span>
+
+<span class="nt">implement</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Write the code</span>
+<span class="w">  </span><span class="nt">agent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">implementer</span>
+<span class="w">  </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">plan</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Use planner&#39;s output</span>
+
+<span class="nt">review</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Review implementation</span>
+<span class="w">  </span><span class="nt">agent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reviewer</span>
+<span class="w">  </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">implement</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Use implementer&#39;s output</span>
+</pre></div>
+</div>
+</section>
+<section id="knowledge-base-integration">
+<h3>Knowledge Base Integration<a class="headerlink" href="#knowledge-base-integration" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># manifest.yaml</span>
+<span class="nt">crews</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">analyzer</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Analyze code with domain knowledge</span>
+<span class="w">    </span><span class="nt">agents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crews/analyzer/agents.yaml</span>
+<span class="w">    </span><span class="nt">tasks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crews/analyzer/tasks.yaml</span>
+<span class="w">    </span><span class="nt">knowledge</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">knowledge/coding_standards/</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">knowledge/security_guidelines/</span>
+</pre></div>
+</div>
+</section>
+<section id="single-agent-cli-execution">
+<h3>Single-Agent CLI Execution<a class="headerlink" href="#single-agent-cli-execution" title="Link to this heading"></a></h3>
+<p>For simple tasks that don’t need multi-agent coordination:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Quick fixes with aider</span>
+agentic-crew<span class="w"> </span>run<span class="w"> </span>--runner<span class="w"> </span>aider<span class="w"> </span>--input<span class="w"> </span><span class="s2">&quot;Add error handling to auth.py&quot;</span>
+
+<span class="c1"># Free local execution with Ollama</span>
+agentic-crew<span class="w"> </span>run<span class="w"> </span>--runner<span class="w"> </span>ollama<span class="w"> </span>--input<span class="w"> </span><span class="s2">&quot;Fix the bug&quot;</span><span class="w"> </span>--model<span class="w"> </span>deepseek-coder
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../QUICKSTART.html" class="btn btn-neutral float-right" title="CrewAI Quickstart for Otterfall" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jon Bogaty.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

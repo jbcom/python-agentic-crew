@@ -1,0 +1,931 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index &mdash; agentic-crew Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=7df63eae" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7026087e"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            agentic-crew
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/installation.html#install-from-pypi">Install from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/installation.html#install-from-source">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/installation.html#verify-installation">Verify Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/quickstart.html#install-agentic-crew">1. Install agentic-crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/quickstart.html#define-a-crew-yaml">2. Define a Crew (YAML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/quickstart.html#run-your-crew">3. Run Your Crew</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting-started/quickstart.html#from-python">From Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started/quickstart.html#from-cli">From CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/quickstart.html#try-different-frameworks">4. Try Different Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/quickstart.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/quickstart.html#common-patterns">Common Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting-started/quickstart.html#multi-agent-collaboration">Multi-Agent Collaboration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started/quickstart.html#knowledge-base-integration">Knowledge Base Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started/quickstart.html#single-agent-cli-execution">Single-Agent CLI Execution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="QUICKSTART.html">CrewAI Quickstart for Otterfall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="QUICKSTART.html#setup-one-time">Setup (One-time)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QUICKSTART.html#using-crewai-for-task-implementation">Using CrewAI for Task Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#example-implement-section-6-1-species-data-system">Example: Implement Section 6.1 (Species Data System)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#what-happens">What Happens</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="QUICKSTART.html#task-decomposition-examples">Task Decomposition Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#too-vague">❌ Too Vague</a></li>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#good-specific-with-context">✅ Good - Specific with Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#best-with-requirements-and-validation">✅ Best - With Requirements and Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="QUICKSTART.html#training-the-crew">Training the Crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QUICKSTART.html#checking-progress">Checking Progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QUICKSTART.html#integration-with-kiro-workflow">Integration with Kiro Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#recommended-workflow">Recommended Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#when-to-use-which">When to Use Which</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="QUICKSTART.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#issue-no-such-file-or-directory">Issue: “No such file or directory”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#issue-anthropic-api-key-not-set">Issue: “ANTHROPIC_API_KEY not set”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#issue-agents-don-t-understand-otterfall-patterns">Issue: Agents don’t understand Otterfall patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="QUICKSTART.html#issue-code-doesn-t-match-conventions">Issue: Code doesn’t match conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="QUICKSTART.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QUICKSTART.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ARCHITECTURE.html">CrewAI Modular Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#current-implementation">Current Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ARCHITECTURE.html#generic-engine-internal-crewai">1. Generic Engine (<code class="docutils literal notranslate"><span class="pre">internal/crewai</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ARCHITECTURE.html#package-specific-crews-packages-name-crewai">2. Package-Specific Crews (<code class="docutils literal notranslate"><span class="pre">packages/&lt;name&gt;/.crewai/</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#solution-package-defined-crews">Solution: Package-Defined Crews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#package-manifest-manifest-yaml">Package Manifest (manifest.yaml)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#agent-template-system">Agent Template System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#cli-usage">CLI Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#github-actions-workflow">GitHub Actions Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#discovery-implementation">Discovery Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#migration-path">Migration Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ARCHITECTURE.html#benefits">Benefits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="INTEGRATION.html">External Integration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#cli-contract-stable-api">CLI Contract (Stable API)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#version-compatibility">Version Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#commands">Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="INTEGRATION.html#list-crews">List Crews</a></li>
+<li class="toctree-l4"><a class="reference internal" href="INTEGRATION.html#get-crew-info">Get Crew Info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="INTEGRATION.html#run-a-crew">Run a Crew</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#json-output-schemas">JSON Output Schemas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#crewlistresult">CrewListResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#crewinforesult">CrewInfoResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#crewrunresult">CrewRunResult</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#typescript-types">TypeScript Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#exit-codes">Exit Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#standard-installation">Standard Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#docker-installation">Docker Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#docker-compose-example">Docker Compose Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#typescript-integration-examples">TypeScript Integration Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#basic-integration-node-js">Basic Integration (Node.js)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#vercel-ai-sdk-integration">Vercel AI SDK Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#agent-to-agent-communication-architecture">Agent-to-Agent Communication Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#structured-error-responses">Structured Error Responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#timeout-handling">Timeout Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#always-use-json-flag">1. Always Use <code class="docutils literal notranslate"><span class="pre">--json</span></code> Flag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#handle-long-running-operations">2. Handle Long-Running Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#cache-crew-list">3. Cache Crew List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#validate-input-before-calling">4. Validate Input Before Calling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#command-not-found">Command Not Found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#framework-errors">Framework Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="INTEGRATION.html#api-key-issues">API Key Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="INTEGRATION.html#related-resources">Related Resources</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/index.html#module-index">Module Index</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/modules.html">Modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="development/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="development/contributing.html#development-setup">Development Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/contributing.html#commit-messages">Commit Messages</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">agentic-crew</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Index</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ 
+</div>
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.LLMConfig.__init__">__init__() (agentic_crew.config.llm.LLMConfig method)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent.__init__">(agentic_crew.ManagerAgent method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.crewai_runner.CrewAIRunner.__init__">(agentic_crew.runners.crewai_runner.CrewAIRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.langgraph_runner.LangGraphRunner.__init__">(agentic_crew.runners.langgraph_runner.LangGraphRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.strands_runner.StrandsRunner.__init__">(agentic_crew.runners.strands_runner.StrandsRunner method)</a>
+</li>
+        <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.__init__">(pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    agentic_crew
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew">module</a>
+</li>
+      </ul></li>
+      <li>
+    agentic_crew.config.llm
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.config.llm">module</a>
+</li>
+      </ul></li>
+      <li>
+    agentic_crew.core.decomposer
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.core.decomposer">module</a>
+</li>
+      </ul></li>
+      <li>
+    agentic_crew.core.discovery
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.core.discovery">module</a>
+</li>
+      </ul></li>
+      <li>
+    agentic_crew.core.loader
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.core.loader">module</a>
+</li>
+      </ul></li>
+      <li>
+    agentic_crew.runners.base
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.runners.base">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    agentic_crew.runners.crewai_runner
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.runners.crewai_runner">module</a>
+</li>
+      </ul></li>
+      <li>
+    agentic_crew.runners.langgraph_runner
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.runners.langgraph_runner">module</a>
+</li>
+      </ul></li>
+      <li>
+    agentic_crew.runners.strands_runner
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.runners.strands_runner">module</a>
+</li>
+      </ul></li>
+      <li>
+    agentic_crew.tools.file_tools
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.tools.file_tools">module</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.LLMProvider.ANTHROPIC">ANTHROPIC (agentic_crew.config.llm.LLMProvider attribute)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.DirectoryListTool.args_schema">args_schema (agentic_crew.tools.file_tools.DirectoryListTool attribute)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.GameCodeReaderTool.args_schema">(agentic_crew.tools.file_tools.GameCodeReaderTool attribute)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.GameCodeWriterTool.args_schema">(agentic_crew.tools.file_tools.GameCodeWriterTool attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.base.BaseRunner">BaseRunner (class in agentic_crew.runners.base)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.base.BaseRunner.build_agent">build_agent() (agentic_crew.runners.base.BaseRunner method)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.crewai_runner.CrewAIRunner.build_agent">(agentic_crew.runners.crewai_runner.CrewAIRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.langgraph_runner.LangGraphRunner.build_agent">(agentic_crew.runners.langgraph_runner.LangGraphRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.strands_runner.StrandsRunner.build_agent">(agentic_crew.runners.strands_runner.StrandsRunner method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.base.BaseRunner.build_and_run">build_and_run() (agentic_crew.runners.base.BaseRunner method)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.base.BaseRunner.build_crew">build_crew() (agentic_crew.runners.base.BaseRunner method)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.crewai_runner.CrewAIRunner.build_crew">(agentic_crew.runners.crewai_runner.CrewAIRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.langgraph_runner.LangGraphRunner.build_crew">(agentic_crew.runners.langgraph_runner.LangGraphRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.strands_runner.StrandsRunner.build_crew">(agentic_crew.runners.strands_runner.StrandsRunner method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.base.BaseRunner.build_task">build_task() (agentic_crew.runners.base.BaseRunner method)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.crewai_runner.CrewAIRunner.build_task">(agentic_crew.runners.crewai_runner.CrewAIRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.langgraph_runner.LangGraphRunner.build_task">(agentic_crew.runners.langgraph_runner.LangGraphRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.strands_runner.StrandsRunner.build_task">(agentic_crew.runners.strands_runner.StrandsRunner method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.check_api_key">check_api_key() (in module pytest_agentic_crew.plugin)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.check_aws_credentials">check_aws_credentials() (in module pytest_agentic_crew.plugin)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent.checkpoint">checkpoint() (agentic_crew.ManagerAgent method)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.WriteFileInput.content">content (agentic_crew.tools.file_tools.WriteFileInput attribute)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.core.loader.create_agent_from_config">create_agent_from_config() (in module agentic_crew.core.loader)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.core.loader.create_task_from_config">create_task_from_config() (in module agentic_crew.core.loader)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.crew_with_knowledge">crew_with_knowledge() (in module pytest_agentic_crew.plugin)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.crewai_runner.CrewAIRunner">CrewAIRunner (class in agentic_crew.runners.crewai_runner)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker">CrewMocker (class in pytest_agentic_crew)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent.crews">crews (agentic_crew.ManagerAgent attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.decompose_crew">decompose_crew() (in module agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.core.decomposer.decompose_crew">(in module agentic_crew.core.decomposer)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent.delegate">delegate() (agentic_crew.ManagerAgent method)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent.delegate_async">delegate_async() (agentic_crew.ManagerAgent method)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent.delegate_parallel">delegate_parallel() (agentic_crew.ManagerAgent method)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent.delegate_sequential">delegate_sequential() (agentic_crew.ManagerAgent method)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.LLMConfig.description">description (agentic_crew.config.llm.LLMConfig attribute)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.DirectoryListTool.description">(agentic_crew.tools.file_tools.DirectoryListTool attribute)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.GameCodeReaderTool.description">(agentic_crew.tools.file_tools.GameCodeReaderTool attribute)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.GameCodeWriterTool.description">(agentic_crew.tools.file_tools.GameCodeWriterTool attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.detect_framework">detect_framework() (in module agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.core.decomposer.detect_framework">(in module agentic_crew.core.decomposer)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.ListDirInput.directory">directory (agentic_crew.tools.file_tools.ListDirInput attribute)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.DirectoryListTool">DirectoryListTool (class in agentic_crew.tools.file_tools)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.discover_all_framework_configs">discover_all_framework_configs() (in module agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.core.discovery.discover_all_framework_configs">(in module agentic_crew.core.discovery)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.discover_packages">discover_packages() (in module agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.core.discovery.discover_packages">(in module agentic_crew.core.discovery)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent.execute_workflow">execute_workflow() (agentic_crew.ManagerAgent method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.ReadFileInput.file_path">file_path (agentic_crew.tools.file_tools.ReadFileInput attribute)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.WriteFileInput.file_path">(agentic_crew.tools.file_tools.WriteFileInput attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.base.BaseRunner.framework_name">framework_name (agentic_crew.runners.base.BaseRunner attribute)</a>, <a href="api/agentic_crew.html#id0">[1]</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.crewai_runner.CrewAIRunner.framework_name">(agentic_crew.runners.crewai_runner.CrewAIRunner attribute)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.langgraph_runner.LangGraphRunner.framework_name">(agentic_crew.runners.langgraph_runner.LangGraphRunner attribute)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.strands_runner.StrandsRunner.framework_name">(agentic_crew.runners.strands_runner.StrandsRunner attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.GameCodeReaderTool">GameCodeReaderTool (class in agentic_crew.tools.file_tools)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.GameCodeWriterTool">GameCodeWriterTool (class in agentic_crew.tools.file_tools)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.get_anthropic_model">get_anthropic_model() (in module pytest_agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.models.get_anthropic_model">(in module pytest_agentic_crew.models)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.core.decomposer.get_available_cli_runners">get_available_cli_runners() (in module agentic_crew.core.decomposer)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.get_available_frameworks">get_available_frameworks() (in module agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.core.decomposer.get_available_frameworks">(in module agentic_crew.core.decomposer)</a>
+</li>
+      </ul></li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.get_bedrock_model">get_bedrock_model() (in module pytest_agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.models.get_bedrock_model">(in module pytest_agentic_crew.models)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.core.decomposer.get_cli_runner">get_cli_runner() (in module agentic_crew.core.decomposer)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.get_code_llm">get_code_llm() (in module agentic_crew.config.llm)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.get_creative_llm">get_creative_llm() (in module agentic_crew.config.llm)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.get_crew_config">get_crew_config() (in module agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.core.discovery.get_crew_config">(in module agentic_crew.core.discovery)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.core.discovery.get_framework_from_config_dir">get_framework_from_config_dir() (in module agentic_crew.core.discovery)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.base.BaseRunner.get_llm">get_llm() (agentic_crew.runners.base.BaseRunner method)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.langgraph_runner.LangGraphRunner.get_llm">(agentic_crew.runners.langgraph_runner.LangGraphRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.config.llm.get_llm">(in module agentic_crew.config.llm)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.get_llm_for_task">get_llm_for_task() (in module agentic_crew.config.llm)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.get_llm_or_raise">get_llm_or_raise() (in module agentic_crew.config.llm)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.get_reasoning_llm">get_reasoning_llm() (in module agentic_crew.config.llm)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.get_runner">get_runner() (in module agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.core.decomposer.get_runner">(in module agentic_crew.core.decomposer)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.core.discovery.get_workspace_root">get_workspace_root() (in module agentic_crew.core.discovery)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.get_workspace_root">(in module agentic_crew.tools.file_tools)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.core.decomposer.is_cli_runner_available">is_cli_runner_available() (in module agentic_crew.core.decomposer)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.is_framework_available">is_framework_available() (in module agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.core.decomposer.is_framework_available">(in module agentic_crew.core.decomposer)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.langgraph_runner.LangGraphRunner">LangGraphRunner (class in agentic_crew.runners.langgraph_runner)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.list_crews">list_crews() (in module agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.core.discovery.list_crews">(in module agentic_crew.core.discovery)</a>
+</li>
+      </ul></li>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.ListDirInput">ListDirInput (class in agentic_crew.tools.file_tools)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.LLMConfig">LLMConfig (class in agentic_crew.config.llm)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.LLMProvider">LLMProvider (class in agentic_crew.config.llm)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.core.loader.load_crew_from_config">load_crew_from_config() (in module agentic_crew.core.loader)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.core.loader.load_knowledge_sources">load_knowledge_sources() (in module agentic_crew.core.loader)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.core.discovery.load_manifest">load_manifest() (in module agentic_crew.core.discovery)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.MagicMock">MagicMock (pytest_agentic_crew.CrewMocker property)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent">ManagerAgent (class in agentic_crew)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.Mock">Mock (pytest_agentic_crew.CrewMocker property)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_all_frameworks">mock_all_frameworks() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_crewai">mock_crewai() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_crewai_agent">mock_crewai_agent() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_crewai_crew">mock_crewai_crew() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_crewai_task">mock_crewai_task() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_langgraph">mock_langgraph() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_langgraph_graph">mock_langgraph_graph() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_module">mock_module() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_modules">mock_modules() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_strands">mock_strands() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mock_strands_agent">mock_strands_agent() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#id17">mocked_modules (pytest_agentic_crew.CrewMocker attribute)</a>, <a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mocked_modules">[1]</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#id0">mocker (pytest_agentic_crew.CrewMocker attribute)</a>, <a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.mocker">[1]</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.LLMConfig.model">model (agentic_crew.config.llm.LLMConfig attribute)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.DirectoryListTool.model_config">model_config (agentic_crew.tools.file_tools.DirectoryListTool attribute)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.GameCodeReaderTool.model_config">(agentic_crew.tools.file_tools.GameCodeReaderTool attribute)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.GameCodeWriterTool.model_config">(agentic_crew.tools.file_tools.GameCodeWriterTool attribute)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.ListDirInput.model_config">(agentic_crew.tools.file_tools.ListDirInput attribute)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.ReadFileInput.model_config">(agentic_crew.tools.file_tools.ReadFileInput attribute)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.WriteFileInput.model_config">(agentic_crew.tools.file_tools.WriteFileInput attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    module
+
+      <ul>
+        <li><a href="api/agentic_crew.html#module-agentic_crew">agentic_crew</a>
+</li>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.config.llm">agentic_crew.config.llm</a>
+</li>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.core.decomposer">agentic_crew.core.decomposer</a>
+</li>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.core.discovery">agentic_crew.core.discovery</a>
+</li>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.core.loader">agentic_crew.core.loader</a>
+</li>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.runners.base">agentic_crew.runners.base</a>
+</li>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.runners.crewai_runner">agentic_crew.runners.crewai_runner</a>
+</li>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.runners.langgraph_runner">agentic_crew.runners.langgraph_runner</a>
+</li>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.runners.strands_runner">agentic_crew.runners.strands_runner</a>
+</li>
+        <li><a href="api/agentic_crew.html#module-agentic_crew.tools.file_tools">agentic_crew.tools.file_tools</a>
+</li>
+        <li><a href="api/pytest_agentic_crew.html#module-pytest_agentic_crew">pytest_agentic_crew</a>
+</li>
+        <li><a href="api/pytest_agentic_crew.html#module-pytest_agentic_crew.models">pytest_agentic_crew.models</a>
+</li>
+        <li><a href="api/pytest_agentic_crew.html#module-pytest_agentic_crew.plugin">pytest_agentic_crew.plugin</a>
+</li>
+        <li><a href="api/pytest_agentic_crew.html#module-pytest_agentic_crew.vcr">pytest_agentic_crew.vcr</a>
+</li>
+      </ul></li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.multi_agent_crew_config">multi_agent_crew_config() (in module pytest_agentic_crew.plugin)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.DirectoryListTool.name">name (agentic_crew.tools.file_tools.DirectoryListTool attribute)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.GameCodeReaderTool.name">(agentic_crew.tools.file_tools.GameCodeReaderTool attribute)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.GameCodeWriterTool.name">(agentic_crew.tools.file_tools.GameCodeWriterTool attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.LLMProvider.OPENROUTER">OPENROUTER (agentic_crew.config.llm.LLMProvider attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent.package_name">package_name (agentic_crew.ManagerAgent attribute)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch">patch (pytest_agentic_crew.CrewMocker property)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_chat_anthropic">patch_chat_anthropic() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_create_react_agent">patch_create_react_agent() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_crewai_agent">patch_crewai_agent() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_crewai_crew">patch_crewai_crew() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_crewai_process">patch_crewai_process() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_crewai_task">patch_crewai_task() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_discover_packages">patch_discover_packages() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_get_crew_config">patch_get_crew_config() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_get_llm">patch_get_llm() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_knowledge_source">patch_knowledge_source() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_run_crew_auto">patch_run_crew_auto() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.patch_strands_agent">patch_strands_agent() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.pytest_addoption">pytest_addoption() (in module pytest_agentic_crew.plugin)</a>
+
+      <ul>
+        <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.vcr.pytest_addoption">(in module pytest_agentic_crew.vcr)</a>
+</li>
+      </ul></li>
+      <li>
+    pytest_agentic_crew
+
+      <ul>
+        <li><a href="api/pytest_agentic_crew.html#module-pytest_agentic_crew">module</a>
+</li>
+      </ul></li>
+      <li>
+    pytest_agentic_crew.models
+
+      <ul>
+        <li><a href="api/pytest_agentic_crew.html#module-pytest_agentic_crew.models">module</a>
+</li>
+      </ul></li>
+      <li>
+    pytest_agentic_crew.plugin
+
+      <ul>
+        <li><a href="api/pytest_agentic_crew.html#module-pytest_agentic_crew.plugin">module</a>
+</li>
+      </ul></li>
+      <li>
+    pytest_agentic_crew.vcr
+
+      <ul>
+        <li><a href="api/pytest_agentic_crew.html#module-pytest_agentic_crew.vcr">module</a>
+</li>
+      </ul></li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.pytest_collection_modifyitems">pytest_collection_modifyitems() (in module pytest_agentic_crew.plugin)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.ReadFileInput">ReadFileInput (class in agentic_crew.tools.file_tools)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.restore_modules">restore_modules() (pytest_agentic_crew.CrewMocker method)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.base.BaseRunner.run">run() (agentic_crew.runners.base.BaseRunner method)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.crewai_runner.CrewAIRunner.run">(agentic_crew.runners.crewai_runner.CrewAIRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.langgraph_runner.LangGraphRunner.run">(agentic_crew.runners.langgraph_runner.LangGraphRunner method)</a>
+</li>
+        <li><a href="api/agentic_crew.html#agentic_crew.runners.strands_runner.StrandsRunner.run">(agentic_crew.runners.strands_runner.StrandsRunner method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.run_crew_auto">run_crew_auto() (in module agentic_crew)</a>
+
+      <ul>
+        <li><a href="api/agentic_crew.html#agentic_crew.core.decomposer.run_crew_auto">(in module agentic_crew.core.decomposer)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.simple_agent_config">simple_agent_config() (in module pytest_agentic_crew.plugin)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.simple_crew_config">simple_crew_config() (in module pytest_agentic_crew.plugin)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.simple_task_config">simple_task_config() (in module pytest_agentic_crew.plugin)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.spy">spy (pytest_agentic_crew.CrewMocker property)</a>
+</li>
+      <li><a href="api/agentic_crew.html#agentic_crew.runners.strands_runner.StrandsRunner">StrandsRunner (class in agentic_crew.runners.strands_runner)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.CrewMocker.stub">stub (pytest_agentic_crew.CrewMocker property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.temp_crew_dir">temp_crew_dir() (in module pytest_agentic_crew.plugin)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.config.llm.LLMConfig.temperature">temperature (agentic_crew.config.llm.LLMConfig attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.vcr.vcr">vcr() (in module pytest_agentic_crew.vcr)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.vcr.vcr_cassette">vcr_cassette() (in module pytest_agentic_crew.vcr)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.vcr.vcr_cassette_dir">vcr_cassette_dir() (in module pytest_agentic_crew.vcr)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.vcr.vcr_cassette_name">vcr_cassette_name() (in module pytest_agentic_crew.vcr)</a>
+</li>
+      <li><a href="api/pytest_agentic_crew.html#pytest_agentic_crew.vcr.vcr_config">vcr_config() (in module pytest_agentic_crew.vcr)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.ManagerAgent.workspace_root">workspace_root (agentic_crew.ManagerAgent attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agentic_crew.html#agentic_crew.tools.file_tools.WriteFileInput">WriteFileInput (class in agentic_crew.tools.file_tools)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jon Bogaty.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

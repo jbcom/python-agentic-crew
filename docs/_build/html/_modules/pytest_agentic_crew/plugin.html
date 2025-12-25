@@ -1,0 +1,533 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytest_agentic_crew.plugin &mdash; agentic-crew Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=7df63eae" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7026087e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            agentic-crew
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/installation.html#install-from-pypi">Install from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/installation.html#install-from-source">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/installation.html#verify-installation">Verify Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/quickstart.html#install-agentic-crew">1. Install agentic-crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/quickstart.html#define-a-crew-yaml">2. Define a Crew (YAML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/quickstart.html#run-your-crew">3. Run Your Crew</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../getting-started/quickstart.html#from-python">From Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../getting-started/quickstart.html#from-cli">From CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/quickstart.html#try-different-frameworks">4. Try Different Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/quickstart.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/quickstart.html#common-patterns">Common Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../getting-started/quickstart.html#multi-agent-collaboration">Multi-Agent Collaboration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../getting-started/quickstart.html#knowledge-base-integration">Knowledge Base Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../getting-started/quickstart.html#single-agent-cli-execution">Single-Agent CLI Execution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../QUICKSTART.html">CrewAI Quickstart for Otterfall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../QUICKSTART.html#setup-one-time">Setup (One-time)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../QUICKSTART.html#using-crewai-for-task-implementation">Using CrewAI for Task Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#example-implement-section-6-1-species-data-system">Example: Implement Section 6.1 (Species Data System)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#what-happens">What Happens</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../QUICKSTART.html#task-decomposition-examples">Task Decomposition Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#too-vague">❌ Too Vague</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#good-specific-with-context">✅ Good - Specific with Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#best-with-requirements-and-validation">✅ Best - With Requirements and Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../QUICKSTART.html#training-the-crew">Training the Crew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../QUICKSTART.html#checking-progress">Checking Progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../QUICKSTART.html#integration-with-kiro-workflow">Integration with Kiro Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#recommended-workflow">Recommended Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#when-to-use-which">When to Use Which</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../QUICKSTART.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#issue-no-such-file-or-directory">Issue: “No such file or directory”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#issue-anthropic-api-key-not-set">Issue: “ANTHROPIC_API_KEY not set”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#issue-agents-don-t-understand-otterfall-patterns">Issue: Agents don’t understand Otterfall patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../QUICKSTART.html#issue-code-doesn-t-match-conventions">Issue: Code doesn’t match conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../QUICKSTART.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../QUICKSTART.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE.html">CrewAI Modular Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#current-implementation">Current Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ARCHITECTURE.html#generic-engine-internal-crewai">1. Generic Engine (<code class="docutils literal notranslate"><span class="pre">internal/crewai</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ARCHITECTURE.html#package-specific-crews-packages-name-crewai">2. Package-Specific Crews (<code class="docutils literal notranslate"><span class="pre">packages/&lt;name&gt;/.crewai/</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#solution-package-defined-crews">Solution: Package-Defined Crews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#package-manifest-manifest-yaml">Package Manifest (manifest.yaml)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#agent-template-system">Agent Template System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#cli-usage">CLI Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#github-actions-workflow">GitHub Actions Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#discovery-implementation">Discovery Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#migration-path">Migration Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ARCHITECTURE.html#benefits">Benefits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../INTEGRATION.html">External Integration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#cli-contract-stable-api">CLI Contract (Stable API)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#version-compatibility">Version Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#commands">Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../INTEGRATION.html#list-crews">List Crews</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../INTEGRATION.html#get-crew-info">Get Crew Info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../INTEGRATION.html#run-a-crew">Run a Crew</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#json-output-schemas">JSON Output Schemas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#crewlistresult">CrewListResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#crewinforesult">CrewInfoResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#crewrunresult">CrewRunResult</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#typescript-types">TypeScript Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#exit-codes">Exit Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#standard-installation">Standard Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#docker-installation">Docker Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#docker-compose-example">Docker Compose Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#typescript-integration-examples">TypeScript Integration Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#basic-integration-node-js">Basic Integration (Node.js)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#vercel-ai-sdk-integration">Vercel AI SDK Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#agent-to-agent-communication-architecture">Agent-to-Agent Communication Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#structured-error-responses">Structured Error Responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#timeout-handling">Timeout Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#always-use-json-flag">1. Always Use <code class="docutils literal notranslate"><span class="pre">--json</span></code> Flag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#handle-long-running-operations">2. Handle Long-Running Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#cache-crew-list">3. Cache Crew List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#validate-input-before-calling">4. Validate Input Before Calling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#command-not-found">Command Not Found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#framework-errors">Framework Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../INTEGRATION.html#api-key-issues">API Key Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../INTEGRATION.html#related-resources">Related Resources</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/index.html#module-index">Module Index</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/modules.html">Modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../development/contributing.html#development-setup">Development Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development/contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development/contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development/contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development/contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development/contributing.html#commit-messages">Commit Messages</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">agentic-crew</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytest_agentic_crew.plugin</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytest_agentic_crew.plugin</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Pytest plugin for agentic-crew E2E test fixtures.</span>
+
+<span class="sd">This module is registered as a pytest plugin via entry points.</span>
+<span class="sd">All fixtures and hooks are automatically available when the package is installed.</span>
+
+<span class="sd">Includes:</span>
+<span class="sd">- VCR.py integration for recording/replaying LLM API calls</span>
+<span class="sd">- Framework mocking fixtures (via pytest-mock integration)</span>
+<span class="sd">- Crew configuration fixtures for testing</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="c1"># Import mocking fixtures - these will be automatically available</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytest_agentic_crew.mocking</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>  <span class="c1"># noqa: F401</span>
+    <span class="n">crew_mocker</span><span class="p">,</span>
+    <span class="n">mock_crewai</span><span class="p">,</span>
+    <span class="n">mock_frameworks</span><span class="p">,</span>
+    <span class="n">mock_langgraph</span><span class="p">,</span>
+    <span class="n">mock_strands</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Import VCR fixtures (they register themselves)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytest_agentic_crew.vcr</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_vcr_marker</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+    <span class="n">vcr</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+    <span class="n">vcr_cassette</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+    <span class="n">vcr_cassette_dir</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+    <span class="n">vcr_cassette_name</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+    <span class="n">vcr_config</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytest_agentic_crew.vcr</span><span class="w"> </span><span class="kn">import</span> <span class="n">pytest_addoption</span> <span class="k">as</span> <span class="n">vcr_addoption</span>
+
+
+<div class="viewcode-block" id="pytest_addoption">
+<a class="viewcode-back" href="../../api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.pytest_addoption">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pytest_addoption</span><span class="p">(</span><span class="n">parser</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add custom command line options for E2E tests.</span>
+
+<span class="sd">    Options:</span>
+<span class="sd">        --e2e: Enable E2E tests (disabled by default)</span>
+<span class="sd">        --framework: Filter tests by framework (crewai, langgraph, strands)</span>
+<span class="sd">        --vcr-record: VCR recording mode (once, new_episodes, none, all)</span>
+<span class="sd">        --disable-vcr: Disable VCR cassette recording/playback</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span>
+        <span class="s2">&quot;--e2e&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run E2E tests (require API keys and make real LLM calls)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span>
+        <span class="s2">&quot;--framework&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run E2E tests for specific framework only (crewai, langgraph, or strands)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># Add VCR options</span>
+    <span class="n">vcr_addoption</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="pytest_collection_modifyitems">
+<a class="viewcode-back" href="../../api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.pytest_collection_modifyitems">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pytest_collection_modifyitems</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pytest</span><span class="o">.</span><span class="n">Item</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modify test collection to handle E2E and framework filtering.</span>
+
+<span class="sd">    Behavior:</span>
+<span class="sd">        - Tests marked with @pytest.mark.e2e are skipped unless --e2e flag is set</span>
+<span class="sd">        - When --framework=&lt;name&gt; is set, only tests with matching marker run</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">e2e_enabled</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--e2e&quot;</span><span class="p">)</span>
+    <span class="n">framework_filter</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--framework&quot;</span><span class="p">)</span>
+
+    <span class="n">skip_e2e</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">&quot;E2E tests disabled (need --e2e flag)&quot;</span><span class="p">)</span>
+    <span class="n">skip_framework</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Test not for framework &#39;</span><span class="si">{</span><span class="n">framework_filter</span><span class="si">}</span><span class="s2">&#39; (--framework filter)&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;e2e&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">keywords</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">e2e_enabled</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">add_marker</span><span class="p">(</span><span class="n">skip_e2e</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">framework_filter</span><span class="p">:</span>
+            <span class="n">framework_markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;crewai&quot;</span><span class="p">,</span> <span class="s2">&quot;langgraph&quot;</span><span class="p">,</span> <span class="s2">&quot;strands&quot;</span><span class="p">}</span>
+            <span class="n">test_frameworks</span> <span class="o">=</span> <span class="n">framework_markers</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">keywords</span><span class="p">)</span>
+            <span class="c1"># Only skip if the test is marked with a framework and it doesn&#39;t match the filter.</span>
+            <span class="k">if</span> <span class="n">test_frameworks</span> <span class="ow">and</span> <span class="n">framework_filter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">test_frameworks</span><span class="p">:</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">add_marker</span><span class="p">(</span><span class="n">skip_framework</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># API Key Check Fixtures</span>
+<span class="c1"># =============================================================================</span>
+
+
+<div class="viewcode-block" id="check_api_key">
+<a class="viewcode-back" href="../../api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.check_api_key">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_api_key</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that ANTHROPIC_API_KEY is available.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        pytest.skip: If ANTHROPIC_API_KEY is not set.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ANTHROPIC_API_KEY&quot;</span><span class="p">):</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;ANTHROPIC_API_KEY not set&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="check_aws_credentials">
+<a class="viewcode-back" href="../../api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.check_aws_credentials">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_aws_credentials</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that AWS credentials are available for Bedrock.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        pytest.skip: If AWS credentials are not configured.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">has_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;AWS_ACCESS_KEY_ID&quot;</span><span class="p">)</span>
+    <span class="n">has_profile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;AWS_PROFILE&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">has_key</span> <span class="ow">or</span> <span class="n">has_profile</span><span class="p">):</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;AWS credentials not configured (need AWS_ACCESS_KEY_ID or AWS_PROFILE)&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Crew Configuration Fixtures</span>
+<span class="c1"># =============================================================================</span>
+
+
+<div class="viewcode-block" id="temp_crew_dir">
+<a class="viewcode-back" href="../../api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.temp_crew_dir">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">temp_crew_dir</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a temporary crew directory with minimal structure.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Path to the .crewai directory.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">crew_dir</span> <span class="o">=</span> <span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;test_package&quot;</span> <span class="o">/</span> <span class="s2">&quot;.crewai&quot;</span>
+    <span class="n">crew_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">crew_dir</span> <span class="o">/</span> <span class="s2">&quot;crews&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">crew_dir</span></div>
+
+
+
+<div class="viewcode-block" id="simple_agent_config">
+<a class="viewcode-back" href="../../api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.simple_agent_config">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">simple_agent_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a simple agent configuration for testing.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;Test Agent&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="s2">&quot;Answer simple questions accurately&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;backstory&quot;</span><span class="p">:</span> <span class="s2">&quot;You are a helpful assistant focused on providing clear, concise answers.&quot;</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="simple_task_config">
+<a class="viewcode-back" href="../../api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.simple_task_config">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">simple_task_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a simple task configuration for testing.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Answer the question: What is 2 + 2?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;expected_output&quot;</span><span class="p">:</span> <span class="s2">&quot;The answer to the mathematical question&quot;</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="simple_crew_config">
+<a class="viewcode-back" href="../../api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.simple_crew_config">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">simple_crew_config</span><span class="p">(</span>
+    <span class="n">simple_agent_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">simple_task_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a simple crew configuration for testing.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;test_crew&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A simple test crew&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;agents&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;test_agent&quot;</span><span class="p">:</span> <span class="n">simple_agent_config</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;test_task&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="o">**</span><span class="n">simple_task_config</span><span class="p">,</span>
+                <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;test_agent&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;knowledge_paths&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="multi_agent_crew_config">
+<a class="viewcode-back" href="../../api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.multi_agent_crew_config">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">multi_agent_crew_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a multi-agent crew configuration for testing.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;multi_agent_crew&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A crew with multiple collaborating agents&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;agents&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;researcher&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;Researcher&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="s2">&quot;Gather and analyze information&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;backstory&quot;</span><span class="p">:</span> <span class="s2">&quot;You are an expert researcher.&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;writer&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;Writer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="s2">&quot;Write clear summaries&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;backstory&quot;</span><span class="p">:</span> <span class="s2">&quot;You are a skilled technical writer.&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;research_task&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Research the topic: Python programming&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;expected_output&quot;</span><span class="p">:</span> <span class="s2">&quot;Key facts about Python&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;researcher&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;writing_task&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Write a brief summary based on the research&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;expected_output&quot;</span><span class="p">:</span> <span class="s2">&quot;A concise summary&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;writer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;research_task&quot;</span><span class="p">],</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;knowledge_paths&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="crew_with_knowledge">
+<a class="viewcode-back" href="../../api/pytest_agentic_crew.html#pytest_agentic_crew.plugin.crew_with_knowledge">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">crew_with_knowledge</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a crew configuration with knowledge sources.&quot;&quot;&quot;</span>
+    <span class="n">knowledge_dir</span> <span class="o">=</span> <span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;knowledge&quot;</span>
+    <span class="n">knowledge_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+
+    <span class="n">test_doc</span> <span class="o">=</span> <span class="n">knowledge_dir</span> <span class="o">/</span> <span class="s2">&quot;test_info.md&quot;</span>
+    <span class="n">test_doc</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;# Test Knowledge</span>
+
+<span class="sd">This is test knowledge about the color blue.</span>
+<span class="sd">Blue is a primary color.</span>
+<span class="sd">It is often associated with calmness and stability.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;knowledge_crew&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A crew with knowledge sources&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;agents&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;knowledgeable_agent&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;Knowledge Expert&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="s2">&quot;Answer questions using provided knowledge&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;backstory&quot;</span><span class="p">:</span> <span class="s2">&quot;You have access to specialized knowledge.&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;knowledge_task&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;What color is mentioned in the knowledge base?&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;expected_output&quot;</span><span class="p">:</span> <span class="s2">&quot;The color mentioned&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;knowledgeable_agent&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;knowledge_paths&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">knowledge_dir</span><span class="p">],</span>
+    <span class="p">}</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jon Bogaty.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

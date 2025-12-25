@@ -1,0 +1,271 @@
+/* jbcom Brand - Sphinx RTD Theme Customization */
+/* Dark theme with jbcom color palette */
+
+:root {
+    /* jbcom Brand Colors */
+    --jbcom-bg: #0a0f1a;
+    --jbcom-surface: #111827;
+    --jbcom-primary: #06b6d4;
+    --jbcom-secondary: #3b82f6;
+    --jbcom-text-primary: #f1f5f9;
+    --jbcom-text-secondary: #94a3b8;
+    --jbcom-success: #10b981;
+    --jbcom-warning: #f59e0b;
+    --jbcom-error: #ef4444;
+    --jbcom-border: #1e293b;
+}
+
+/* Dark theme base */
+body {
+    background-color: var(--jbcom-bg) !important;
+    color: var(--jbcom-text-primary) !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Sidebar styling */
+.wy-nav-side {
+    background: var(--jbcom-surface) !important;
+    border-right: 1px solid var(--jbcom-border);
+}
+
+.wy-side-nav-search {
+    background-color: var(--jbcom-bg) !important;
+}
+
+.wy-side-nav-search input[type="text"] {
+    background-color: var(--jbcom-surface) !important;
+    color: var(--jbcom-text-primary) !important;
+    border: 1px solid var(--jbcom-border);
+}
+
+/* Navigation items */
+.wy-menu-vertical a {
+    color: var(--jbcom-text-secondary) !important;
+}
+
+.wy-menu-vertical a:hover {
+    background-color: var(--jbcom-bg) !important;
+    color: var(--jbcom-primary) !important;
+}
+
+.wy-menu-vertical li.current > a {
+    background-color: var(--jbcom-bg) !important;
+    color: var(--jbcom-primary) !important;
+    border-right: 3px solid var(--jbcom-primary);
+}
+
+.wy-menu-vertical li.current a {
+    border: none;
+}
+
+/* Main content area */
+.wy-nav-content-wrap {
+    background-color: var(--jbcom-bg) !important;
+}
+
+.wy-nav-content {
+    background-color: var(--jbcom-bg) !important;
+    max-width: 900px;
+}
+
+/* Headings - Space Grotesk */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Inter', sans-serif !important;
+    font-weight: 600;
+    color: var(--jbcom-text-primary) !important;
+}
+
+/* Links */
+a {
+    color: var(--jbcom-primary) !important;
+}
+
+a:hover {
+    color: var(--jbcom-secondary) !important;
+}
+
+a:visited {
+    color: var(--jbcom-primary) !important;
+}
+
+/* Code blocks - JetBrains Mono */
+code, pre, .highlight {
+    font-family: 'JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', monospace !important;
+    background-color: var(--jbcom-surface) !important;
+    color: var(--jbcom-text-primary) !important;
+    border: 1px solid var(--jbcom-border);
+    border-radius: 6px;
+}
+
+.highlight {
+    padding: 12px;
+}
+
+/* Inline code */
+code.literal {
+    background-color: var(--jbcom-surface) !important;
+    color: var(--jbcom-primary) !important;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--jbcom-border);
+}
+
+/* Tables */
+table.docutils {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: var(--jbcom-surface) !important;
+    border: 1px solid var(--jbcom-border);
+}
+
+table.docutils thead {
+    background-color: var(--jbcom-bg) !important;
+}
+
+table.docutils th {
+    background-color: var(--jbcom-bg) !important;
+    color: var(--jbcom-text-primary) !important;
+    font-weight: 600;
+    padding: 12px;
+    border: 1px solid var(--jbcom-border);
+}
+
+table.docutils td {
+    padding: 10px 12px;
+    border: 1px solid var(--jbcom-border);
+    color: var(--jbcom-text-secondary);
+}
+
+table.docutils tr:hover {
+    background-color: var(--jbcom-bg) !important;
+}
+
+/* Admonitions - Semantic colors */
+.admonition {
+    border-radius: 6px;
+    padding: 12px 16px;
+    border-left: 4px solid;
+    background-color: var(--jbcom-surface) !important;
+    margin: 16px 0;
+}
+
+.admonition.note {
+    border-left-color: var(--jbcom-secondary);
+}
+
+.admonition.tip {
+    border-left-color: var(--jbcom-success);
+}
+
+.admonition.warning {
+    border-left-color: var(--jbcom-warning);
+}
+
+.admonition.danger, .admonition.error {
+    border-left-color: var(--jbcom-error);
+}
+
+.admonition-title {
+    font-weight: 600;
+    color: var(--jbcom-text-primary) !important;
+    margin-bottom: 8px;
+}
+
+/* Search results */
+.search li {
+    background-color: var(--jbcom-surface) !important;
+    border: 1px solid var(--jbcom-border);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    padding: 12px;
+}
+
+.search li a {
+    color: var(--jbcom-primary) !important;
+}
+
+/* Footer */
+.rst-footer-buttons {
+    border-top: 1px solid var(--jbcom-border);
+}
+
+.btn {
+    background-color: var(--jbcom-surface) !important;
+    color: var(--jbcom-text-primary) !important;
+    border: 1px solid var(--jbcom-border);
+}
+
+.btn:hover {
+    background-color: var(--jbcom-primary) !important;
+    color: var(--jbcom-bg) !important;
+}
+
+/* Accessibility - Focus states */
+a:focus, button:focus, input:focus {
+    outline: 2px solid var(--jbcom-primary);
+    outline-offset: 2px;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .wy-nav-content {
+        max-width: 100%;
+    }
+}
+
+/* Version selector */
+.rst-versions {
+    background-color: var(--jbcom-surface) !important;
+    border-top: 1px solid var(--jbcom-border);
+}
+
+.rst-versions a {
+    color: var(--jbcom-text-secondary) !important;
+}
+
+.rst-versions .rst-current-version {
+    background-color: var(--jbcom-bg) !important;
+    color: var(--jbcom-text-primary) !important;
+}
+
+/* Breadcrumbs */
+.wy-breadcrumbs li a {
+    color: var(--jbcom-text-secondary) !important;
+}
+
+.wy-breadcrumbs li.wy-breadcrumbs-aside a {
+    color: var(--jbcom-primary) !important;
+}
+
+/* API documentation */
+dl.class, dl.function, dl.method {
+    background-color: var(--jbcom-surface) !important;
+    border: 1px solid var(--jbcom-border);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 16px;
+}
+
+dt {
+    background-color: var(--jbcom-bg) !important;
+    color: var(--jbcom-text-primary) !important;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+dd {
+    color: var(--jbcom-text-secondary);
+    padding: 12px;
+}
+
+/* Parameter lists */
+.field-list th {
+    background-color: var(--jbcom-bg) !important;
+    color: var(--jbcom-text-primary) !important;
+    white-space: nowrap;
+}
+
+.field-list td {
+    color: var(--jbcom-text-secondary);
+}
