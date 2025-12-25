@@ -53,12 +53,14 @@ packages = ["src/pytest_agentic_crew"]
 
 # Semantic Release - per-package versioning
 [tool.semantic_release]
-tag_format = "pytest-agentic-crew-v{version}"
 version_toml = ["pyproject.toml:project.version"]
 version_variables = ["src/pytest_agentic_crew/__init__.py:__version__"]
 build_command = "uv build"
 commit_parser = "angular"
 commit_author = "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+tag_format = "pytest-agentic-crew-v{version}"
+changelog_file = "CHANGELOG.md"
+upload_to_vcs_release = true
 
 [tool.semantic_release.commit_parser_options]
 allowed_tags = ["feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "ci", "build"]
@@ -68,3 +70,11 @@ patch_tags = ["fix", "perf"]
 [tool.semantic_release.branches.main]
 match = "main"
 prerelease = false
+
+[tool.semantic_release.remote]
+type = "github"
+token = { env = "GH_TOKEN" }
+
+[tool.semantic_release.publish]
+dist_glob_patterns = ["dist/*"]
+upload_to_vcs_release = true
