@@ -43,21 +43,28 @@ Quick Example
    :caption: Guides
 
    QUICKSTART
-   ARCHITECTURE
    INTEGRATION
 
 .. toctree::
    :maxdepth: 2
-   :caption: API Reference
+   :caption: Architecture
 
-   api/index
+   architecture/index
 
 .. toctree::
    :maxdepth: 1
    :caption: Development
 
-   development/contributing
+   contributing
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Enterprise
+
+   jbcom Hub <https://jbcom.github.io>
+   Agentic Docs <https://agentic.dev>
+   Strata Docs <https://strata.game>
+   Extended Data <https://extendeddata.dev>
 
 Indices and tables
 ==================

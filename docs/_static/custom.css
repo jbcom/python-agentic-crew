@@ -2,11 +2,11 @@
 /* Dark theme with jbcom color palette */
 
 :root {
-    /* jbcom Brand Colors */
+    /* jbcom Brand Colors - Agentic Purple Override */
     --jbcom-bg: #0a0f1a;
     --jbcom-surface: #111827;
-    --jbcom-primary: #06b6d4;
-    --jbcom-secondary: #3b82f6;
+    --jbcom-primary: #8b5cf6;
+    --jbcom-secondary: #ddd6fe;
     --jbcom-text-primary: #f1f5f9;
     --jbcom-text-secondary: #94a3b8;
     --jbcom-success: #10b981;
