@@ -72,7 +72,7 @@ jobs:
       - uses: hynek/setup-cached-uv@5a9d96ffa15170e34ced0e2de6c6ae8805056fd9  # v2
 
       - name: Cache tox
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830  # v4
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb  # v4
         with:
           path: |
             ~/.cache/uv
