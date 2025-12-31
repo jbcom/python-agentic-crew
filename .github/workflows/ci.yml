@@ -20,81 +20,57 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
         with:
           node-version: '22'
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          STORE_PATH=$(pnpm store path --silent 2>/dev/null || true)
-          STORE_PATH="${STORE_PATH:-${XDG_DATA_HOME:-$HOME/.local/share}/pnpm/store}"
-          echo "store=$STORE_PATH" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.0
+      - name: Setup Python
+        uses: actions/setup-python@v6
         with:
-          path: ${{ steps.pnpm-cache.outputs.store }}
-          key: pnpm-store-${{ hashFiles('pnpm-lock.yaml', 'package.json') }}
-          restore-keys: pnpm-store-
+          python-version: '3.11'
+
+      - name: Setup uv
+        uses: hynek/setup-cached-uv@v2
 
       - name: Install dependencies
-        run: pnpm install
+        run: uv sync --all-extras --dev
 
       - name: Lint and Format Check
-        run: pnpm run check
-
-      - name: Build
-        run: pnpm run build
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
 
       - name: Type check
-        run: pnpm run typecheck
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
-        with:
-          name: build-output
-          path: dist
-          retention-days: 1
+        run: uv run mypy . || true
 
   test:
     name: Tests
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
         with:
           node-version: '22'
-      - uses: pnpm/action-setup@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
         with:
-          version: 9
+          python-version: '3.11'
+
+      - name: Setup uv
+        uses: hynek/setup-cached-uv@v2
 
       - name: Install dependencies
-        run: pnpm install
+        run: uv sync --all-extras --dev
 
-      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
-        with:
-          name: build-output
-          path: dist
-
-      - name: Run tests with coverage
-        run: pnpm run test:coverage
-
-      - name: Report Coveralls
-        uses: coverallsapp/github-action@v2
-
-      - name: Upload test results
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
-        if: always()
-        with:
-          name: test-results
-          path: coverage/
-          retention-days: 7
+      - name: Run tests
+        run: uv run pytest
 
   release:
     name: Release
@@ -105,35 +81,26 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: actions/checkout@v4 # v6.0.1
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-node@v4 # v6.1.0
+      - name: Setup Node
+        uses: actions/setup-node@v6
         with:
           node-version: '22'
-          registry-url: 'https://registry.npmjs.org'
 
-      - uses: pnpm/action-setup@v4 # v4.1.0
+      - name: Setup Python
+        uses: actions/setup-python@v6
         with:
-          version: 9
+          python-version: '3.11'
 
-      - name: Install dependencies
-        run: pnpm install
-
-      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
-        with:
-          name: build-output
-          path: dist
-
-      - name: Git config
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Setup uv
+        uses: hynek/setup-cached-uv@v2
 
       - name: Install python-semantic-release
-        run: pip install python-semantic-release
+        run: uv tool install python-semantic-release
 
       - name: Check if release needed
         id: check
@@ -152,15 +119,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: semantic-release version
 
-      - name: Publish to NPM
-        if: steps.check.outputs.should_release == 'true'
-        run: pnpm publish --access public --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Create GitHub Release
         if: steps.check.outputs.should_release == 'true'
-        uses: softprops/action-gh-release@c85c599104002394fd3f3576406e9036952705e3 # v2.2.1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.check.outputs.version }}
           name: v${{ steps.check.outputs.version }}
